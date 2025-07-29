@@ -60,16 +60,16 @@ const Hero = () => {
   }, []);
 
   const one = <h1>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Brittany Chiang.</h2>;
-  const three = <h3 className="big-heading">I build things for the web.</h3>;
+  const two = <h2 className="big-heading">Bijay Subedi.</h2>;
+  const three = <h3 className="big-heading">I turn ideas into web applications.</h3>;
   const four = (
     <>
       <p>
-        I’m a software engineer specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I’m focused on building accessible, human-centered products
-        at{' '}
-        <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
-          Upstatement
+        I’m a Software Engineer specializing in Ruby on Rails and React.js, passionate about
+        building performant, scalable applications. Currently, I’m focused on developing robust
+        backend systems at{' '}
+        <a href="https://www.truemark.dev/" target="_blank" rel="noreferrer">
+          Truemark Pvt. Ltd
         </a>
         .
       </p>
