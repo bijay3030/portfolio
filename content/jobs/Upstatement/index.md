@@ -1,13 +1,15 @@
 ---
 date: '2018-05-14'
-title: 'Lead Engineer'
-company: 'Upstatement'
-location: 'Boston, MA'
-range: 'May 2018 - Present'
-url: 'https://www.upstatement.com/'
+title: 'Software Engineer'
+company: 'Truemark Pvt Limited'
+location: 'Kathmandu, Nepal'
+range: 'Aug 2022 - Present'
+url: 'https://www.truemark.dev/'
 ---
 
-- Deliver high-quality, robust production code for a diverse array of projects for clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The 19th News, and more
-- Work alongside creative directors to lead the research, development, and architecture of technical solutions to fulfill business requirements
-- Collaborate with designers, project managers, and other engineers to transform creative concepts into production realities for clients and stakeholders
-- Provide leadership within engineering department through close collaboration, knowledge shares, and mentorship
+- Led development and maintenance of multiple Ruby on Rails applications.
+- Migrated monolithic systems to microservices on AWS, improving scalability.
+- Collaborate with designers, project managers, and other engineers to transform creative concepts into production realities for clients and stakeholders.
+- Enhanced frontend performance by optimizing React.js state management.
+- Designed and optimized PostgreSQL schemas to boost query efficiency.
+- Established CI/CD pipelines, automating deployments and reducing downtime
