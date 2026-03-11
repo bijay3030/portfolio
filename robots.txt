@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://your_username.github.io/sitemap/sitemap-index.xml
-Host: https://your_username.github.io
+Sitemap: https://bijay3030.github.io/portfolio/sitemap/sitemap-index.xml
+Host: https://bijay3030.github.io
