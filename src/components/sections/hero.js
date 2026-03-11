@@ -61,13 +61,12 @@ const Hero = () => {
 
   const one = <h1>Hi, my name is</h1>;
   const two = <h2 className="big-heading">Bijay Subedi.</h2>;
-  const three = <h3 className="big-heading">I turn ideas into web applications.</h3>;
+  const three = <h3 className="big-heading">I build scalable web systems.</h3>;
   const four = (
     <>
       <p>
-        I’m a Software Engineer specializing in Ruby on Rails and React.js, passionate about
-        building performant, scalable applications. Currently, I’m focused on developing robust
-        backend systems at{' '}
+        Senior Software Engineer with 5+ years of experience in Ruby on Rails, React.js, and AWS.
+        Currently building high-performance products and microservices at{' '}
         <a href="https://www.truemark.dev/" target="_blank" rel="noreferrer">
           Truemark Pvt. Ltd
         </a>
@@ -75,17 +74,7 @@ const Hero = () => {
       </p>
     </>
   );
-  const five = (
-    <a
-      className="email-link"
-      href="https://www.newline.co/courses/build-a-spotify-connected-app"
-      target="_blank"
-      rel="noreferrer">
-      Check out my course!
-    </a>
-  );
-
-  const items = [one, two, three, four, five];
+  const items = [one, two, three, four];
 
   return (
     <StyledHeroSection>
