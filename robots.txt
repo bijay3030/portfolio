@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://your_username.github.io/sitemap/sitemap-index.xml
+Host: https://your_username.github.io
