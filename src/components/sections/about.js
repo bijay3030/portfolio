@@ -126,21 +126,42 @@ const About = () => {
   }, []);
 
   const skills = [
-    'JavaScript (ES6+)',
-    'React',
     'Ruby',
+    'JavaScript (ES6+)',
+    'HTML5',
+    'CSS3',
+    'SQL',
     'Ruby on Rails',
-    'Node.js',
-    'Next.js',
+    'React.js',
+    'Redux',
+    'Hotwire (Turbo + Stimulus)',
+    'Sidekiq',
     'PostgreSQL',
+    'MySQL',
     'MongoDB',
+    'Redis',
+    'AWS (EC2, S3, Lambda, RDS, CodePipeline)',
+    'Docker',
+    'Kubernetes',
+    'Nginx',
+    'RESTful API Design',
+    'GraphQL',
+    'Third-Party API Integration',
+    'RSpec',
+    'Jest',
+    'TDD / BDD',
+    'Integration Testing',
+    'GitLab CI',
+    'CircleCI',
+    'GitHub Actions',
     'Git',
-    'HTML & CSS',
-    'Bootstrap',
-    'Material-UI',
-    'JIRA',
-    'Trello',
-    'AWS',
+    'GitHub',
+    'GitLab',
+    'Agile/Scrum',
+    'Microservices Architecture',
+    'System Design',
+    'Code Review',
+    'Technical Documentation',
   ];
 
   return (
@@ -151,17 +172,19 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Bijay, and I love turning complex problems into efficient software
-              solutions. My journey started with B.Tech in Computer Science from Maharshi Dayanand
-              University, and since then, I’ve been immersed in designing and developing web
-              applications.
+              I am a results-driven Software Engineer with 5+ years of hands-on experience building
+              scalable, high-performance systems with Ruby on Rails and React.js.
             </p>
             <p>
-              Currently, I’m a Software Engineer at Truemark Pvt. Ltd., leading the development of
-              scalable APIs, optimizing database performance, and mentoring junior engineers in
-              Rails and React.js best practices.
+              At Truemark, I have led development of multiple client applications, migrated
+              monoliths to microservices on AWS, built APIs serving 500K+ monthly requests at 99.9%
+              uptime, and improved key query performance by up to 60%.
             </p>
-            <p>Here are a few technologies I’ve been working with recently:</p>
+            <p>
+              I also mentor junior engineers, improve CI/CD automation, and translate business
+              requirements into reliable, production-ready systems.
+            </p>
+            <p>Here are the technologies and practices I use regularly:</p>
           </div>
 
           <ul className="skills-list">
