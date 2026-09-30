@@ -11,6 +11,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const postTemplate = path.resolve(`src/templates/post.js`);
   const tagTemplate = path.resolve('src/templates/tag.js');
+  const projectTemplate = path.resolve('src/templates/project.js');
 
   const result = await graphql(`
     {
@@ -26,6 +27,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           node {
             frontmatter {
               slug
+            }
+          }
+        }
+      }
+      projectsRemark: allMarkdownRemark(
+        filter: { fileAbsolutePath: { regex: "/content/featured/" } }
+        sort: { frontmatter: { date: ASC } }
+      ) {
+        edges {
+          node {
+            id
+            frontmatter {
+              slug
+              title
             }
           }
         }
@@ -52,6 +67,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: node.frontmatter.slug,
       component: postTemplate,
       context: {},
+    });
+  });
+
+  // Create a case-study page for each featured project, with prev/next links
+  const projects = result.data.projectsRemark.edges;
+
+  projects.forEach(({ node }, i) => {
+    createPage({
+      path: node.frontmatter.slug,
+      component: projectTemplate,
+      context: {
+        id: node.id,
+        prev: i > 0 ? projects[i - 1].node.frontmatter : null,
+        next: i < projects.length - 1 ? projects[i + 1].node.frontmatter : null,
+      },
     });
   });
 

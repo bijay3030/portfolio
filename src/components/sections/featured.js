@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import sr from '@utils/sr';
@@ -236,6 +236,15 @@ const StyledProject = styled.li`
     text-transform: uppercase;
   }
 
+  /* Keep text blocks above the overlapping cover image */
+  .project-meta,
+  .project-subtitle,
+  .outcomes-list,
+  .project-links {
+    position: relative;
+    z-index: 2;
+  }
+
   .workflow-list,
   .outcomes-list,
   .inputs-list {
@@ -362,6 +371,12 @@ const StyledProject = styled.li`
       }
     }
 
+    .case-study-link {
+      ${({ theme }) => theme.mixins.smallButton};
+      margin: 0 10px 0 10px;
+      padding: 0.75rem 1rem;
+    }
+
     .cta {
       ${({ theme }) => theme.mixins.smallButton};
       margin: 10px;
@@ -465,16 +480,13 @@ const Featured = () => {
               tech
               github
               external
+              slug
+              summary
               cta
               domain
               role
-              projectTypes
-              contribution
-              estimationInputs
-              workflow
               outcomes
             }
-            html
           }
         }
       }
@@ -508,9 +520,11 @@ const Featured = () => {
       <StyledProjectsGrid>
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => {
-            const { frontmatter, html } = node;
+            const { frontmatter } = node;
             const {
               external,
+              slug,
+              summary,
               title,
               tech,
               github,
@@ -518,10 +532,6 @@ const Featured = () => {
               cta,
               domain,
               role,
-              projectTypes,
-              contribution,
-              estimationInputs,
-              workflow,
               outcomes,
             } = frontmatter;
             const image = getImage(cover);
@@ -531,65 +541,18 @@ const Featured = () => {
                 <div className="project-content">
                   <div>
                     <h3 className="project-title">
-                      <a href={external}>{title}</a>
+                      <Link to={slug}>{title}</Link>
                     </h3>
 
-                    <div
-                      className="project-description"
-                      dangerouslySetInnerHTML={{ __html: html }}
-                    />
+                    <div className="project-description">
+                      <p>{summary}</p>
+                    </div>
 
                     {(domain || role) && (
                       <ul className="project-meta">
                         {domain && <li className="meta-pill">{domain}</li>}
                         {role && <li className="meta-pill">{role}</li>}
                       </ul>
-                    )}
-
-                    {projectTypes && projectTypes.length > 0 && (
-                      <>
-                        <h4 className="project-subtitle">Built For</h4>
-                        <ul className="project-meta">
-                          {projectTypes.map((type, idx) => (
-                            <li key={idx} className="meta-pill">
-                              {type}
-                            </li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-
-                    {contribution && contribution.length > 0 && (
-                      <>
-                        <h4 className="project-subtitle">My Contribution</h4>
-                        <ul className="outcomes-list">
-                          {contribution.map((item, idx) => (
-                            <li key={idx}>{item}</li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-
-                    {estimationInputs && estimationInputs.length > 0 && (
-                      <>
-                        <h4 className="project-subtitle">Key Inputs</h4>
-                        <ul className="inputs-list">
-                          {estimationInputs.map((input, idx) => (
-                            <li key={idx}>{input}</li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-
-                    {workflow && workflow.length > 0 && (
-                      <>
-                        <h4 className="project-subtitle">How It Works</h4>
-                        <ol className="workflow-list">
-                          {workflow.map((step, idx) => (
-                            <li key={idx}>{step}</li>
-                          ))}
-                        </ol>
-                      </>
                     )}
 
                     {outcomes && outcomes.length > 0 && (
@@ -612,6 +575,9 @@ const Featured = () => {
                     )}
 
                     <div className="project-links">
+                      <Link to={slug} className="case-study-link">
+                        Read the case study <span aria-hidden="true">&rarr;</span>
+                      </Link>
                       {cta && (
                         <a href={cta} aria-label="Course Link" className="cta">
                           Learn More
@@ -632,13 +598,13 @@ const Featured = () => {
                 </div>
 
                 <div className="project-image">
-                  <a href={external ? external : github ? github : '#'}>
+                  <Link to={slug} aria-label={`${title} case study`}>
                     <GatsbyImage
                       image={image}
-                      alt={`${title} — ${role || domain} screenshot`}
+                      alt={`${title} — ${role || domain}`}
                       className="img"
                     />
-                  </a>
+                  </Link>
                 </div>
               </StyledProject>
             );

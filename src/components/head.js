@@ -7,7 +7,7 @@ import { email, socialMedia } from '@config';
 
 // https://www.gatsbyjs.com/docs/add-seo-component/
 
-const Head = ({ title, description, image }) => {
+const Head = ({ title, description, image, type, schema }) => {
   const { pathname } = useLocation();
 
   const { site, featured } = useStaticQuery(
@@ -29,12 +29,11 @@ const Head = ({ title, description, image }) => {
         ) {
           edges {
             node {
-              excerpt(pruneLength: 200)
               frontmatter {
                 title
-                external
+                slug
+                summary
                 domain
-                role
                 tech
               }
             }
@@ -47,6 +46,7 @@ const Head = ({ title, description, image }) => {
   const { defaultTitle, shortTitle, defaultDescription, siteUrl, defaultImage, twitterUsername } =
     site.siteMetadata;
 
+  const isHome = pathname === '/';
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
@@ -56,90 +56,81 @@ const Head = ({ title, description, image }) => {
 
   const personId = `${siteUrl}/#person`;
 
-  // Structured data so search engines and AI answer engines can resolve
-  // "who is Bijay Subedi / what has he built" to a single, citable entity.
-  const schema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Person',
-        '@id': personId,
-        name: 'Bijay Subedi',
-        alternateName: 'Bijay Prasad Subedi',
-        jobTitle: 'Senior Software Engineer',
-        description: defaultDescription,
-        url: siteUrl,
-        image: `${siteUrl}${defaultImage}`,
-        email: `mailto:${email}`,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Kathmandu',
-          addressCountry: 'NP',
-        },
-        worksFor: {
-          '@type': 'Organization',
-          name: 'Truemark',
-          url: 'https://www.truemark.dev/',
-        },
-        knowsAbout: [
-          'Ruby on Rails',
-          'React.js',
-          'Hotwire (Turbo + Stimulus)',
-          'PostgreSQL',
-          'Amazon Web Services (AWS)',
-          'Microservices architecture',
-          'RESTful API design',
-          'Sidekiq background jobs',
-          'CI/CD',
-          'Test-driven development (RSpec, Jest)',
-          'Healthcare localization workflow software',
-          'AI-assisted e-commerce listing automation',
-        ],
-        sameAs: socialMedia
-          .filter(({ name }) => ['GitHub', 'Linkedin', 'Twitter'].includes(name))
-          .map(({ url }) => url),
-      },
-      {
-        '@type': 'WebSite',
-        '@id': `${siteUrl}/#website`,
-        url: siteUrl,
-        name: shortTitle,
-        description: defaultDescription,
-        publisher: { '@id': personId },
-        inLanguage: 'en',
-      },
-      {
-        '@type': 'ProfilePage',
-        '@id': `${siteUrl}/#profile`,
-        url: siteUrl,
-        name: defaultTitle,
-        mainEntity: { '@id': personId },
-      },
-      {
-        '@type': 'ItemList',
-        '@id': `${siteUrl}/#projects`,
-        name: 'Software projects by Bijay Subedi',
-        itemListElement: featured.edges.map(({ node }, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          item: {
-            '@type': 'SoftwareApplication',
-            name: node.frontmatter.title,
-            applicationCategory: 'BusinessApplication',
-            description: node.excerpt,
-            url: node.frontmatter.external || `${siteUrl}/#projects`,
-            keywords: [
-              node.frontmatter.domain,
-              node.frontmatter.role,
-              ...(node.frontmatter.tech || []),
-            ]
-              .filter(Boolean)
-              .join(', '),
-            creator: { '@id': personId },
-          },
-        })),
-      },
+  // The Person entity appears on every page with the same @id, so search engines and
+  // AI answer engines resolve every page to one citable entity.
+  const person = {
+    '@type': 'Person',
+    '@id': personId,
+    name: 'Bijay Subedi',
+    jobTitle: 'Senior Software Engineer',
+    description: defaultDescription,
+    url: `${siteUrl}/`,
+    image: `${siteUrl}${defaultImage}`,
+    email: `mailto:${email}`,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Kathmandu',
+      addressCountry: 'NP',
+    },
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Truemark',
+      url: 'https://www.truemark.dev/',
+    },
+    knowsAbout: [
+      'Ruby on Rails',
+      'React.js',
+      'Hotwire (Turbo + Stimulus)',
+      'PostgreSQL',
+      'Amazon Web Services (AWS)',
+      'Microservices architecture',
+      'RESTful API design',
+      'Sidekiq background jobs',
+      'CI/CD',
+      'Test-driven development (RSpec, Jest)',
+      'Healthcare localization workflow software',
+      'AI-assisted e-commerce listing automation',
     ],
+    sameAs: socialMedia
+      .filter(({ name }) => ['GitHub', 'Linkedin', 'Twitter'].includes(name))
+      .map(({ url }) => url),
+  };
+
+  // Site-level entities belong on the home page only.
+  const homeGraph = [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: shortTitle,
+      description: defaultDescription,
+      publisher: { '@id': personId },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${siteUrl}/#profile`,
+      url: `${siteUrl}/`,
+      name: defaultTitle,
+      mainEntity: { '@id': personId },
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${siteUrl}/#projects`,
+      name: 'Software projects by Bijay Subedi',
+      itemListElement: featured.edges.map(({ node }, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${siteUrl}${node.frontmatter.slug}`,
+        name: node.frontmatter.title,
+        description: node.frontmatter.summary,
+      })),
+    },
+  ];
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [person, ...(isHome ? homeGraph : []), ...schema],
   };
 
   return (
@@ -155,11 +146,13 @@ const Head = ({ title, description, image }) => {
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />
       <meta property="og:image" content={seo.image} />
-      <meta property="og:image:alt" content="Bijay Subedi — Senior Software Engineer" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={seo.title} />
       <meta property="og:url" content={seo.url} />
-      <meta property="og:type" content="profile" />
-      <meta property="profile:first_name" content="Bijay" />
-      <meta property="profile:last_name" content="Subedi" />
+      <meta property="og:type" content={type} />
+      {type === 'profile' && <meta property="profile:first_name" content="Bijay" />}
+      {type === 'profile' && <meta property="profile:last_name" content="Subedi" />}
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={twitterUsername} />
@@ -168,7 +161,7 @@ const Head = ({ title, description, image }) => {
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
 
-      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      <script type="application/ld+json">{JSON.stringify(graph)}</script>
     </Helmet>
   );
 };
@@ -179,10 +172,14 @@ Head.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
+  type: PropTypes.string,
+  schema: PropTypes.arrayOf(PropTypes.object),
 };
 
 Head.defaultProps = {
   title: null,
   description: null,
   image: null,
+  type: 'profile',
+  schema: [],
 };

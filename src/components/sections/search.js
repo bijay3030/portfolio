@@ -232,7 +232,7 @@ const Search = () => {
             excerpt(pruneLength: 260)
             frontmatter {
               title
-              external
+              slug
               tech
               domain
               role
@@ -310,7 +310,7 @@ const Search = () => {
     const featuredEntries = data.featured.edges.map(({ node }, idx) => {
       const {
         title,
-        external,
+        slug,
         tech,
         domain,
         role,
@@ -329,7 +329,7 @@ const Search = () => {
         id: `featured-${idx}`,
         title,
         section: 'Featured Work',
-        link: external || '/#projects',
+        link: slug || '/#projects',
         snippet: truncate(stripTags(node.excerpt)),
         searchableText: [
           title,

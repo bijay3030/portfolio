@@ -290,7 +290,8 @@ const GlobalSearch = ({ isOpen, onClose }) => {
             excerpt(pruneLength: 260)
             frontmatter {
               title
-              external
+              slug
+              summary
               tech
               domain
               role
@@ -298,24 +299,6 @@ const GlobalSearch = ({ isOpen, onClose }) => {
               estimationInputs
               workflow
               outcomes
-            }
-          }
-        }
-      }
-      projects: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/content/projects/" } }
-        sort: { frontmatter: { date: DESC } }
-      ) {
-        edges {
-          node {
-            excerpt(pruneLength: 240)
-            frontmatter {
-              title
-              company
-              external
-              github
-              tech
-              date
             }
           }
         }
@@ -377,15 +360,25 @@ const GlobalSearch = ({ isOpen, onClose }) => {
     });
 
     const featuredEntries = data.featured.edges.map(({ node }, idx) => {
-      const { title, tech, domain, role, projectTypes, estimationInputs, workflow, outcomes } =
-        node.frontmatter;
+      const {
+        title,
+        slug,
+        summary,
+        tech,
+        domain,
+        role,
+        projectTypes,
+        estimationInputs,
+        workflow,
+        outcomes,
+      } = node.frontmatter;
 
       return {
         id: `featured-${idx}`,
         title,
-        section: 'Featured Work',
-        link: '/#projects',
-        snippet: truncate(node.excerpt),
+        section: 'Case study',
+        link: slug,
+        snippet: truncate(summary || node.excerpt),
         searchableText: [
           title,
           domain,
@@ -395,24 +388,13 @@ const GlobalSearch = ({ isOpen, onClose }) => {
           asArray(estimationInputs).join(' '),
           asArray(workflow).join(' '),
           asArray(outcomes).join(' '),
+          summary,
           node.excerpt,
         ].join(' '),
       };
     });
 
-    const projectEntries = data.projects.edges.map(({ node }, idx) => {
-      const { title, company, external, github, tech, date } = node.frontmatter;
-      return {
-        id: `project-${idx}`,
-        title,
-        section: 'Projects',
-        link: external || github || '/archive',
-        snippet: `${company ? `${company} • ` : ''}${date ? new Date(date).getFullYear() : ''}`,
-        searchableText: `${title} ${company} ${asArray(tech).join(' ')} ${node.excerpt}`,
-      };
-    });
-
-    return [aboutEntry, ...jobsEntries, ...featuredEntries, ...projectEntries];
+    return [aboutEntry, ...jobsEntries, ...featuredEntries];
   }, [data]);
 
   const results = useMemo(() => {
