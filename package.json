@@ -20,6 +20,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
+    "preview": "gatsby build && gatsby serve",
     "clean": "gatsby clean",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
