@@ -352,7 +352,7 @@ const Search = () => {
       return {
         id: `post-${idx}`,
         title,
-        section: 'Pensieve',
+        section: 'Writing',
         link: slug,
         snippet: truncate(description || node.excerpt),
         searchableText: `${title} ${description} ${tagsList.join(' ')} ${node.excerpt}`,
@@ -381,8 +381,7 @@ const Search = () => {
 
       <p className="intro">
         Search across everything on this portfolio: <strong>About</strong>,{' '}
-        <strong>Experience</strong>, <strong>Featured Work</strong>, and{' '}
-        <strong>Pensieve posts</strong>.
+        <strong>Experience</strong>, <strong>Featured Work</strong>, and <strong>writing</strong>.
       </p>
 
       <div className="search-shell">

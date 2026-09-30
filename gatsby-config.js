@@ -18,7 +18,39 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+            posts: allMarkdownRemark(
+              filter: {
+                fileAbsolutePath: { regex: "/content/posts/" }
+                frontmatter: { draft: { ne: true } }
+              }
+            ) {
+              totalCount
+            }
+          }
+        `,
+        // Leave out thin tag pages, and the writing index until a post is published.
+        resolvePages: ({ allSitePage, posts }) =>
+          allSitePage.nodes.filter(
+            ({ path }) =>
+              !path.startsWith('/writing/tags') && (path !== '/writing/' || posts.totalCount > 0),
+          ),
+      },
+    },
     {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
@@ -37,6 +69,59 @@ module.exports = {
           { userAgent: 'Claude-User', allow: '/' },
           { userAgent: 'ClaudeBot', allow: '/' },
           { userAgent: 'Google-Extended', allow: '/' },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title: shortTitle
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) =>
+              allMarkdownRemark.nodes.map(node => ({
+                title: node.frontmatter.title,
+                description: node.frontmatter.description,
+                date: node.frontmatter.date,
+                url: `${site.siteMetadata.siteUrl}${node.frontmatter.slug}`,
+                guid: `${site.siteMetadata.siteUrl}${node.frontmatter.slug}`,
+                custom_elements: [{ 'content:encoded': node.html }],
+              })),
+            query: `
+              {
+                allMarkdownRemark(
+                  filter: {
+                    fileAbsolutePath: { regex: "/content/posts/" }
+                    frontmatter: { draft: { ne: true } }
+                  }
+                  sort: { frontmatter: { date: DESC } }
+                ) {
+                  nodes {
+                    html
+                    frontmatter {
+                      title
+                      description
+                      date
+                      slug
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/rss.xml',
+            title: 'Bijay Subedi — Writing',
+          },
         ],
       },
     },

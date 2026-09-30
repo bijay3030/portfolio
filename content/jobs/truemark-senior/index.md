@@ -5,6 +5,18 @@ company: 'Truemark Pvt Limited'
 location: 'Kathmandu, Nepal'
 range: 'Aug 2022 - Present'
 url: 'https://www.truemark.dev/'
+tabLabel: 'Truemark · Senior'
+stack:
+  - Ruby on Rails
+  - React.js
+  - Hotwire
+  - PostgreSQL
+  - AWS (EC2, S3, Lambda)
+  - Microservices
+  - RSpec
+  - Jest
+  - GitLab CI
+  - AWS CodePipeline
 ---
 
 - Led development and maintenance of 6+ Ruby on Rails client applications, delivering scalable architecture and complex business logic across projects.

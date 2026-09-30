@@ -5,6 +5,14 @@ company: 'Truemark Pvt Limited'
 location: 'Kathmandu, Nepal'
 range: 'Apr 2021 - Aug 2022'
 url: 'https://www.truemark.dev/'
+tabLabel: 'Truemark · Associate'
+stack:
+  - Ruby on Rails
+  - React.js
+  - REST APIs
+  - Third-party API integrations
+  - RSpec
+  - Agile/Scrum
 ---
 
 - Developed scalable RESTful APIs and backend services with Ruby on Rails for high-traffic applications with consistent sub-200ms response times.

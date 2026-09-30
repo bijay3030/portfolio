@@ -156,6 +156,29 @@ const StyledTabPanel = styled.div`
     }
   }
 
+  .job-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+      padding: 4px 10px;
+      border: 1px solid var(--lightest-navy);
+      border-radius: 999px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: var(--fz-xxs);
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+
   .range {
     margin-bottom: 25px;
     color: var(--light-slate);
@@ -179,6 +202,8 @@ const Jobs = () => {
               location
               range
               url
+              tabLabel
+              stack
             }
             html
           }
@@ -250,7 +275,7 @@ const Jobs = () => {
         <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>
           {jobsData &&
             jobsData.map(({ node }, i) => {
-              const { company } = node.frontmatter;
+              const { company, tabLabel } = node.frontmatter;
               return (
                 <StyledTabButton
                   key={i}
@@ -262,7 +287,7 @@ const Jobs = () => {
                   tabIndex={activeTabId === i ? '0' : '-1'}
                   aria-selected={activeTabId === i ? true : false}
                   aria-controls={`panel-${i}`}>
-                  <span>{company}</span>
+                  <span>{tabLabel || company}</span>
                 </StyledTabButton>
               );
             })}
@@ -273,7 +298,7 @@ const Jobs = () => {
           {jobsData &&
             jobsData.map(({ node }, i) => {
               const { frontmatter, html } = node;
-              const { title, url, company, range } = frontmatter;
+              const { title, url, company, range, stack } = frontmatter;
 
               return (
                 <CSSTransition key={i} in={activeTabId === i} timeout={250} classNames="fade">
@@ -297,6 +322,14 @@ const Jobs = () => {
                     <p className="range">{range}</p>
 
                     <div dangerouslySetInnerHTML={{ __html: html }} />
+
+                    {stack && stack.length > 0 && (
+                      <ul className="job-stack" aria-label="Stack used in this role">
+                        {stack.map(item => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
                   </StyledTabPanel>
                 </CSSTransition>
               );
