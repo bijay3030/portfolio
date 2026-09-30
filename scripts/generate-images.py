@@ -16,13 +16,13 @@ from html import escape
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-NAVY = '#0a192f'
-LIGHT_NAVY = '#112240'
-LIGHTEST_NAVY = '#233554'
-SLATE = '#8892b0'
-LIGHT_SLATE = '#a8b2d1'
-LIGHTEST_SLATE = '#ccd6f6'
-GREEN = '#64ffda'
+NAVY = '#0e1217'
+LIGHT_NAVY = '#161c24'
+LIGHTEST_NAVY = '#28313d'
+SLATE = '#8d99a8'
+LIGHT_SLATE = '#b4bfcc'
+LIGHTEST_SLATE = '#e2e8ef'
+GREEN = '#ff6b7f'  # accent (ruby); name kept to match the site's CSS variable
 SANS = 'Helvetica Neue, Helvetica, Arial, sans-serif'
 MONO = 'Menlo, SF Mono, monospace'
 
@@ -207,6 +207,23 @@ def og(kicker, title, subtitle_lines, footer):
 </svg>'''
 
 
+HOME_OG = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="{NAVY}"/>
+<rect x="0" y="0" width="12" height="630" fill="{GREEN}"/>
+<text x="80" y="130" font-family="{MONO}" font-size="24" fill="{GREEN}">Senior Software Engineer · Ruby on Rails · React · AWS</text>
+<text x="76" y="250" font-family="{SANS}" font-size="96" font-weight="700" fill="{LIGHTEST_SLATE}">Bijay Subedi</text>
+<text x="80" y="330" font-family="{SANS}" font-size="46" font-weight="700" fill="{SLATE}">I build software that runs operations.</text>
+<text x="80" y="410" font-family="{SANS}" font-size="27" fill="{SLATE}">Healthcare workflow platforms · AI listing automation</text>
+<text x="80" y="450" font-family="{SANS}" font-size="27" fill="{SLATE}">Kathmandu, Nepal · open to senior full-time remote roles</text>
+<text x="80" y="560" font-family="{MONO}" font-size="22" fill="{LIGHT_SLATE}">bijay3030.github.io</text>
+</svg>'''
+
+LOGO = f'''<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="96" fill="{NAVY}"/>
+<rect x="56" y="56" width="400" height="400" rx="72" fill="none" stroke="{GREEN}" stroke-width="24"/>
+<text x="256" y="312" text-anchor="middle" font-family="{MONO}" font-size="168" font-weight="700" fill="{GREEN}">BS</text>
+</svg>'''
+
 OG_IMAGES = {
     'helios': og(
         'Case study · Healthcare translation operations',
@@ -237,6 +254,18 @@ def main():
             f.write(svg)
         render(svg_path, os.path.join(folder, 'architecture.png'), W, H)
         print('diagram', name)
+
+    for svg, out, w, h in [
+        (HOME_OG, os.path.join(ROOT, 'static', 'og.png'), 1200, 630),
+        (HOME_OG, os.path.join(ROOT, 'static', 'og@2x.png'), 2400, 1260),
+        (LOGO, os.path.join(ROOT, 'src', 'images', 'logo.png'), 512, 512),
+    ]:
+        tmp = out + '.svg'
+        with open(tmp, 'w') as f:
+            f.write(svg)
+        render(tmp, out, w, h)
+        os.remove(tmp)
+        print('image', os.path.relpath(out, ROOT))
 
     og_dir = os.path.join(ROOT, 'static', 'og')
     os.makedirs(og_dir, exist_ok=True)

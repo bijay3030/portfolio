@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { navLinks } from '@config';
 import { Menu } from '@components';
-import { IconLogo, IconHex } from '@components/icons';
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -72,45 +71,31 @@ const StyledNav = styled.nav`
     ${({ theme }) => theme.mixins.flexCenter};
 
     a {
+      display: block;
       color: var(--green);
+    }
+
+    .monogram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 42px;
       height: 42px;
-      position: relative;
-      z-index: 1;
-
-      .hex-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        @media (prefers-reduced-motion: no-preference) {
-          transition: var(--transition);
-        }
+      border: 2px solid var(--green);
+      border-radius: 10px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      @media (prefers-reduced-motion: no-preference) {
+        transition: var(--transition);
       }
+    }
 
-      .logo-container {
-        position: relative;
-        z-index: 1;
-        svg {
-          fill: none;
-          user-select: none;
-          @media (prefers-reduced-motion: no-preference) {
-            transition: var(--transition);
-          }
-          polygon {
-            fill: var(--navy);
-          }
-        }
-      }
-
-      &:hover,
-      &:focus {
-        outline: 0;
-        transform: translate(-4px, -4px);
-        .hex-container {
-          transform: translate(4px, 3px);
-        }
-      }
+    a:hover .monogram,
+    a:focus .monogram {
+      background-color: var(--green-tint);
     }
   }
 `;
@@ -137,14 +122,6 @@ const StyledLinks = styled.div`
 
       a {
         padding: 10px;
-
-        &:before {
-          content: '0' counter(item) '.';
-          margin-right: 5px;
-          color: var(--green);
-          font-size: var(--fz-xxs);
-          text-align: right;
-        }
       }
     }
   }
@@ -183,25 +160,21 @@ const Nav = ({ isHome, onOpenSearch }) => {
   const enter = i =>
     isHome ? { className: 'nav-enter', style: { animationDelay: `${i * 80}ms` } } : {};
 
+  const Monogram = (
+    <span className="monogram" aria-hidden="true">
+      BS
+    </span>
+  );
+
   const Logo = (
     <div className="logo" tabIndex="-1">
       {isHome ? (
-        <a href="/" aria-label="home">
-          <div className="hex-container">
-            <IconHex />
-          </div>
-          <div className="logo-container">
-            <IconLogo />
-          </div>
+        <a href="/" aria-label="Bijay Subedi, home">
+          {Monogram}
         </a>
       ) : (
-        <Link to="/" aria-label="home">
-          <div className="hex-container">
-            <IconHex />
-          </div>
-          <div className="logo-container">
-            <IconLogo />
-          </div>
+        <Link to="/" aria-label="Bijay Subedi, home">
+          {Monogram}
         </Link>
       )}
     </div>

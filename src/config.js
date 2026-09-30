@@ -24,10 +24,6 @@ module.exports = {
       url: 'https://github.com/bijay3030',
     },
     {
-      name: 'Instagram',
-      url: 'https://www.instagram.com/_good_.vibess/',
-    },
-    {
       name: 'Twitter',
       url: 'https://x.com/Bj11S',
     },
@@ -43,16 +39,16 @@ module.exports = {
 
   navLinks: [
     {
-      name: 'About',
-      url: '/#about',
+      name: 'Work',
+      url: '/#projects',
     },
     {
       name: 'Experience',
       url: '/#jobs',
     },
     {
-      name: 'Work',
-      url: '/#projects',
+      name: 'About',
+      url: '/#about',
     },
     {
       name: 'Contact',
@@ -61,9 +57,9 @@ module.exports = {
   ],
 
   colors: {
-    green: '#64ffda',
-    navy: '#0a192f',
-    darkNavy: '#020c1b',
+    green: '#ff6b7f',
+    navy: '#0e1217',
+    darkNavy: '#07090c',
   },
 
   srConfig: (delay = 200, viewFactor = 0.25) => ({

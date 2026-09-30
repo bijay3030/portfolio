@@ -131,14 +131,6 @@ const StyledSidebar = styled.aside`
       @media (max-width: 600px) {
         margin: 0 auto 10px;
       }
-
-      &:before {
-        content: '0' counter(item) '.';
-        display: block;
-        margin-bottom: 5px;
-        color: var(--green);
-        font-size: var(--fz-sm);
-      }
     }
 
     a {
