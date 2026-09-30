@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useLocation } from '@reach/router';
 import { useStaticQuery, graphql } from 'gatsby';
-import { email, socialMedia } from '@config';
+import { email, socialMedia, verification } from '@config';
 
 // https://www.gatsbyjs.com/docs/add-seo-component/
 
@@ -160,6 +160,11 @@ const Head = ({ title, description, image, type, schema }) => {
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
+
+      {verification.google && (
+        <meta name="google-site-verification" content={verification.google} />
+      )}
+      {verification.bing && <meta name="msvalidate.01" content={verification.bing} />}
 
       <script type="application/ld+json">{JSON.stringify(graph)}</script>
     </Helmet>

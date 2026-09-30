@@ -1,6 +1,7 @@
 const config = require('./src/config');
 // Served from the root of the bijay3030.github.io user site, so there is no path prefix.
 const siteUrl = process.env.GATSBY_SITE_URL || 'https://bijay3030.github.io';
+const gaMeasurementId = process.env.GATSBY_GA_MEASUREMENT_ID;
 
 module.exports = {
   siteMetadata: {
@@ -248,5 +249,18 @@ module.exports = {
         ],
       },
     },
+    // Google Analytics 4, only when GATSBY_GA_MEASUREMENT_ID is set at build time.
+    ...(gaMeasurementId
+      ? [
+        {
+          resolve: `gatsby-plugin-google-gtag`,
+          options: {
+            trackingIds: [gaMeasurementId],
+            gtagConfig: { anonymize_ip: true },
+            pluginConfig: { head: false, respectDNT: true },
+          },
+        },
+      ]
+      : []),
   ],
 };
