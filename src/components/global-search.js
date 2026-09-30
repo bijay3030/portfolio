@@ -196,7 +196,9 @@ const tokenize = value =>
 
 const scoreEntry = (entry, query) => {
   const q = normalize(query);
-  if (!q) {return 0;}
+  if (!q) {
+    return 0;
+  }
 
   const title = normalize(entry.title);
   const section = normalize(entry.section);
@@ -204,16 +206,32 @@ const scoreEntry = (entry, query) => {
   const tokens = q.split(' ').filter(Boolean);
   let score = 0;
 
-  if (title === q) {score += 120;}
-  if (title.startsWith(q)) {score += 80;}
-  if (title.includes(q)) {score += 60;}
-  if (section.includes(q)) {score += 25;}
-  if (content.includes(q)) {score += 35;}
+  if (title === q) {
+    score += 120;
+  }
+  if (title.startsWith(q)) {
+    score += 80;
+  }
+  if (title.includes(q)) {
+    score += 60;
+  }
+  if (section.includes(q)) {
+    score += 25;
+  }
+  if (content.includes(q)) {
+    score += 35;
+  }
 
   tokens.forEach(token => {
-    if (token.length < 2) {return;}
-    if (title.includes(token)) {score += 18;}
-    if (content.includes(token)) {score += 7;}
+    if (token.length < 2) {
+      return;
+    }
+    if (title.includes(token)) {
+      score += 18;
+    }
+    if (content.includes(token)) {
+      score += 7;
+    }
   });
 
   return score;
@@ -221,16 +239,24 @@ const scoreEntry = (entry, query) => {
 
 const scoreRelated = (entry, query) => {
   const queryTokens = tokenize(query);
-  if (queryTokens.length === 0) {return 0;}
+  if (queryTokens.length === 0) {
+    return 0;
+  }
 
   const entryTokens = tokenize(entry.searchableText);
-  if (entryTokens.length === 0) {return 0;}
+  if (entryTokens.length === 0) {
+    return 0;
+  }
 
   let score = 0;
   queryTokens.forEach(qToken => {
     const hasPrefixMatch = entryTokens.some(token => token.startsWith(qToken));
     const hasContainsMatch = entryTokens.some(token => token.includes(qToken));
-    if (hasPrefixMatch) {score += 14;} else if (hasContainsMatch) {score += 7;}
+    if (hasPrefixMatch) {
+      score += 14;
+    } else if (hasContainsMatch) {
+      score += 7;
+    }
   });
 
   return score;
@@ -238,10 +264,10 @@ const scoreRelated = (entry, query) => {
 
 const GlobalSearch = ({ isOpen, onClose }) => {
   const data = useStaticQuery(graphql`
-    query {
+    {
       jobs: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/jobs/" } }
-        sort: { fields: [frontmatter___date], order: DESC }
+        sort: { frontmatter: { date: DESC } }
       ) {
         edges {
           node {
@@ -257,7 +283,7 @@ const GlobalSearch = ({ isOpen, onClose }) => {
       }
       featured: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/featured/" } }
-        sort: { fields: [frontmatter___date], order: ASC }
+        sort: { frontmatter: { date: ASC } }
       ) {
         edges {
           node {
@@ -278,7 +304,7 @@ const GlobalSearch = ({ isOpen, onClose }) => {
       }
       projects: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/projects/" } }
-        sort: { fields: [frontmatter___date], order: DESC }
+        sort: { frontmatter: { date: DESC } }
       ) {
         edges {
           node {
@@ -301,14 +327,18 @@ const GlobalSearch = ({ isOpen, onClose }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    if (!isOpen) {return undefined;}
+    if (!isOpen) {
+      return undefined;
+    }
 
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     setTimeout(() => inputRef.current?.focus(), 0);
 
     const onKeyDown = event => {
-      if (event.key === 'Escape') {onClose();}
+      if (event.key === 'Escape') {
+        onClose();
+      }
     };
 
     document.addEventListener('keydown', onKeyDown);
@@ -387,7 +417,9 @@ const GlobalSearch = ({ isOpen, onClose }) => {
 
   const results = useMemo(() => {
     const q = query.trim();
-    if (q.length < 2) {return [];}
+    if (q.length < 2) {
+      return [];
+    }
 
     const direct = searchIndex
       .map(entry => ({ ...entry, score: scoreEntry(entry, q) }))
@@ -423,7 +455,9 @@ const GlobalSearch = ({ isOpen, onClose }) => {
     navigate(link);
   };
 
-  if (!isOpen) {return null;}
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <StyledOverlay onClick={onClose}>

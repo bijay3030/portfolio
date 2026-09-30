@@ -1,4 +1,11 @@
 module.exports = {
+  // One source of truth for the availability line shown in the hero, contact, and FAQ.
+  availability: {
+    status: 'Open to senior full-time remote roles',
+    location: 'Kathmandu, Nepal (UTC+5:45)',
+    overlap: '4+ hours overlap with US Eastern · full EU workday overlap',
+  },
+
   email: 'sharma.bj11@gmail.com',
 
   socialMedia: [
@@ -19,7 +26,7 @@ module.exports = {
       url: 'https://www.linkedin.com/in/bijay-p-subedi/',
     },
     {
-      name: 'Codepen',
+      name: 'LeetCode',
       url: 'https://leetcode.com/u/stanbj3030/',
     },
   ],

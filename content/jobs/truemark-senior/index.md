@@ -1,6 +1,6 @@
 ---
 date: '2022-08-01'
-title: 'Software Engineer'
+title: 'Senior Software Engineer'
 company: 'Truemark Pvt Limited'
 location: 'Kathmandu, Nepal'
 range: 'Aug 2022 - Present'

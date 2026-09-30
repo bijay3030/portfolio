@@ -12,7 +12,7 @@ const Head = ({ title, description, image }) => {
 
   const { site, featured } = useStaticQuery(
     graphql`
-      query {
+      {
         site {
           siteMetadata {
             defaultTitle: title
@@ -25,7 +25,7 @@ const Head = ({ title, description, image }) => {
         }
         featured: allMarkdownRemark(
           filter: { fileAbsolutePath: { regex: "/content/featured/" } }
-          sort: { fields: [frontmatter___date], order: ASC }
+          sort: { frontmatter: { date: ASC } }
         ) {
           edges {
             node {

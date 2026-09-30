@@ -162,7 +162,9 @@ const asArray = value => (Array.isArray(value) ? value : []);
 
 const scoreEntry = (entry, query) => {
   const q = normalize(query);
-  if (!q) {return 0;}
+  if (!q) {
+    return 0;
+  }
 
   const title = normalize(entry.title);
   const section = normalize(entry.section);
@@ -171,16 +173,32 @@ const scoreEntry = (entry, query) => {
 
   let score = 0;
 
-  if (title === q) {score += 120;}
-  if (title.startsWith(q)) {score += 80;}
-  if (title.includes(q)) {score += 60;}
-  if (section.includes(q)) {score += 25;}
-  if (content.includes(q)) {score += 35;}
+  if (title === q) {
+    score += 120;
+  }
+  if (title.startsWith(q)) {
+    score += 80;
+  }
+  if (title.includes(q)) {
+    score += 60;
+  }
+  if (section.includes(q)) {
+    score += 25;
+  }
+  if (content.includes(q)) {
+    score += 35;
+  }
 
   tokens.forEach(token => {
-    if (token.length < 2) {return;}
-    if (title.includes(token)) {score += 18;}
-    if (content.includes(token)) {score += 7;}
+    if (token.length < 2) {
+      return;
+    }
+    if (title.includes(token)) {
+      score += 18;
+    }
+    if (content.includes(token)) {
+      score += 7;
+    }
   });
 
   return score;
@@ -188,10 +206,10 @@ const scoreEntry = (entry, query) => {
 
 const Search = () => {
   const data = useStaticQuery(graphql`
-    query {
+    {
       jobs: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/jobs/" } }
-        sort: { fields: [frontmatter___date], order: DESC }
+        sort: { frontmatter: { date: DESC } }
       ) {
         edges {
           node {
@@ -207,7 +225,7 @@ const Search = () => {
       }
       featured: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/featured/" } }
-        sort: { fields: [frontmatter___date], order: ASC }
+        sort: { frontmatter: { date: ASC } }
       ) {
         edges {
           node {
@@ -231,7 +249,7 @@ const Search = () => {
           fileAbsolutePath: { regex: "/content/posts/" }
           frontmatter: { draft: { ne: true } }
         }
-        sort: { fields: [frontmatter___date], order: DESC }
+        sort: { frontmatter: { date: DESC } }
       ) {
         edges {
           node {
@@ -346,7 +364,9 @@ const Search = () => {
 
   const results = useMemo(() => {
     const q = query.trim();
-    if (q.length < 2) {return [];}
+    if (q.length < 2) {
+      return [];
+    }
 
     return searchIndex
       .map(entry => ({ ...entry, score: scoreEntry(entry, q) }))

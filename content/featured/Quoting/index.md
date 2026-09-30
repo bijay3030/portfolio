@@ -2,7 +2,7 @@
 date: '0.5'
 title: 'Quoting'
 cover: './ls-quoting-cover.png'
-external: 'https://www.languagescientific.com/'
+external: ''
 github: ''
 cta: ''
 domain: 'Healthcare Localization'
@@ -36,6 +36,6 @@ outcomes:
   - Full version history, access rules, and secure file handling for enterprise clients
 ---
 
-**Quoting is a quote-management platform that turns a healthcare translation request into an accurate, versioned price quote.** I built it for Language Scientific's project-management team.
+**Quoting is a quote-management platform that turns a healthcare translation request into an accurate, versioned price quote.** Built at Truemark for the project-management team of a US healthcare localization provider (client under NDA).
 
 **The problem:** estimates depended on word counts, file lists, and pricing rules spread across spreadsheets, so quotes were slow and inconsistent. Quoting centralizes those rules, tracks every revision, and hands approved quotes directly to delivery.

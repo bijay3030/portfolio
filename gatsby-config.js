@@ -1,10 +1,8 @@
 const config = require('./src/config');
-const repoName = process.env.GH_PAGES_REPO || '';
-const pathPrefix = repoName ? `/${repoName}` : '';
+// Served from the root of the bijay3030.github.io user site, so there is no path prefix.
 const siteUrl = process.env.GATSBY_SITE_URL || 'https://bijay3030.github.io';
 
 module.exports = {
-  pathPrefix,
   siteMetadata: {
     title: 'Bijay Subedi — Senior Software Engineer (Ruby on Rails, React, AWS)',
     shortTitle: 'Bijay Subedi',
@@ -21,20 +19,39 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sitemap`,
-    `gatsby-plugin-robots-txt`,
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: siteUrl,
+        sitemap: `${siteUrl}/sitemap-index.xml`,
+        // Explicitly welcome search engines and AI answer-engine crawlers.
+        policy: [
+          { userAgent: '*', allow: '/' },
+          { userAgent: 'Googlebot', allow: '/' },
+          { userAgent: 'Bingbot', allow: '/' },
+          { userAgent: 'OAI-SearchBot', allow: '/' },
+          { userAgent: 'ChatGPT-User', allow: '/' },
+          { userAgent: 'GPTBot', allow: '/' },
+          { userAgent: 'PerplexityBot', allow: '/' },
+          { userAgent: 'Claude-SearchBot', allow: '/' },
+          { userAgent: 'Claude-User', allow: '/' },
+          { userAgent: 'ClaudeBot', allow: '/' },
+          { userAgent: 'Google-Extended', allow: '/' },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'Bijay Subedi — Software Engineer',
         short_name: 'Bijay Subedi',
-        start_url: pathPrefix ? `${pathPrefix}/` : '/',
+        start_url: '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
         display: 'minimal-ui',
         icon: 'src/images/logo.png',
       },
     },
-    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -82,7 +99,6 @@ module.exports = {
               maxWidth: 700,
               linkImagesToOriginal: true,
               quality: 90,
-              tracedSVG: { color: config.colors.green },
             },
           },
           {

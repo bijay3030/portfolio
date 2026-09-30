@@ -19,7 +19,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           fileAbsolutePath: { regex: "/content/posts/" }
           frontmatter: { draft: { ne: true } }
         }
-        sort: { order: DESC, fields: [frontmatter___date] }
+        sort: { frontmatter: { date: DESC } }
         limit: 1000
       ) {
         edges {
@@ -31,7 +31,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
       tagsGroup: allMarkdownRemark(limit: 2000, filter: { frontmatter: { draft: { ne: true } } }) {
-        group(field: frontmatter___tags) {
+        group(field: { frontmatter: { tags: SELECT } }) {
           fieldValue
         }
       }

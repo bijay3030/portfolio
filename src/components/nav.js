@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled, { css } from 'styled-components';
 import { navLinks } from '@config';
-import { loaderDelay } from '@utils';
-import { usePrefersReducedMotion } from '@hooks';
 import { Menu } from '@components';
 import { IconLogo, IconHex } from '@components/icons';
 
@@ -50,6 +47,25 @@ const StyledNav = styled.nav`
   color: var(--lightest-slate);
   font-family: var(--font-mono);
   counter-reset: item 0;
+
+  @keyframes nav-fadedown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-enter {
+    animation: nav-fadedown 300ms var(--easing) both;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
   z-index: 12;
 
   .logo {
@@ -151,34 +167,21 @@ const StyledLinks = styled.div`
 `;
 
 const Nav = ({ isHome, onOpenSearch }) => {
-  const [isMounted, setIsMounted] = useState(!isHome);
   const [scrolledToTop, setScrolledToTop] = useState(true);
-  const prefersReducedMotion = usePrefersReducedMotion();
-
   const handleScroll = () => {
     setScrolledToTop(window.pageYOffset < 50);
   };
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      setIsMounted(true);
-    }, 100);
-
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const timeout = isHome ? loaderDelay : 0;
-  const fadeClass = isHome ? 'fade' : '';
-  const fadeDownClass = isHome ? 'fadedown' : '';
+  // Rendered identically on server and client (no hydration mismatch); the entrance
+  // animation on the homepage is pure CSS.
+  const enter = i =>
+    isHome ? { className: 'nav-enter', style: { animationDelay: `${i * 80}ms` } } : {};
 
   const Logo = (
     <div className="logo" tabIndex="-1">
@@ -229,81 +232,22 @@ const Nav = ({ isHome, onOpenSearch }) => {
   return (
     <StyledHeader scrolledToTop={scrolledToTop}>
       <StyledNav>
-        {prefersReducedMotion ? (
-          <>
-            {Logo}
+        <div {...enter(0)}>{Logo}</div>
 
-            <StyledLinks>
-              <ol>
-                {navLinks &&
-                  navLinks.map(({ url, name }, i) => (
-                    <li key={i}>
-                      <Link to={url}>{name}</Link>
-                    </li>
-                  ))}
-              </ol>
-              <div>{SearchButton}</div>
-              <div>{ResumeLink}</div>
-            </StyledLinks>
+        <StyledLinks>
+          <ol>
+            {navLinks &&
+              navLinks.map(({ url, name }, i) => (
+                <li key={i} {...enter(i + 1)}>
+                  <Link to={url}>{name}</Link>
+                </li>
+              ))}
+          </ol>
+          <div {...enter(navLinks.length + 1)}>{SearchButton}</div>
+          <div {...enter(navLinks.length + 2)}>{ResumeLink}</div>
+        </StyledLinks>
 
-            <Menu onOpenSearch={onOpenSearch} />
-          </>
-        ) : (
-          <>
-            <TransitionGroup component={null}>
-              {isMounted && (
-                <CSSTransition classNames={fadeClass} timeout={timeout}>
-                  <>{Logo}</>
-                </CSSTransition>
-              )}
-            </TransitionGroup>
-
-            <StyledLinks>
-              <ol>
-                <TransitionGroup component={null}>
-                  {isMounted &&
-                    navLinks &&
-                    navLinks.map(({ url, name }, i) => (
-                      <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
-                        <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
-                          <Link to={url}>{name}</Link>
-                        </li>
-                      </CSSTransition>
-                    ))}
-                </TransitionGroup>
-              </ol>
-
-              <TransitionGroup component={null}>
-                {isMounted && (
-                  <CSSTransition classNames={fadeDownClass} timeout={timeout}>
-                    <div style={{ transitionDelay: `${isHome ? navLinks.length * 100 : 0}ms` }}>
-                      {SearchButton}
-                    </div>
-                  </CSSTransition>
-                )}
-              </TransitionGroup>
-
-              <TransitionGroup component={null}>
-                {isMounted && (
-                  <CSSTransition classNames={fadeDownClass} timeout={timeout}>
-                    <div
-                      style={{ transitionDelay: `${isHome ? (navLinks.length + 1) * 100 : 0}ms` }}>
-                      {ResumeLink}
-                    </div>
-                  </CSSTransition>
-                )}
-              </TransitionGroup>
-            </StyledLinks>
-
-            <TransitionGroup component={null}>
-              {isMounted && (
-                <CSSTransition classNames={fadeClass} timeout={timeout}>
-                  <Menu onOpenSearch={onOpenSearch} />
-                </CSSTransition>
-              )}
-            </TransitionGroup>
-          </>
-        )}
+        <Menu onOpenSearch={onOpenSearch} />
       </StyledNav>
     </StyledHeader>
   );

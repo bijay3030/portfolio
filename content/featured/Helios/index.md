@@ -2,7 +2,7 @@
 date: '0'
 title: 'Helios'
 cover: './ls-helios-cover.jpg'
-external: 'https://www.languagescientific.com/'
+external: ''
 github: ''
 cta: ''
 domain: 'Healthcare Translation Operations'
@@ -32,6 +32,6 @@ outcomes:
   - Handles high-volume medical localization without adding coordinator headcount
 ---
 
-**Helios is a workflow platform that runs medical translation projects end to end — from file intake to vendor coordination, delivery, and invoicing.** I built it for Language Scientific, a US healthcare localization provider.
+**Helios is a workflow platform that runs medical translation projects end to end — from file intake to vendor coordination, delivery, and invoicing.** Built at Truemark for a US healthcare localization provider (client name withheld under NDA).
 
 **The problem:** coordinators were moving files, prices, and vendor assignments between email and spreadsheets, which was slow and hard to audit. Helios automates those steps and gives every team one real-time view of each job.
