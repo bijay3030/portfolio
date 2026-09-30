@@ -1,17 +1,18 @@
 const config = require('./src/config');
 const repoName = process.env.GH_PAGES_REPO || '';
 const pathPrefix = repoName ? `/${repoName}` : '';
-const siteUrl = process.env.GATSBY_SITE_URL || 'https://YOUR_USERNAME.github.io';
+const siteUrl = process.env.GATSBY_SITE_URL || 'https://bijay3030.github.io';
 
 module.exports = {
   pathPrefix,
   siteMetadata: {
-    title: 'Brittany Chiang',
+    title: 'Bijay Subedi — Senior Software Engineer (Ruby on Rails, React, AWS)',
+    shortTitle: 'Bijay Subedi',
     description:
-      'Brittany Chiang is a software engineer who specializes in building (and occasionally designing) exceptional digital experiences.',
+      'Bijay Subedi is a Kathmandu-based senior software engineer with 5+ years building Ruby on Rails, React, and AWS systems — including healthcare translation workflow platforms and AI product-listing tools.',
     siteUrl, // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
-    twitterUsername: '@bchiang7',
+    twitterUsername: '@Bj11S',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -24,8 +25,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Brittany Chiang',
-        short_name: 'Brittany Chiang',
+        name: 'Bijay Subedi — Software Engineer',
+        short_name: 'Bijay Subedi',
         start_url: pathPrefix ? `${pathPrefix}/` : '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
@@ -151,12 +152,6 @@ module.exports = {
             },
           },
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: 'UA-45666519-2',
       },
     },
   ],

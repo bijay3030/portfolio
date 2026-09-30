@@ -126,42 +126,16 @@ const About = () => {
   }, []);
 
   const skills = [
-    'Ruby',
-    'JavaScript (ES6+)',
-    'HTML5',
-    'CSS3',
-    'SQL',
-    'Ruby on Rails',
-    'React.js',
-    'Redux',
+    'Ruby on Rails 7',
+    'React.js / React 18',
     'Hotwire (Turbo + Stimulus)',
-    'Sidekiq',
-    'PostgreSQL',
-    'MySQL',
-    'MongoDB',
-    'Redis',
-    'AWS (EC2, S3, Lambda, RDS, CodePipeline)',
-    'Docker',
-    'Kubernetes',
-    'Nginx',
-    'RESTful API Design',
-    'GraphQL',
-    'Third-Party API Integration',
-    'RSpec',
-    'Jest',
-    'TDD / BDD',
-    'Integration Testing',
-    'GitLab CI',
-    'CircleCI',
-    'GitHub Actions',
-    'Git',
-    'GitHub',
-    'GitLab',
-    'Agile/Scrum',
-    'Microservices Architecture',
-    'System Design',
-    'Code Review',
-    'Technical Documentation',
+    'PostgreSQL & Redis',
+    'Sidekiq & ActionCable',
+    'AWS (EC2, S3, Lambda, RDS)',
+    'Microservices & REST APIs',
+    'Docker & Kubernetes',
+    'RSpec, Jest & TDD',
+    'CI/CD (GitLab CI, GitHub Actions)',
   ];
 
   return (
@@ -172,19 +146,28 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              I am a results-driven Software Engineer with 5+ years of hands-on experience building
-              scalable, high-performance systems with Ruby on Rails and React.js.
+              I’m Bijay, a senior software engineer who builds the systems that operations teams
+              depend on every day. I specialize in <strong>Ruby on Rails</strong> back ends,{' '}
+              <strong>React</strong> front ends, and the <strong>AWS</strong> infrastructure that
+              keeps them fast and reliable.
             </p>
             <p>
-              At Truemark, I have led development of multiple client applications, migrated
-              monoliths to microservices on AWS, built APIs serving 500K+ monthly requests at 99.9%
-              uptime, and improved key query performance by up to 60%.
+              Over 5+ years at{' '}
+              <a href="https://www.truemark.dev/" target="_blank" rel="noreferrer">
+                Truemark
+              </a>
+              , I’ve led 6+ client applications, moved a monolith to microservices on AWS (40% lower
+              inter-service latency), kept APIs serving 500K+ requests a month at 99.9% uptime, and
+              cut deploys from ~45 minutes to under 8.
             </p>
             <p>
-              I also mentor junior engineers, improve CI/CD automation, and translate business
-              requirements into reliable, production-ready systems.
+              Much of my recent work is for a US healthcare localization company: platforms that
+              take a translation job from quote to intake, vendor coordination, delivery, and
+              invoicing, with role-based access and a full audit trail. I also mentor junior
+              engineers and work directly with product managers to turn fuzzy requirements into
+              shippable specs.
             </p>
-            <p>Here are the technologies and practices I use regularly:</p>
+            <p>Tools I use daily:</p>
           </div>
 
           <ul className="skills-list">

@@ -469,6 +469,7 @@ const Featured = () => {
               domain
               role
               projectTypes
+              contribution
               estimationInputs
               workflow
               outcomes
@@ -497,11 +498,11 @@ const Featured = () => {
   return (
     <section id="projects">
       <h2 className="numbered-heading" ref={revealTitle}>
-        Client Projects I’ve Contributed To
+        Featured Projects
       </h2>
       <p className="section-intro">
-        A selection of client products and platforms where I contributed across architecture,
-        implementation, integrations, and delivery workflows.
+        Production platforms I’ve built with client teams at Truemark — each one replaces a manual,
+        spreadsheet-and-email process with software that is faster, auditable, and easier to scale.
       </p>
 
       <StyledProjectsGrid>
@@ -518,6 +519,7 @@ const Featured = () => {
               domain,
               role,
               projectTypes,
+              contribution,
               estimationInputs,
               workflow,
               outcomes,
@@ -546,7 +548,7 @@ const Featured = () => {
 
                     {projectTypes && projectTypes.length > 0 && (
                       <>
-                        <h4 className="project-subtitle">Project Types</h4>
+                        <h4 className="project-subtitle">Built For</h4>
                         <ul className="project-meta">
                           {projectTypes.map((type, idx) => (
                             <li key={idx} className="meta-pill">
@@ -557,9 +559,20 @@ const Featured = () => {
                       </>
                     )}
 
+                    {contribution && contribution.length > 0 && (
+                      <>
+                        <h4 className="project-subtitle">My Contribution</h4>
+                        <ul className="outcomes-list">
+                          {contribution.map((item, idx) => (
+                            <li key={idx}>{item}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+
                     {estimationInputs && estimationInputs.length > 0 && (
                       <>
-                        <h4 className="project-subtitle">Estimation Inputs</h4>
+                        <h4 className="project-subtitle">Key Inputs</h4>
                         <ul className="inputs-list">
                           {estimationInputs.map((input, idx) => (
                             <li key={idx}>{input}</li>
@@ -570,7 +583,7 @@ const Featured = () => {
 
                     {workflow && workflow.length > 0 && (
                       <>
-                        <h4 className="project-subtitle">Translation Workflow</h4>
+                        <h4 className="project-subtitle">How It Works</h4>
                         <ol className="workflow-list">
                           {workflow.map((step, idx) => (
                             <li key={idx}>{step}</li>
@@ -581,7 +594,7 @@ const Featured = () => {
 
                     {outcomes && outcomes.length > 0 && (
                       <>
-                        <h4 className="project-subtitle">Project Outcomes</h4>
+                        <h4 className="project-subtitle">Impact</h4>
                         <ul className="outcomes-list">
                           {outcomes.map((outcome, idx) => (
                             <li key={idx}>{outcome}</li>
@@ -620,7 +633,11 @@ const Featured = () => {
 
                 <div className="project-image">
                   <a href={external ? external : github ? github : '#'}>
-                    <GatsbyImage image={image} alt={title} className="img" />
+                    <GatsbyImage
+                      image={image}
+                      alt={`${title} — ${role || domain} screenshot`}
+                      className="img"
+                    />
                   </a>
                 </div>
               </StyledProject>

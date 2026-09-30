@@ -60,8 +60,8 @@ const Contact = () => {
       <h2 className="title">Get In Touch</h2>
 
       <p>
-        I’m always open to new opportunities, collaborations, or just discussing tech. Feel free to
-        reach out!
+        Hiring for a Ruby on Rails, React, or full-stack role — or have an operations workflow that
+        still runs on spreadsheets and email? I’d like to hear about it. My inbox is always open.
       </p>
 
       <a className="email-link" href={`mailto:${email}`}>

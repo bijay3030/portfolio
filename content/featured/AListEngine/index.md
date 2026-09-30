@@ -5,35 +5,38 @@ cover: './happyjay-software-2.png'
 external: 'https://www.truemark.dev/'
 github: ''
 cta: ''
-domain: 'AI Product Listing Automation'
-role: 'AI Listing Workflow Platform'
+domain: 'AI E-commerce Listing Automation'
+role: 'AI Listing Generator'
 projectTypes:
-  - Seller Listing Workflows
-  - Auction Team Operations
-  - High-Volume E-commerce Pipelines
+  - Online sellers
+  - Auction houses
+  - High-volume e-commerce teams
 tech:
   - Ruby on Rails
   - React.js
-  - AI Vision + Text Generation
-  - Rules Engine
-  - Platform Integrations
+  - AI vision + text generation
+  - Rules engine
   - Shopify
   - AuctionFlex
-  - Live Auctioneers
+  - LiveAuctioneers
+contribution:
+  - Built the photo-to-draft pipeline that calls AI vision and text models
+  - Added a rules engine for seller-specific fields and marketplace formatting
+  - Integrated exports to Shopify, AuctionFlex, and LiveAuctioneers
 estimationInputs:
-  - Listing photos and category context
+  - Product photos and category context
   - Seller-specific custom fields
   - Marketplace export requirements
 workflow:
-  - Upload photos and listing context
-  - Generate title, description, and pricing draft with AI
-  - Refine and export listings to target marketplaces
+  - Upload product photos and basic context
+  - AI drafts the title, description, and suggested price
+  - Seller reviews, edits, and exports to each marketplace
 outcomes:
-  - Reduced listing creation time from hours to minutes
-  - Improved listing quality and consistency
-  - Scaled listing throughput for sellers and auction teams
+  - Listing creation dropped from hours to minutes
+  - More consistent listing quality across sellers and channels
+  - Sellers and auction teams can list far more items per day
 ---
 
-Built **AListEngine**, an AI-powered listing platform for auction and e-commerce teams.
+**AListEngine is an AI tool that turns product photos into ready-to-publish listings for e-commerce stores and auction houses.** It drafts the title, description, and price, then exports to Shopify, AuctionFlex, and LiveAuctioneers.
 
-It transforms photos and product context into export-ready listings, helping sellers publish faster while keeping quality and consistency high across channels.
+**The problem:** writing each listing by hand took hours, and quality varied from person to person. AListEngine gives sellers a consistent first draft in minutes, so they only review and publish.
