@@ -11,5 +11,5 @@ url: 'https://www.truemark.dev/'
 - Contributed to React.js frontend development, improving UX responsiveness and reducing client-reported UI issues by 25%.
 - Integrated 10+ third-party APIs including payment, analytics, and communication services for reliable cross-system data exchange.
 - Created and maintained unit and integration test coverage with RSpec, improving reliability and reducing regression debugging time.
-- Assisted Agile/Scrum adoption, contributed to sprint planning, and maintained technical documentation for cross-functional teams.
+- Helped the team adopt Agile/Scrum, contributed to sprint planning, and kept technical documentation current for cross-functional partners.
 - Participated actively in code reviews to enforce best practices and raise overall code quality.

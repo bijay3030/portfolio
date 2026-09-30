@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
-import { Head, Loader, GlobalSearch, Nav, Social, Email, Footer } from '@components';
+import { Head, GlobalSearch, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
 
 const StyledContent = styled.div`
@@ -12,7 +12,6 @@ const StyledContent = styled.div`
 
 const Layout = ({ children, location }) => {
   const isHome = location.pathname === '/';
-  const [isLoading, setIsLoading] = useState(isHome);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Sets target="_blank" rel="noopener noreferrer" on external links
@@ -29,10 +28,6 @@ const Layout = ({ children, location }) => {
   };
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-
     if (location.hash) {
       const id = location.hash.substring(1); // location.hash without the '#'
       setTimeout(() => {
@@ -45,7 +40,7 @@ const Layout = ({ children, location }) => {
     }
 
     handleExternalLinks();
-  }, [isLoading]);
+  }, []);
 
   return (
     <>
@@ -59,20 +54,18 @@ const Layout = ({ children, location }) => {
             Skip to Content
           </a>
 
-          {isLoading && isHome ? (
-            <Loader finishLoading={() => setIsLoading(false)} />
-          ) : (
-            <StyledContent>
-              <Nav isHome={isHome} onOpenSearch={() => setIsSearchOpen(true)} />
-              <Social isHome={isHome} />
-              <Email isHome={isHome} />
+          {/* Content is always server-rendered so crawlers and AI answer engines that
+              don't execute JavaScript still see the full page. */}
+          <StyledContent>
+            <Nav isHome={isHome} onOpenSearch={() => setIsSearchOpen(true)} />
+            <Social isHome={isHome} />
+            <Email isHome={isHome} />
 
-              <div id="content">
-                {children}
-                <Footer />
-              </div>
-            </StyledContent>
-          )}
+            <div id="content">
+              {children}
+              <Footer />
+            </div>
+          </StyledContent>
 
           <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </ThemeProvider>

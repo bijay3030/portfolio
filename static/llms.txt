@@ -1,0 +1,19 @@
+# Bijay Subedi
+
+> Bijay Subedi is a senior software engineer in Kathmandu, Nepal, with 5+ years of experience building Ruby on Rails, React, and AWS applications. Bijay works at Truemark (https://www.truemark.dev/) building workflow and automation platforms for US clients, mainly in healthcare localization and e-commerce.
+
+## Profile
+
+- Role: Senior Software Engineer, Truemark (Aug 2022 – present); Associate Software Engineer, Truemark (Apr 2021 – Aug 2022)
+- Core stack: Ruby on Rails 7, React 18, Hotwire (Turbo + Stimulus), PostgreSQL, Redis, Sidekiq, ActionCable, AWS (EC2, S3, Lambda, RDS), Docker, RSpec, Jest
+- Highlights: led 6+ client Rails applications; migrated a monolith to AWS microservices (40% lower inter-service latency); APIs serving 500K+ requests/month at 99.9% uptime; PostgreSQL query times cut by up to 60%; deploys cut from ~45 min to under 8 min; mentored 3 junior engineers
+- Contact: sharma.bj11@gmail.com
+- GitHub: https://github.com/bijay3030
+- LinkedIn: https://www.linkedin.com/in/bijay-p-subedi/
+- Resume (PDF): /resume.pdf
+
+## Projects
+
+- Helios: a workflow platform that runs medical translation projects end to end (intake, file routing, pricing, vendor work orders, delivery, invoicing) for Language Scientific, a US healthcare localization provider. Rails 7, React, Sidekiq, ActionCable, AWS S3, Pundit.
+- Quoting: a quote-management platform that turns healthcare translation requests into accurate, versioned quotes using worksheet rules, file lists, and word counts. Rails 7, React 18, PostgreSQL, ActionCable, AWS S3, Pundit.
+- AListEngine: an AI tool that turns product photos into ready-to-publish listings (title, description, price) and exports them to Shopify, AuctionFlex, and LiveAuctioneers. Cut listing creation from hours to minutes. Rails, React, AI vision and text generation.

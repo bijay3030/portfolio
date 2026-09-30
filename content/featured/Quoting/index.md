@@ -5,12 +5,12 @@ cover: './ls-quoting-cover.png'
 external: 'https://www.languagescientific.com/'
 github: ''
 cta: ''
-domain: 'Language Scientific | Healthcare Localization'
+domain: 'Healthcare Localization'
 role: 'Quote Lifecycle Automation'
 projectTypes:
-  - Intake-to-Quote Operations
-  - Multilingual Cost Planning
-  - Versioned Quote Management
+  - Project managers
+  - Sales & account teams
+  - Delivery operations
 tech:
   - Ruby on Rails 7
   - React 18
@@ -18,20 +18,24 @@ tech:
   - ActionCable
   - AWS S3
   - Pundit
+contribution:
+  - Modeled worksheet-based pricing rules and versioned quotes in PostgreSQL
+  - Built multilingual line-item editing in React 18, synced live over ActionCable
+  - Wired intake from external systems in, and approved quotes out to delivery
 estimationInputs:
   - Intake requests from external systems
   - Worksheet rules, file lists, and word-count logs
   - Language-pair line items, schedules, and delivery constraints
 workflow:
-  - Ingest request data and generate worksheet-based estimates
-  - Manage multilingual line items and versioned quote updates
-  - Submit approved quotes into downstream delivery workflows
+  - Ingest the request and generate a worksheet-based estimate
+  - Edit multilingual line items; every change creates a new quote version
+  - Submit the approved quote straight into the delivery workflow
 outcomes:
-  - Reduced quote turnaround time and rework
-  - Improved consistency with structured, versioned quote flows
-  - Increased control via access rules, audit history, and secure file handling
+  - Faster quote turnaround with less rework between PMs and sales
+  - Consistent pricing from shared worksheet rules instead of personal spreadsheets
+  - Full version history, access rules, and secure file handling for enterprise clients
 ---
 
-Built **Quoting**, an enterprise healthcare localization quoting platform that streamlines intake, estimation, revision, and delivery preparation.
+**Quoting is a quote-management platform that turns a healthcare translation request into an accurate, versioned price quote.** I built it for Language Scientific's project-management team.
 
-The system centralizes worksheet-based costing and versioned quote workflows so PM teams can produce accurate quotes faster with clear operational traceability.
+**The problem:** estimates depended on word counts, file lists, and pricing rules spread across spreadsheets, so quotes were slow and inconsistent. Quoting centralizes those rules, tracks every revision, and hands approved quotes directly to delivery.
