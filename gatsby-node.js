@@ -11,6 +11,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const postTemplate = path.resolve(`src/templates/post.js`);
   const tagTemplate = path.resolve('src/templates/tag.js');
+  const projectTemplate = path.resolve('src/templates/project.js');
 
   const result = await graphql(`
     {
@@ -19,7 +20,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           fileAbsolutePath: { regex: "/content/posts/" }
           frontmatter: { draft: { ne: true } }
         }
-        sort: { order: DESC, fields: [frontmatter___date] }
+        sort: { frontmatter: { date: DESC } }
         limit: 1000
       ) {
         edges {
@@ -30,8 +31,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
+      projectsRemark: allMarkdownRemark(
+        filter: { fileAbsolutePath: { regex: "/content/featured/" } }
+        sort: { frontmatter: { date: ASC } }
+      ) {
+        edges {
+          node {
+            id
+            frontmatter {
+              slug
+              title
+            }
+          }
+        }
+      }
       tagsGroup: allMarkdownRemark(limit: 2000, filter: { frontmatter: { draft: { ne: true } } }) {
-        group(field: frontmatter___tags) {
+        group(field: { frontmatter: { tags: SELECT } }) {
           fieldValue
         }
       }
@@ -55,12 +70,27 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     });
   });
 
+  // Create a case-study page for each featured project, with prev/next links
+  const projects = result.data.projectsRemark.edges;
+
+  projects.forEach(({ node }, i) => {
+    createPage({
+      path: node.frontmatter.slug,
+      component: projectTemplate,
+      context: {
+        id: node.id,
+        prev: i > 0 ? projects[i - 1].node.frontmatter : null,
+        next: i < projects.length - 1 ? projects[i + 1].node.frontmatter : null,
+      },
+    });
+  });
+
   // Extract tag data from query
   const tags = result.data.tagsGroup.group;
   // Make tag pages
   tags.forEach(tag => {
     createPage({
-      path: `/pensieve/tags/${_.kebabCase(tag.fieldValue)}/`,
+      path: `/writing/tags/${_.kebabCase(tag.fieldValue)}/`,
       component: tagTemplate,
       context: {
         tag: tag.fieldValue,

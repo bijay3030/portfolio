@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
-import { loaderDelay } from '@utils';
-import { usePrefersReducedMotion } from '@hooks';
 
 const StyledSideElement = styled.div`
   width: 40px;
@@ -22,36 +19,31 @@ const StyledSideElement = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+
+  &.side-enter {
+    animation: side-fade 400ms var(--easing) 600ms both;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  @keyframes side-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
-const Side = ({ children, isHome, orientation }) => {
-  const [isMounted, setIsMounted] = useState(!isHome);
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  useEffect(() => {
-    if (!isHome || prefersReducedMotion) {
-      return;
-    }
-    const timeout = setTimeout(() => setIsMounted(true), loaderDelay);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  return (
-    <StyledSideElement orientation={orientation}>
-      {prefersReducedMotion ? (
-        <>{children}</>
-      ) : (
-        <TransitionGroup component={null}>
-          {isMounted && (
-            <CSSTransition classNames={isHome ? 'fade' : ''} timeout={isHome ? loaderDelay : 0}>
-              {children}
-            </CSSTransition>
-          )}
-        </TransitionGroup>
-      )}
-    </StyledSideElement>
-  );
-};
+const Side = ({ children, isHome, orientation }) => (
+  // Same markup on server and client; the homepage fade-in is CSS-only.
+  <StyledSideElement orientation={orientation} className={isHome ? 'side-enter' : ''}>
+    {children}
+  </StyledSideElement>
+);
 
 Side.propTypes = {
   children: PropTypes.node.isRequired,

@@ -1,127 +1,78 @@
-# Bijay Subedi Portfolio
+# Bijay Subedi — Portfolio
 
-Production-ready Gatsby portfolio focused on client project contributions, engineering impact, and resume-aligned experience.
+Source for [bijay3030.github.io](https://bijay3030.github.io): the portfolio of Bijay Subedi, a senior software engineer (Ruby on Rails, React, AWS) in Kathmandu, Nepal.
 
-## Overview
+Built with Gatsby 5, React 18, and styled-components. Design adapted from [Brittany Chiang's v4](https://github.com/bchiang7/v4).
 
-This portfolio highlights:
+## What's on the site
 
-- Client projects contributed to: **Helios**, **Quoting**, **AListEngine**
-- Software engineering experience and skills from the latest resume
-- Search across portfolio content (About, Experience, Featured Work, Pensieve)
-- Resume download and responsive, sticky navigation
+- **Home (`/`)**: hero with availability, about, experience, featured projects, testimonials (when published), quick answers (FAQ), contact.
+- **Case studies (`/projects/<slug>/`)**: one page per project with an architecture diagram, contribution, problem, decisions, and results.
+- **Writing (`/writing/`)**: blog posts, with an RSS feed at `/rss.xml`.
+- **SEO / AI answer engines**: per-page titles, descriptions, canonical URLs, Open Graph images, JSON-LD (Person, WebSite, ProfilePage, Article, BreadcrumbList, FAQPage), sitemap, a root `robots.txt` that welcomes AI search crawlers, and `/llms.txt`.
 
-## Tech Stack
+## Run locally
 
-- Gatsby 3
-- React 17
-- Styled Components
-- GraphQL (Gatsby data layer)
-- Markdown-driven content (`content/`)
-
-## Project Structure
-
-- `src/components/sections/` - Homepage sections (`hero`, `about`, `jobs`, `featured`, `contact`)
-- `content/featured/` - Featured client projects shown in “Client Projects I’ve Contributed To”
-- `content/jobs/` - Experience timeline content
-- `static/resume.pdf` - Resume file opened by the Resume button
-- `src/components/global-search.js` - Global search index + modal
-
-## Run Locally
-
-1. Install dependencies
+Requires Node 22 (see `.nvmrc`).
 
 ```bash
+nvm use
 npm install
+npm start          # dev server at http://localhost:8000
+npm run build      # production build into public/
+npm run serve      # serve the production build at http://localhost:9000
 ```
 
-2. Start development server
+## Editing content
+
+| What                    | Where                                                                                                    |
+| ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| Hero, availability line | `src/components/sections/hero.js`, `availability` in `src/config.js`                                     |
+| About text and skills   | `src/components/sections/about.js`                                                                       |
+| Experience              | `content/jobs/*/index.md` (`stack` and `tabLabel` fields add pills and tab names)                        |
+| Projects / case studies | `content/featured/<Project>/index.md` — frontmatter drives the homepage card, the body is the case study |
+| Testimonials            | copy `content/testimonials/example/`, fill it in, set `draft: false`                                     |
+| Blog posts              | `content/posts/<slug>/index.md`, set `draft: false` to publish                                           |
+| FAQ                     | `src/components/sections/faq.js`                                                                         |
+| AI-crawler summary      | `static/llms.txt`                                                                                        |
+| Resume                  | `static/resume.pdf`                                                                                      |
+
+Lines marked `<!-- REVIEW ... -->` in case studies and drafts are notes to check before publishing; they don't render.
+
+### Diagrams and share images
+
+Architecture diagrams (`content/featured/*/architecture.{svg,png}`) and Open Graph images (`static/og/*.png`) are generated:
 
 ```bash
-npm start
+brew install librsvg        # once
+python3 scripts/generate-images.py
 ```
 
-3. Build for production
+Edit the node and label lists in `scripts/generate-images.py` to change them.
+
+## Deploy (GitHub Pages)
+
+The site is served from the root of the `bijay3030.github.io` user site.
 
 ```bash
-npm run build
+npm run deploy     # builds and pushes public/ to the gh-pages branch
+npm run ping       # optional: tell Bing/IndexNow engines that pages changed
 ```
 
-4. Serve production build locally
+One-time GitHub setting: **Settings → Pages → Deploy from a branch → `gh-pages` / root**.
+
+## Measurement
+
+Nothing is tracked unless these environment variables are set when you build:
+
+| Variable                          | Used for                                                     |
+| --------------------------------- | ------------------------------------------------------------ |
+| `GATSBY_GOOGLE_SITE_VERIFICATION` | Google Search Console HTML-tag verification                  |
+| `GATSBY_BING_SITE_VERIFICATION`   | Bing Webmaster Tools verification (`msvalidate.01`)          |
+| `GATSBY_GA_MEASUREMENT_ID`        | Google Analytics 4 (e.g. `G-XXXXXXX`); respects Do Not Track |
+
+Example:
 
 ```bash
-npm run serve
+GATSBY_GOOGLE_SITE_VERIFICATION=abc123 GATSBY_BING_SITE_VERIFICATION=def456 npm run deploy
 ```
-
-## Content Editing
-
-### Featured projects
-
-Edit markdown files:
-
-- `content/featured/Helios/index.md`
-- `content/featured/Quoting/index.md`
-- `content/featured/AListEngine/index.md`
-
-Each file supports fields like:
-
-- `title`, `cover`, `external`, `tech`
-- `domain`, `role`
-- `projectTypes`, `estimationInputs`, `workflow`, `outcomes`
-
-### Experience
-
-Edit:
-
-- `content/jobs/Upstatement/index.md`
-- `content/jobs/Apple/index.md`
-
-### About & skills
-
-Edit:
-
-- `src/components/sections/about.js`
-
-### Resume file
-
-Replace:
-
-- `static/resume.pdf`
-
-## Deploy to GitHub Pages (Free)
-
-This repo is already prepared for GitHub Pages deployment.
-
-### Local deploy command
-
-Use your values below:
-
-```bash
-GH_PAGES_REPO=YOUR_REPO_NAME \
-GATSBY_SITE_URL=https://YOUR_GITHUB_USERNAME.github.io \
-npm run deploy
-```
-
-### GitHub settings (one-time)
-
-1. Push code to GitHub.
-2. Open repository **Settings -> Pages**.
-3. Source: **Deploy from a branch**.
-4. Branch: **gh-pages** / **root**.
-5. Save.
-
-Your site URL will be:
-
-- `https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/`
-
-If repo name is `YOUR_GITHUB_USERNAME.github.io`, run:
-
-```bash
-GATSBY_SITE_URL=https://YOUR_GITHUB_USERNAME.github.io npm run deploy
-```
-
-## Notes
-
-- Archive is intentionally cleared for irrelevant legacy projects.
-- Search index is focused on current portfolio-relevant content.
-- Build may show non-blocking warnings from older Gatsby ecosystem packages.

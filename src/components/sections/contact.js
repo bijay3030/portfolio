@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { srConfig, email } from '@config';
+import { srConfig, email, availability } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
@@ -39,6 +39,13 @@ const StyledContactSection = styled.section`
     ${({ theme }) => theme.mixins.bigButton};
     margin-top: 50px;
   }
+
+  .availability {
+    margin-top: 20px;
+    color: var(--light-slate);
+    font-family: var(--font-mono);
+    font-size: var(--fz-xs);
+  }
 `;
 
 const Contact = () => {
@@ -62,6 +69,10 @@ const Contact = () => {
       <p>
         Hiring for a Ruby on Rails, React, or full-stack role — or have an operations workflow that
         still runs on spreadsheets and email? I’d like to hear about it. My inbox is always open.
+      </p>
+
+      <p className="availability">
+        {availability.status} · {availability.location} · {availability.overlap}
       </p>
 
       <a className="email-link" href={`mailto:${email}`}>

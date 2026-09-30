@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
-import { srConfig, email } from '@config';
+import { srConfig, email, availability } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
@@ -51,8 +51,17 @@ const faqs = [
     a: 'Helios, a platform that runs medical translation projects from intake to delivery; Quoting, a versioned quote system for a healthcare localization company; and AListEngine, an AI tool that turns product photos into marketplace-ready listings.',
   },
   {
+    q: 'Does Bijay Subedi work remotely with US or European teams?',
+    a: `Yes. Bijay already works remotely with US clients through Truemark and is based in ${
+      availability.location
+    }, with ${availability.overlap.replace(
+      ' · ',
+      ' and ',
+    )}. Bijay is ${availability.status.toLowerCase()}.`,
+  },
+  {
     q: 'How can I contact Bijay Subedi?',
-    a: `Email ${email}. Bijay is open to senior full-stack and backend engineering opportunities.`,
+    a: `Email ${email}.`,
   },
 ];
 

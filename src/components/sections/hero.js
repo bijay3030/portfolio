@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { availability } from '@config';
 
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -37,9 +38,41 @@ const StyledHeroSection = styled.section`
     max-width: 540px;
   }
 
+  .hero-status {
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: var(--fz-xs);
+
+    p {
+      margin: 0;
+    }
+
+    .status-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green);
+    }
+
+    .status-meta {
+      margin-top: 6px;
+      padding-left: 18px;
+      color: var(--light-slate);
+    }
+
+    .dot {
+      flex: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 3px var(--green-tint);
+    }
+  }
+
   .email-link {
     ${({ theme }) => theme.mixins.bigButton};
-    margin-top: 50px;
+    margin-top: 40px;
   }
 
   /* CSS-only entrance so the text is present in the server-rendered HTML */
@@ -80,13 +113,24 @@ const Hero = () => {
       </p>
     </>
   );
+  const status = (
+    <div className="hero-status">
+      <p className="status-line">
+        <span className="dot" aria-hidden="true" />
+        {availability.status}
+      </p>
+      <p className="status-meta">
+        {availability.location} · {availability.overlap}
+      </p>
+    </div>
+  );
   const five = (
     <a className="email-link" href="#projects">
       See what I’ve built
     </a>
   );
 
-  const items = [one, two, three, four, five];
+  const items = [one, two, three, four, status, five];
 
   return (
     <StyledHeroSection>
