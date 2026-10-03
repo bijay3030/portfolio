@@ -11,10 +11,15 @@
 - Contact: sharma.bj11@gmail.com
 - GitHub: https://github.com/bijay3030
 - LinkedIn: https://www.linkedin.com/in/bijay-p-subedi/
-- Resume (PDF): https://bijay3030.github.io/resume.pdf
+- About: https://bijay3030.github.io/about/
+- Resume: https://bijay3030.github.io/resume/ (PDF: https://bijay3030.github.io/resume.pdf)
 
 ## Projects (case studies)
 
 - [Helios](https://bijay3030.github.io/projects/helios/): a workflow platform that runs medical translation projects end to end (intake, file routing, pricing, vendor work orders, delivery, invoicing) for a US healthcare localization provider (client under NDA). Rails 7, React, Sidekiq, ActionCable, AWS S3, Pundit.
 - [Quoting](https://bijay3030.github.io/projects/quoting/): a quote-management platform that turns healthcare translation requests into accurate, versioned quotes using worksheet rules, file lists, and word counts. Rails 7, React 18, PostgreSQL, ActionCable, AWS S3, Pundit.
 - [AListEngine](https://bijay3030.github.io/projects/alistengine/): an AI tool that turns product photos into ready-to-publish listings (title, description, price) and exports them to Shopify, AuctionFlex, and LiveAuctioneers. Cut listing creation from hours to minutes. Rails, React, AI vision and text generation.
+
+## Open source
+
+- [NEPSE Trade Journal](https://github.com/bijay3030/nepse-trade-journal): full-stack trading journal for Nepal Stock Exchange traders (plan, execute, review trades; portfolio and analytics). Rails 8 API, PostgreSQL, ActionCable, Devise + JWT, React 19, TypeScript, Tailwind CSS.
