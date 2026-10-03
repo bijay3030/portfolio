@@ -82,12 +82,6 @@ const Footer = () => {
           <Link to="/resume/">Resume</Link>
         </nav>
         <div>© {year} Bijay Subedi</div>
-        <div style={{ marginTop: '10px' }}>
-          Design adapted from{' '}
-          <a href="https://github.com/bchiang7/v4" target="_blank" rel="noreferrer">
-            Brittany Chiang
-          </a>
-        </div>
       </StyledCredit>
     </StyledFooter>
   );
