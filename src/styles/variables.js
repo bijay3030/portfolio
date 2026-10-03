@@ -2,18 +2,20 @@ import { css } from 'styled-components';
 
 const variables = css`
   :root {
-    --dark-navy: #020c1b;
-    --navy: #0a192f;
-    --light-navy: #112240;
-    --lightest-navy: #233554;
-    --navy-shadow: rgba(2, 12, 27, 0.7);
-    --dark-slate: #495670;
-    --slate: #8892b0;
-    --light-slate: #a8b2d1;
-    --lightest-slate: #ccd6f6;
-    --white: #e6f1ff;
-    --green: #64ffda;
-    --green-tint: rgba(100, 255, 218, 0.1);
+    /* Palette: warm ink background with a ruby accent (a nod to Ruby on Rails).
+       Variable names are kept from the original template to avoid a mass rename. */
+    --dark-navy: #07090c;
+    --navy: #0e1217;
+    --light-navy: #161c24;
+    --lightest-navy: #28313d;
+    --navy-shadow: rgba(4, 6, 9, 0.7);
+    --dark-slate: #4d5866;
+    --slate: #8d99a8;
+    --light-slate: #b4bfcc;
+    --lightest-slate: #e2e8ef;
+    --white: #f4f7fa;
+    --green: #ff6b7f;
+    --green-tint: rgba(255, 107, 127, 0.1);
     --pink: #f57dff;
     --blue: #57cbff;
 

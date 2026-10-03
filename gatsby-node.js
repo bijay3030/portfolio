@@ -4,7 +4,9 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
+const fs = require('fs');
 const path = require('path');
+const { siteUrl } = require('./src/config');
 const _ = require('lodash');
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
@@ -137,4 +139,23 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       },
     },
   });
+};
+
+// After every build: write llms.txt with the current site URL, and write the CNAME file
+// GitHub Pages needs when the site is served from a custom domain.
+exports.onPostBuild = ({ reporter }) => {
+  const publicDir = path.join(__dirname, 'public');
+  const llms = fs.readFileSync(path.join(__dirname, 'content', 'llms.txt'), 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'llms.txt'), llms.replace(/{{SITE_URL}}/g, siteUrl));
+
+  const { host } = new URL(siteUrl);
+  const cnamePath = path.join(publicDir, 'CNAME');
+  if (host.endsWith('.github.io')) {
+    if (fs.existsSync(cnamePath)) {
+      fs.unlinkSync(cnamePath);
+    }
+  } else {
+    fs.writeFileSync(cnamePath, `${host}\n`);
+    reporter.info(`Wrote CNAME for custom domain ${host}`);
+  }
 };

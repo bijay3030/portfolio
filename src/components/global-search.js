@@ -19,7 +19,7 @@ const StyledDialog = styled.div`
   width: min(980px, 100%);
   max-height: 82vh;
   overflow: auto;
-  border: 1px solid rgba(100, 255, 218, 0.25);
+  border: 1px solid rgba(255, 107, 127, 0.25);
   border-radius: 10px;
   background: linear-gradient(145deg, rgba(17, 34, 64, 0.96), rgba(10, 25, 47, 0.96));
   box-shadow: 0 24px 60px -20px var(--navy-shadow);
@@ -124,7 +124,7 @@ const StyledDialog = styled.div`
     &:hover,
     &:focus-within {
       transform: translateY(-3px);
-      border-color: rgba(100, 255, 218, 0.45);
+      border-color: rgba(255, 107, 127, 0.45);
     }
   }
 
@@ -132,7 +132,7 @@ const StyledDialog = styled.div`
     display: inline-flex;
     margin-bottom: 8px;
     padding: 4px 10px;
-    border: 1px solid rgba(100, 255, 218, 0.4);
+    border: 1px solid rgba(255, 107, 127, 0.4);
     border-radius: 999px;
     color: var(--green);
     font-family: var(--font-mono);

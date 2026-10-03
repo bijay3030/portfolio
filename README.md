@@ -21,7 +21,10 @@ npm install
 npm start          # dev server at http://localhost:8000
 npm run build      # production build into public/
 npm run serve      # serve the production build at http://localhost:9000
+npm run preview    # build + serve in one step
 ```
+
+`npm start` is the development server: the first visit to each page type compiles it on demand, so it can take a few seconds. To judge real page speed, use `npm run preview`.
 
 ## Editing content
 

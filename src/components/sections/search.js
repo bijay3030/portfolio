@@ -105,7 +105,7 @@ const StyledSearchSection = styled.section`
     &:hover,
     &:focus-within {
       transform: translateY(-3px);
-      border-color: rgba(100, 255, 218, 0.45);
+      border-color: rgba(255, 107, 127, 0.45);
     }
   }
 
@@ -113,7 +113,7 @@ const StyledSearchSection = styled.section`
     display: inline-flex;
     margin-bottom: 8px;
     padding: 4px 10px;
-    border: 1px solid rgba(100, 255, 218, 0.4);
+    border: 1px solid rgba(255, 107, 127, 0.4);
     border-radius: 999px;
     color: var(--green);
     font-family: var(--font-mono);

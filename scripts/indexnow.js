@@ -10,9 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const { indexNowKey } = require('../src/config');
-
-const siteUrl = process.env.GATSBY_SITE_URL || 'https://bijay3030.github.io';
+const { indexNowKey, siteUrl } = require('../src/config');
 const sitemap = path.join(__dirname, '..', 'public', 'sitemap-0.xml');
 
 if (!fs.existsSync(sitemap)) {

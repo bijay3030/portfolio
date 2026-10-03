@@ -97,7 +97,7 @@ const StyledHeroSection = styled.section`
 `;
 
 const Hero = () => {
-  const one = <p className="hero-kicker">Hi, my name is</p>;
+  const one = <p className="hero-kicker">Senior Software Engineer · Ruby on Rails · React · AWS</p>;
   const two = <h1 className="big-heading">Bijay Subedi.</h1>;
   const three = <h2 className="big-heading">I build software that runs operations.</h2>;
   const four = (

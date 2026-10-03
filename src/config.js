@@ -1,4 +1,9 @@
 module.exports = {
+  // The site's public address. Change it here (or set GATSBY_SITE_URL) to move to a
+  // custom domain; robots.txt, sitemap, canonical URLs, llms.txt, and the CNAME file
+  // for GitHub Pages all follow it. No trailing slash.
+  siteUrl: process.env.GATSBY_SITE_URL || 'https://bijay3030.github.io',
+
   // One source of truth for the availability line shown in the hero, contact, and FAQ.
   availability: {
     status: 'Open to senior full-time remote roles',
@@ -24,10 +29,6 @@ module.exports = {
       url: 'https://github.com/bijay3030',
     },
     {
-      name: 'Instagram',
-      url: 'https://www.instagram.com/_good_.vibess/',
-    },
-    {
       name: 'Twitter',
       url: 'https://x.com/Bj11S',
     },
@@ -43,16 +44,16 @@ module.exports = {
 
   navLinks: [
     {
-      name: 'About',
-      url: '/#about',
+      name: 'Work',
+      url: '/#projects',
     },
     {
       name: 'Experience',
       url: '/#jobs',
     },
     {
-      name: 'Work',
-      url: '/#projects',
+      name: 'About',
+      url: '/#about',
     },
     {
       name: 'Contact',
@@ -61,9 +62,9 @@ module.exports = {
   ],
 
   colors: {
-    green: '#64ffda',
-    navy: '#0a192f',
-    darkNavy: '#020c1b',
+    green: '#ff6b7f',
+    navy: '#0e1217',
+    darkNavy: '#07090c',
   },
 
   srConfig: (delay = 200, viewFactor = 0.25) => ({

@@ -217,8 +217,9 @@ const StyledProject = styled.li`
   }
 
   .meta-pill {
-    border: 1px solid rgba(100, 255, 218, 0.35);
+    border: 1px solid rgba(255, 107, 127, 0.35);
     border-radius: 999px;
+    background-color: var(--navy);
     padding: 6px 12px;
     color: var(--green);
     font-family: var(--font-mono);
@@ -283,7 +284,7 @@ const StyledProject = styled.li`
     height: 18px;
     margin-right: 8px;
     border-radius: 50%;
-    background: rgba(100, 255, 218, 0.2);
+    background: rgba(255, 107, 127, 0.2);
     color: var(--green);
     font-family: var(--font-mono);
     font-size: 10px;
@@ -291,7 +292,7 @@ const StyledProject = styled.li`
   }
 
   .outcomes-list li {
-    border: 1px dashed rgba(100, 255, 218, 0.28);
+    border: 1px dashed rgba(255, 107, 127, 0.28);
   }
 
   .inputs-list li {
@@ -397,57 +398,43 @@ const StyledProject = styled.li`
     }
 
     a {
+      display: block;
       width: 100%;
       height: 100%;
-      background-color: var(--green);
       border-radius: var(--border-radius);
       vertical-align: middle;
 
-      &:hover,
-      &:focus {
-        background: transparent;
-        outline: 0;
-
-        &:before,
-        .img {
-          background: transparent;
-          filter: none;
-        }
+      &:hover .img,
+      &:focus .img {
+        opacity: 1;
       }
 
-      &:before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 3;
-        transition: var(--transition);
-        background-color: var(--navy);
-        mix-blend-mode: screen;
+      &:focus {
+        outline: 0;
       }
     }
 
+    /* Show diagrams and screenshots in their real colors (no template tint) */
     .img {
+      border: 1px solid var(--lightest-navy);
       border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
+      opacity: 0.9;
+      transition: var(--transition);
 
       @media (max-width: 768px) {
         object-fit: cover;
         width: auto;
         height: 100%;
-        filter: grayscale(100%) contrast(1) brightness(50%);
+        filter: brightness(40%);
       }
+    }
+  }
     }
   }
 
   @media (max-width: 768px) {
     .meta-pill {
-      border-color: rgba(100, 255, 218, 0.55);
+      border-color: rgba(255, 107, 127, 0.55);
       color: var(--lightest-slate);
       background: rgba(2, 12, 27, 0.35);
     }
