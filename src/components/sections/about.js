@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
-import { srConfig } from '@config';
+import { srConfig, skills } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
@@ -19,6 +20,16 @@ const StyledAboutSection = styled.section`
   }
 `;
 const StyledText = styled.div`
+  .more-links {
+    margin-top: 25px;
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
+
+    a {
+      ${({ theme }) => theme.mixins.inlineLink};
+    }
+  }
+
   ul.skills-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(140px, 200px));
@@ -120,19 +131,6 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = [
-    'Ruby on Rails 7',
-    'React.js / React 18',
-    'Hotwire (Turbo + Stimulus)',
-    'PostgreSQL & Redis',
-    'Sidekiq & ActionCable',
-    'AWS (EC2, S3, Lambda, RDS)',
-    'Microservices & REST APIs',
-    'Docker & Kubernetes',
-    'RSpec, Jest & TDD',
-    'CI/CD (GitLab CI, GitHub Actions)',
-  ];
-
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
       <h2 className="numbered-heading">About Me</h2>
@@ -168,6 +166,10 @@ const About = () => {
           <ul className="skills-list">
             {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
           </ul>
+
+          <p className="more-links">
+            <Link to="/about/">More about me</Link> · <Link to="/resume/">Resume</Link>
+          </p>
         </StyledText>
 
         <StyledPic>

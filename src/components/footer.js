@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { socialMedia } from '@config';
@@ -40,6 +41,13 @@ const StyledSocialLinks = styled.div`
 `;
 
 const StyledCredit = styled.div`
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+
   color: var(--light-slate);
   font-family: var(--font-mono);
   font-size: var(--fz-xxs);
@@ -69,6 +77,10 @@ const Footer = () => {
       </StyledSocialLinks>
 
       <StyledCredit>
+        <nav className="footer-links" aria-label="Site">
+          <Link to="/about/">About</Link>
+          <Link to="/resume/">Resume</Link>
+        </nav>
         <div>© {year} Bijay Subedi</div>
         <div style={{ marginTop: '10px' }}>
           Design adapted from{' '}

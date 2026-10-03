@@ -21,6 +21,24 @@ module.exports = {
   // IndexNow key (public by design); the matching key file lives in /static.
   indexNowKey: '081dd982c4b0f09c66de720ed7a26cba',
 
+  // Core skills, shown on the home page, the resume page, and in structured data.
+  skills: [
+    'Ruby on Rails 7',
+    'React.js / React 18',
+    'Hotwire (Turbo + Stimulus)',
+    'PostgreSQL & Redis',
+    'Sidekiq & ActionCable',
+    'AWS (EC2, S3, Lambda, RDS)',
+    'Microservices & REST APIs',
+    'Docker & Kubernetes',
+    'RSpec, Jest & TDD',
+    'CI/CD (GitLab CI, GitHub Actions)',
+  ],
+
+  // One-paragraph professional summary used on the resume and about pages.
+  summary:
+    'Senior software engineer with 5+ years building Ruby on Rails, React, and AWS systems for US clients. Leads client applications end to end, from data modeling and APIs to background jobs, real-time features, CI/CD, and mentoring.',
+
   email: 'sharma.bj11@gmail.com',
 
   socialMedia: [
