@@ -1,4 +1,9 @@
 module.exports = {
+  // The site's public address. Change it here (or set GATSBY_SITE_URL) to move to a
+  // custom domain; robots.txt, sitemap, canonical URLs, llms.txt, and the CNAME file
+  // for GitHub Pages all follow it. No trailing slash.
+  siteUrl: process.env.GATSBY_SITE_URL || 'https://bijay3030.github.io',
+
   // One source of truth for the availability line shown in the hero, contact, and FAQ.
   availability: {
     status: 'Open to senior full-time remote roles',

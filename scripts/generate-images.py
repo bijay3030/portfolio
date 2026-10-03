@@ -12,6 +12,7 @@ can be shown safely.
 """
 import os
 import subprocess
+from urllib.parse import urlparse
 from html import escape
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,6 +26,8 @@ LIGHTEST_SLATE = '#e2e8ef'
 GREEN = '#ff6b7f'  # accent (ruby); name kept to match the site's CSS variable
 SANS = 'Helvetica Neue, Helvetica, Arial, sans-serif'
 MONO = 'Menlo, SF Mono, monospace'
+# Shown on the home share image; pass the custom domain once you have one.
+SITE_HOST = urlparse(os.environ.get('GATSBY_SITE_URL', 'https://bijay3030.github.io')).netloc
 
 
 def render(svg_path, png_path, width, height):
@@ -215,7 +218,7 @@ HOME_OG = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" 
 <text x="80" y="330" font-family="{SANS}" font-size="46" font-weight="700" fill="{SLATE}">I build software that runs operations.</text>
 <text x="80" y="410" font-family="{SANS}" font-size="27" fill="{SLATE}">Healthcare workflow platforms · AI listing automation</text>
 <text x="80" y="450" font-family="{SANS}" font-size="27" fill="{SLATE}">Kathmandu, Nepal · open to senior full-time remote roles</text>
-<text x="80" y="560" font-family="{MONO}" font-size="22" fill="{LIGHT_SLATE}">bijay3030.github.io</text>
+<text x="80" y="560" font-family="{MONO}" font-size="22" fill="{LIGHT_SLATE}">{SITE_HOST}</text>
 </svg>'''
 
 LOGO = f'''<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
