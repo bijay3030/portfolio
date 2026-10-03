@@ -2,7 +2,7 @@
 
 Source for [bijay3030.github.io](https://bijay3030.github.io): the portfolio of Bijay Subedi, a senior software engineer (Ruby on Rails, React, AWS) in Kathmandu, Nepal.
 
-Built with Gatsby 5, React 18, and styled-components. Design adapted from [Brittany Chiang's v4](https://github.com/bchiang7/v4).
+Built with Gatsby 5, React 18, and styled-components. Originally based on [Brittany Chiang](https://brittanychiang.com)'s open-source [v4 site](https://github.com/bchiang7/v4) (MIT); see `LICENSE`.
 
 ## What's on the site
 

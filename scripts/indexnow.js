@@ -33,7 +33,10 @@ const request = https.request(
   'https://api.indexnow.org/indexnow',
   {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Length': Buffer.byteLength(body),
+    },
   },
   response => {
     console.log(`IndexNow responded ${response.statusCode} for ${urlList.length} URLs.`);

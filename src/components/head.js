@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useLocation } from '@reach/router';
 import { useStaticQuery, graphql } from 'gatsby';
-import { email, socialMedia, verification } from '@config';
+import { email, socialMedia, verification, skills } from '@config';
 
 // https://www.gatsbyjs.com/docs/add-seo-component/
 
 const Head = ({ title, description, image, type, schema }) => {
   const { pathname } = useLocation();
 
-  const { site, featured } = useStaticQuery(
+  const { site, featured, repos } = useStaticQuery(
     graphql`
       {
         site {
@@ -21,6 +21,20 @@ const Head = ({ title, description, image, type, schema }) => {
             siteUrl
             defaultImage: image
             twitterUsername
+          }
+        }
+        repos: allMarkdownRemark(
+          filter: { fileAbsolutePath: { regex: "/content/opensource/" } }
+          sort: { frontmatter: { order: ASC } }
+        ) {
+          nodes {
+            frontmatter {
+              title
+              github
+              summary
+              tech
+              languages
+            }
           }
         }
         featured: allMarkdownRemark(
@@ -91,9 +105,19 @@ const Head = ({ title, description, image, type, schema }) => {
       'Healthcare localization workflow software',
       'AI-assisted e-commerce listing automation',
     ],
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: 'Senior Software Engineer',
+      occupationLocation: { '@type': 'City', name: 'Kathmandu' },
+      skills: skills.join(', '),
+    },
     sameAs: socialMedia
-      .filter(({ name }) => ['GitHub', 'Linkedin', 'Twitter'].includes(name))
+      .filter(({ name }) => ['GitHub', 'Linkedin', 'Twitter', 'LeetCode'].includes(name))
       .map(({ url }) => url),
+    subjectOf: [
+      { '@type': 'AboutPage', url: `${siteUrl}/about/` },
+      { '@type': 'WebPage', name: 'Resume', url: `${siteUrl}/resume/` },
+    ],
   };
 
   // Site-level entities belong on the home page only.
@@ -126,6 +150,16 @@ const Head = ({ title, description, image, type, schema }) => {
         description: node.frontmatter.summary,
       })),
     },
+    // Public code: lets search engines and AI answer engines link to work they can verify.
+    ...repos.nodes.map(({ frontmatter }) => ({
+      '@type': 'SoftwareSourceCode',
+      name: frontmatter.title,
+      description: frontmatter.summary,
+      codeRepository: frontmatter.github,
+      programmingLanguage: frontmatter.languages || [],
+      keywords: (frontmatter.tech || []).join(', '),
+      author: { '@id': personId },
+    })),
   ];
 
   const graph = {
