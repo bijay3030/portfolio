@@ -12,7 +12,7 @@ export const profile = {
   resume: 'resume.pdf', // relative to the site base
   // One sentence that says what you do and for whom.
   statement:
-    'I build the software operations teams run on — workflow platforms that replace email threads and spreadsheets with one clear, auditable system.',
+    'I build the systems operations teams run on — replacing email threads and spreadsheets with one auditable workflow.',
   availability: 'Open to senior full-time remote roles',
   overlap: '4+ hours with US Eastern · full EU workday',
   links: [
@@ -22,18 +22,18 @@ export const profile = {
 };
 
 export const about = [
-  'Since 2021 I have worked at Truemark, building Ruby on Rails and React applications for US clients — mostly in healthcare localization, where a lost file or a wrong price is a real problem.',
-  'The work I like best starts with a messy process that people hold together by hand. I model it as clear states, automate the steps between them, and leave a record of who did what.',
-  'Day to day that means PostgreSQL data models, REST APIs, Sidekiq background jobs, real-time updates with ActionCable and Hotwire, services on AWS, and the CI/CD that ships them.',
+  'Since 2021 I have built Ruby on Rails and React applications at Truemark for US clients — mostly in healthcare localization, where one lost file or wrong price breaks trust.',
+  'My best work starts with a process people hold together by hand. I model it as explicit states, automate every step between them, and record who did what.',
+  'The toolkit: PostgreSQL data models, REST APIs, Sidekiq jobs, real-time updates with ActionCable and Hotwire, AWS services, and the CI/CD that ships them.',
 ];
 
 // Small, verifiable facts. Each one should be something you can explain in an interview.
 export const numbers = [
   { value: '5+', label: 'years shipping Rails & React' },
   { value: '6+', label: 'client applications led' },
-  { value: '99.9%', label: 'uptime on APIs serving 500K+ requests a month' },
-  { value: '45→8', label: 'minutes to deploy, after rebuilding CI/CD' },
-  { value: '−40%', label: 'inter-service latency after moving to AWS microservices' },
+  { value: '99.9%', label: 'API uptime at 500K+ requests a month' },
+  { value: '45→8', label: 'minutes per deploy, after rebuilding CI/CD' },
+  { value: '−40%', label: 'inter-service latency, after the move to AWS microservices' },
   { value: '3', label: 'junior engineers mentored' },
 ];
 
@@ -76,20 +76,20 @@ export const projects: Project[] = [
     name: 'Helios',
     domain: 'Healthcare translation operations',
     summary:
-      'A workflow platform that runs medical translation projects end to end — from file intake to vendor coordination, delivery, and invoicing.',
+      'Runs medical translation projects end to end — intake, vendor coordination, delivery, and invoicing — in one platform.',
     before: 'Email threads and spreadsheets',
     after: 'One auditable workflow',
-    scale: ['~20 files per project', '4–5 language pairs each', 'up to ~100 file × language tasks to track'],
+    scale: ['~20 files per project', '4–5 language pairs', 'up to ~100 tracked file × language tasks'],
     flow: ['Intake', 'Validate', 'Price', 'Route to vendors', 'Deliver', 'Invoice'],
     client: 'US healthcare localization provider (under NDA)',
     role: 'Full-stack engineer, Rails + React',
     contribution: [
-      'Rails services and Sidekiq jobs that route multilingual files and validate them on upload',
-      'Automated pricing and turnaround calculations, and vendor work orders generated from them',
-      'Live job status with ActionCable; role-based access with Pundit',
+      'Built Rails services and Sidekiq jobs that validate and route multilingual files on upload',
+      'Automated pricing and turnaround, and generated vendor work orders from them',
+      'Delivered live job status (ActionCable) and role-based access (Pundit)',
     ],
     problem:
-      'A typical project arrives with around 20 source files that must go into 4 or 5 languages — so one project becomes up to a hundred file-and-language pieces of work, each with a vendor, a deadline, and a delivery. That coordination lived in email and spreadsheets: slow to turn around, easy to lose a file or a deadline, and hard to prove who did what to clients who expect a clean audit trail.',
+      'Each project brings ~20 source files into 4–5 languages — up to a hundred file-and-language tasks, each with its own vendor, deadline, and delivery. Email and spreadsheets held it together: slow turnaround, easy to lose a file or miss a deadline, and no way to prove who did what to clients who demand an audit trail.',
     architecture: {
       tiers: [
         {
@@ -132,21 +132,21 @@ export const projects: Project[] = [
       caption: 'Simplified. Client systems and names omitted (NDA).',
     },
     built: [
-      'Uploads land in S3 and are checked by background jobs before anyone touches them.',
-      'Jobs split by language pair; pricing and turnaround are calculated, not typed.',
-      'Vendor work orders are generated from the priced job.',
-      'Delivery, invoice, and client handoff happen from the same record.',
-      'Project managers see status change live instead of refreshing or asking around.',
+      'Every upload lands in S3 and is validated in the background before anyone touches it.',
+      'Jobs split by language pair; pricing and turnaround are calculated, never typed.',
+      'Vendor work orders generate from the priced job.',
+      'Delivery, invoice, and client handoff run from one record.',
+      'Project managers watch status change live — no refreshing, no chasing.',
     ],
     decisions: [
-      { title: 'Background jobs for anything slow', body: 'Validation, routing, and document generation run in Sidekiq, so uploads return immediately and failures retry safely.' },
-      { title: 'Authorization as policies', body: 'Pundit keeps “who can do what” in one place per model — important when clients, vendors, and staff share one system.' },
-      { title: 'Push, don’t poll', body: 'ActionCable pushes status changes to open dashboards, keeping the UI current without polling load.' },
+      { title: 'Background jobs for anything slow', body: 'Validation, routing, and document generation run in Sidekiq: uploads return instantly, failures retry safely.' },
+      { title: 'Authorization as policies', body: 'Pundit keeps “who can do what” in one place per model — essential when clients, vendors, and staff share one system.' },
+      { title: 'Push, don’t poll', body: 'ActionCable pushes every status change to open dashboards: always current, no polling load.' },
     ],
     results: [
-      'Manual hand-offs across intake, vendors, and delivery replaced by automated steps.',
-      'Every step permission-checked and logged — an audit-ready history for each job.',
-      'Higher job volume without adding coordinators.',
+      'Automated every hand-off across intake, vendors, and delivery.',
+      'Every step permission-checked and logged — audit-ready history for every job.',
+      'More job volume, no extra coordinators.',
     ],
     stack: ['Rails 7', 'React', 'Sidekiq', 'ActionCable', 'AWS S3', 'Pundit'],
   },
@@ -155,20 +155,20 @@ export const projects: Project[] = [
     name: 'Quoting',
     domain: 'Healthcare localization pricing',
     summary:
-      'A quote-management platform that turns a translation request into an accurate, versioned price quote — and hands approved quotes straight to delivery.',
+      'Turns a translation request into an accurate, versioned quote — and hands approved quotes straight to delivery.',
     before: 'A spreadsheet per project manager',
     after: 'Shared rules, every revision kept',
-    scale: ['more files per project than Helios', 'large worksheets that differ by project type', 'every revision kept'],
+    scale: ['more files per project than Helios', 'large worksheets per project type', 'every revision kept'],
     flow: ['Request in', 'Worksheet estimate', 'Edit line items', 'New version', 'Approve', 'Hand to delivery'],
     client: 'US healthcare localization provider (under NDA)',
     role: 'Full-stack engineer, Rails + React',
     contribution: [
-      'Worksheet-based pricing rules and versioned quotes modeled in PostgreSQL',
-      'Multilingual line-item editor in React 18, synced live over ActionCable',
-      'Intake from external systems in; approved quotes out to delivery',
+      'Modeled worksheet pricing rules and versioned quotes in PostgreSQL',
+      'Built a multilingual line-item editor in React 18, synced live over ActionCable',
+      'Connected intake from external systems and hand-off to delivery',
     ],
     problem:
-      'Pricing a translation job depends on files, word counts, language pairs, schedule, and rules that differ by client. Quoting handles even more files per project than Helios, and each project type has its own large worksheet of rules. Those worksheets lived in individual spreadsheets: quotes were slow, two PMs could price the same job differently, and when a client asked for a change there was no reliable record of the previous quote.',
+      'Price depends on files, word counts, language pairs, schedule, and client-specific rules. Quoting carries more files per project than Helios, and every project type has its own large worksheet. Those worksheets lived in personal spreadsheets: quotes were slow, two PMs could price one job differently, and a client’s change request had no reliable record of the previous quote.',
     architecture: {
       tiers: [
         {
@@ -209,20 +209,20 @@ export const projects: Project[] = [
       caption: 'Simplified. Client systems and names omitted (NDA).',
     },
     built: [
-      'Requests arrive from external intake systems through a Rails API, with file lists and word-count logs in S3.',
-      'Shared worksheet rules — one large set per project type — calculate the first draft of every quote.',
-      'PMs adjust line items per language pair; others viewing the quote see changes live.',
-      'Every change creates a new version that can be compared or restored.',
+      'External intake systems send requests through a Rails API; file lists and word-count logs land in S3.',
+      'Shared worksheets — one per project type — draft every quote.',
+      'PMs adjust line items per language pair; everyone viewing sees changes live.',
+      'Every change creates a new version — compare or restore any of them.',
       'Quotes are submitted or rejected; approved ones flow into delivery.',
     ],
     decisions: [
-      { title: 'Immutable versions, not edits in place', body: 'Each revision is a new row, so history, comparisons, and client disputes are straightforward.' },
-      { title: 'Pricing rules as data, not code', body: 'Worksheets change per client and project type without a deploy.' },
-      { title: 'Real-time only where it matters', body: 'ActionCable is used on the quote editor, where several people work on one quote at once — nowhere else.' },
+      { title: 'Immutable versions, not edits in place', body: 'Each revision is a new row: history, comparisons, and client disputes become simple queries.' },
+      { title: 'Pricing rules as data, not code', body: 'Worksheets change per client and project type — no deploy.' },
+      { title: 'Real-time only where it matters', body: 'ActionCable runs on the quote editor, where several people edit one quote — nowhere else.' },
     ],
     results: [
-      'Quotes produced faster, with less back-and-forth between PMs and sales.',
-      'Consistent pricing, because everyone uses the same rules.',
+      'Faster quotes, less back-and-forth between PMs and sales.',
+      'Consistent pricing — one set of rules for everyone.',
       'Full version history, access control, and secure file handling for enterprise clients.',
     ],
     stack: ['Rails 7', 'React 18', 'PostgreSQL', 'ActionCable', 'AWS S3', 'Pundit'],
@@ -232,7 +232,7 @@ export const projects: Project[] = [
     name: 'aListEngine',
     domain: 'AI cataloging for auctions',
     summary:
-      'AI cataloging software for auctioneers and resellers: photograph items, get drafted titles, descriptions, condition notes, and prices, then export to the auction platforms they already use.',
+      'AI cataloging for auctioneers and resellers: photograph items, get drafted titles, descriptions, condition notes, and prices, and export to the platforms they already use.',
     before: 'Hours of writing per batch',
     after: 'Minutes, reviewed by a person',
     scale: ['live product', 'hundreds of photos per batch', '10 export platforms', 'iOS + Android capture'],
@@ -240,12 +240,12 @@ export const projects: Project[] = [
     client: 'Auctioneers, estate-sale teams, and resellers',
     role: 'Full-stack engineer, Rails + React',
     contribution: [
-      'The photo-to-draft pipeline calling AI vision and text models',
-      'A rules engine for seller-specific fields and marketplace formats',
-      'Exports to Shopify, AuctionFlex, and LiveAuctioneers',
+      'Built the photo-to-draft pipeline on AI vision and text models',
+      'Built a rules engine for seller fields and marketplace formats',
+      'Shipped exports to Shopify, AuctionFlex, and LiveAuctioneers',
     ],
     problem:
-      'Auction houses and estate-sale teams catalog hundreds of one-off items at a time — antiques, collectibles, equipment, household goods. Each lot needs a good title, a description, condition notes, and a sensible price, in a slightly different format for every auction platform. By hand it took hours per batch, and quality depended on who wrote it.',
+      'Auction and estate-sale teams catalog hundreds of one-off items at a time — antiques, collectibles, equipment, household goods. Every lot needs a title, description, condition notes, and a price, formatted differently for each platform. By hand: hours per batch, and quality that depended on the writer.',
     architecture: {
       tiers: [
         {
@@ -284,21 +284,21 @@ export const projects: Project[] = [
       caption: 'Simplified, from the public product and my part of it.',
     },
     built: [
-      'Teams capture photos on their phones and import hundreds at a time; barcodes split them into lots and duplicates are caught.',
-      'Vision and text models identify each item and draft the title, description, condition notes, and a suggested price — at quick, standard, enhanced, or thorough depth.',
-      'The draft says what it isn’t sure about and which extra photo or detail would help.',
-      'A rules engine applies organization and folder instructions, pricing strategy (auction or retail), and each platform’s format.',
-      'The team reviews and approves, then exports files ready for HiBid, K-Bid, AuctionMethod, AuctionFlex, BidWrangler, Equip-Bid, LiveAuctioneers, EstateSales.NET, Shopify, or eBay.',
+      'Phone capture imports hundreds of photos at once; barcodes split them into lots and catch duplicates.',
+      'Vision and text models identify each item and draft title, description, condition notes, and price — at four analysis depths.',
+      'Each draft flags what it can’t confirm — and which photo or detail would.',
+      'A rules engine applies organization and folder instructions, auction or retail pricing, and each platform’s format.',
+      'Teams approve, then export to HiBid, K-Bid, AuctionMethod, AuctionFlex, BidWrangler, Equip-Bid, LiveAuctioneers, EstateSales.NET, Shopify, or eBay.',
     ],
     decisions: [
-      { title: 'The AI drafts, a person approves', body: 'Nothing is exported without review — quality stays high and mistakes stay cheap.' },
-      { title: 'Marketplace rules outside the prompt', body: 'Formatting and required fields are enforced in code, so output is consistent and a new marketplace doesn’t mean rewriting prompts.' },
-      { title: 'One export layer per marketplace', body: 'Each integration maps the same listing to its platform, so adding a channel is isolated work.' },
+      { title: 'The AI drafts, a person approves', body: 'Nothing exports without review: quality stays high, mistakes stay cheap.' },
+      { title: 'Marketplace rules outside the prompt', body: 'Code enforces formats and required fields: consistent output, and a new marketplace never means rewriting prompts.' },
+      { title: 'One export layer per marketplace', body: 'Each adapter maps one listing to one platform; a new channel is isolated work.' },
     ],
     results: [
-      'Listing creation dropped from hours to minutes.',
-      'More consistent quality across sellers and channels.',
-      'Live as a paid product, with a free tier and 14-day trials.',
+      'Listing time: hours → minutes.',
+      'Consistent quality across sellers and channels.',
+      'Live, paid product with a free tier and 14-day trials.',
     ],
     stack: ['Rails', 'React', 'AI vision + text', 'Rules engine', 'iOS + Android', 'Shopify', 'AuctionFlex', 'LiveAuctioneers'],
     href: 'https://alistengine.com/',
@@ -310,11 +310,11 @@ export const openSource = [
     name: 'NEPSE Trade Journal',
     href: 'https://github.com/bijay3030/nepse-trade-journal',
     summary:
-      'A trading journal for Nepal Stock Exchange traders: plan, execute, and review trades, keep a daily journal, and see win rate, P&L, and expectancy.',
+      'A trading journal for Nepal Stock Exchange traders: plan, execute, and review trades; journal daily; track win rate, P&L, and expectancy.',
     notes: [
-      'Trades modeled as Plan → Execute → Result, updating the portfolio automatically',
-      'Live prices over ActionCable WebSockets, with a polling fallback',
-      'Rails 8 API with Devise + JWT; React 19 + TypeScript with React Query',
+      'Plan → Execute → Result lifecycle updates the portfolio automatically',
+      'Live prices over ActionCable WebSockets; polling as fallback',
+      'Rails 8 API (Devise + JWT); React 19 + TypeScript with React Query',
     ],
     stack: ['Rails 8', 'PostgreSQL', 'ActionCable', 'React 19', 'TypeScript', 'Tailwind'],
   },
@@ -326,16 +326,16 @@ export const experience = [
     company: 'Truemark',
     href: 'https://www.truemark.dev/',
     period: 'Aug 2022 — Present',
-    summary: 'Lead client Rails applications end to end, from data model to deploy pipeline.',
+    summary: 'Own client Rails applications end to end — data model to deploy pipeline.',
     points: [
-      'Led 6+ Ruby on Rails client applications, owning architecture and complex business logic.',
-      'Moved monoliths to microservices on AWS (EC2, S3, Lambda), cutting inter-service latency by 40%.',
-      'Kept REST APIs serving 500K+ requests a month at 99.9% uptime.',
-      'Introduced Hotwire and tuned React interfaces, cutting initial load ~35% and removing full-page reloads in key flows.',
-      'Redesigned PostgreSQL schemas and indexes, cutting critical queries by up to 60%.',
+      'Led 6+ Ruby on Rails client applications — architecture and core business logic.',
+      'Migrated monoliths to AWS microservices (EC2, S3, Lambda): inter-service latency down 40%.',
+      'Sustained 99.9% uptime on REST APIs serving 500K+ requests a month.',
+      'Introduced Hotwire and tuned React: initial load ~35% faster, no full-page reloads in key flows.',
+      'Redesigned PostgreSQL schemas and indexes: critical queries up to 60% faster.',
       'Rebuilt CI/CD on GitLab CI and AWS CodePipeline: deploys from ~45 minutes to under 8.',
-      'Raised test coverage to 87% with RSpec and Jest; production bug reports fell 35%.',
-      'Mentored 3 junior engineers through weekly reviews in Rails and React.',
+      'Raised test coverage to 87% (RSpec, Jest); production bug reports down 35%.',
+      'Mentored 3 junior engineers through weekly Rails and React reviews.',
     ],
   },
   {
@@ -345,10 +345,10 @@ export const experience = [
     period: 'Apr 2021 — Aug 2022',
     summary: 'Built APIs and integrations for high-traffic client apps.',
     points: [
-      'Built Rails APIs and backend services with consistent sub-200ms responses.',
+      'Built Rails APIs and services with consistent sub-200ms responses.',
       'Integrated 10+ third-party APIs — payments, analytics, communication.',
-      'Worked on React frontends, reducing client-reported UI issues by 25%.',
-      'Helped the team adopt Scrum and kept technical documentation current.',
+      'Improved React frontends: client-reported UI issues down 25%.',
+      'Helped the team adopt Scrum; kept technical documentation current.',
     ],
   },
 ];
@@ -359,10 +359,10 @@ export const education = [
 
 // How I work — each principle is backed by a project above.
 export const principles = [
-  { title: 'Slow work goes in the background.', body: 'Users get an answer immediately; the job retries safely when it fails.', from: 'Helios' },
+  { title: 'Slow work goes in the background.', body: 'Users get an instant answer; failures retry safely.', from: 'Helios' },
   { title: 'Keep every version.', body: 'Edits create new records, so history is a query, not an argument.', from: 'Quoting' },
-  { title: 'Rules are data.', body: 'If a business rule changes per client, it shouldn’t need a deploy.', from: 'Quoting' },
-  { title: 'Push, don’t poll — where it matters.', body: 'Real-time only on the screens where people actually collaborate.', from: 'Helios · Quoting' },
+  { title: 'Rules are data.', body: 'A rule that changes per client should never need a deploy.', from: 'Quoting' },
+  { title: 'Push, don’t poll — where it matters.', body: 'Real-time only on screens where people collaborate.', from: 'Helios · Quoting' },
   { title: 'The AI drafts, a person approves.', body: 'Models are fast and fallible; review keeps mistakes cheap.', from: 'aListEngine' },
   { title: 'One place for permissions.', body: 'Authorization as policies, not checks scattered across controllers.', from: 'Helios' },
 ];
@@ -383,7 +383,7 @@ export const faqs = [
   },
   {
     q: 'What does Bijay Subedi specialize in?',
-    a: 'Full-stack web applications with Ruby on Rails 7 and React: background processing with Sidekiq, real-time updates with ActionCable and Hotwire, PostgreSQL performance tuning, microservices on AWS, and CI/CD pipelines.',
+    a: 'Full-stack Ruby on Rails 7 and React applications: Sidekiq background processing, real-time updates with ActionCable and Hotwire, PostgreSQL performance tuning, AWS microservices, and CI/CD pipelines.',
   },
   {
     q: 'What has Bijay Subedi built?',
