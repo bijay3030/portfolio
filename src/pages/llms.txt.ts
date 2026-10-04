@@ -1,13 +1,13 @@
 // A plain-text version of the page for AI assistants and anyone who prefers text.
 import type { APIRoute } from 'astro';
 import { url } from '../utils/url';
-import { profile, about, projects, openSource, experience, principles, skills, faqs, education } from '../data/site';
+import { profile, about, projects, openSource, experience, skills, faqs, education } from '../data/site';
 
 export const GET: APIRoute = ({ site }) => {
   const lines = [
     `# ${profile.name}`,
     '',
-    `> ${profile.role} in ${profile.location} (${profile.utcOffset}). ${profile.statement}`,
+    `> ${profile.tagline}, ${profile.location} (${profile.utcOffset}). ${profile.statement}`,
     '',
     `- Availability: ${profile.availability}; overlap ${profile.overlap}`,
     `- Email: ${profile.email}`,
@@ -25,7 +25,10 @@ export const GET: APIRoute = ({ site }) => {
       p.summary,
       '',
       `- Before → after: ${p.before} → ${p.after}`,
-      `- Role: ${p.role}; client: ${p.client}`,
+      `- Scale: ${p.scale.join('; ')}`,
+      `- Client: ${p.client}${p.href ? ` — ${p.href}` : ''}`,
+      `- Problem: ${p.problem}`,
+      ...p.contribution.map((c) => `- My part: ${c}`),
       `- Stack: ${p.stack.join(', ')}`,
       ...p.decisions.map((d) => `- Decision: ${d.title}. ${d.body}`),
       ...p.results.map((r) => `- Result: ${r}`),
@@ -33,18 +36,22 @@ export const GET: APIRoute = ({ site }) => {
     ]),
     '## Open source',
     '',
-    ...openSource.flatMap((o) => [`- [${o.name}](${o.href}): ${o.summary}`]),
+    ...openSource.flatMap((o) => [`- [${o.name}](${o.href}): ${o.summary}`, ...o.notes.map((n) => `  - ${n}`)]),
     '',
     '## Experience',
     '',
-    ...experience.flatMap((j) => [`### ${j.title}, ${j.company} (${j.period})`, '', ...j.points.map((p) => `- ${p}`), '']),
+    ...experience.flatMap((j) => [
+      `### ${j.title}, ${j.company} (${j.period})`,
+      '',
+      j.summary,
+      '',
+      ...j.metrics.map((m) => `- ${m.value} ${m.label}`),
+      ...j.points.map((p) => `- ${p}`),
+      '',
+    ]),
     '## Education',
     '',
     ...education.map((e) => `- ${e.degree}, ${e.school} (${e.years})`),
-    '',
-    '## How I work',
-    '',
-    ...principles.map((p) => `- ${p.title} ${p.body}`),
     '',
     '## Toolkit',
     '',

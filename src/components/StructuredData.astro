@@ -1,7 +1,7 @@
 ---
-// JSON-LD describing the person, the page, the work, and the FAQ — built from the same data as the page,
+// JSON-LD describing the person, the page, and the work — built from the same data as the page,
 // so search engines and AI answer engines read exactly what visitors see.
-import { profile, about, projects, openSource, skills, faqs, education } from '../data/site';
+import { profile, about, projects, openSource, skills, education } from '../data/site';
 import { url } from '../utils/url';
 
 const home = new URL(url(), Astro.site).href;
@@ -74,15 +74,6 @@ const graph = [
         },
       })),
     ],
-  },
-  {
-    '@type': 'FAQPage',
-    '@id': `${home}#faq`,
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
   },
 ];
 
