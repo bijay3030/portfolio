@@ -1,0 +1,122 @@
+---
+// A layered architecture diagram in plain HTML: each tier is a row of components, joined by labelled links.
+// Real text (not an image), so it reflows on phones and stays readable to crawlers and screen readers.
+import type { Architecture } from '../data/site';
+
+interface Props {
+  arch: Architecture;
+  name: string;
+}
+
+const { arch, name } = Astro.props;
+---
+
+<figure class="arch" aria-label={`Architecture of ${name}`}>
+  {
+    arch.tiers.map((tier, i) => (
+      <>
+        {i > 0 && (
+          <div class="link">
+            <span class="line" aria-hidden="true" />
+            {tier.via && <span class="via label">{tier.via}</span>}
+          </div>
+        )}
+        <section class:list={['tier', { core: tier.core }]}>
+          <h5 class="label">{tier.label}</h5>
+          <ul style={`--n: ${tier.nodes.length}`}>
+            {tier.nodes.map((n) => (
+              <li>
+                <strong>{n.name}</strong>
+                <span class="mono">{n.note}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </>
+    ))
+  }
+  <figcaption class="mono">{arch.caption}</figcaption>
+</figure>
+
+<style>
+  .arch {
+    margin: 0 0 1.75rem;
+    padding: 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--paper-deep) 55%, transparent);
+  }
+  .tier h5 {
+    margin: 0 0 0.45rem;
+    font-weight: 400;
+  }
+  ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.55rem 0.65rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .core li {
+    border-color: var(--ink);
+  }
+  li strong {
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+  li .mono {
+    font-size: 0.6875rem;
+    color: var(--muted);
+  }
+
+  /* The link between tiers: a short vertical rule with an arrowhead and what travels along it. */
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    height: 2rem;
+    padding-left: 1.25rem;
+  }
+  .line {
+    position: relative;
+    width: 1px;
+    height: 100%;
+    background: var(--muted);
+  }
+  .line::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -3px;
+    border: 3.5px solid transparent;
+    border-top: 5px solid var(--muted);
+    border-bottom: 0;
+  }
+  .via {
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  figcaption {
+    margin-top: 0.9rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 34rem) {
+    ul {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .arch {
+      padding: 0.85rem;
+    }
+  }
+</style>
