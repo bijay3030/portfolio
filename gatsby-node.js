@@ -7,6 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const { siteUrl } = require('./src/config');
+const { writeAgentDocs } = require('./gatsby/agent-docs');
 const _ = require('lodash');
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
@@ -141,12 +142,11 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   });
 };
 
-// After every build: write llms.txt with the current site URL, and write the CNAME file
-// GitHub Pages needs when the site is served from a custom domain.
-exports.onPostBuild = ({ reporter }) => {
+// After every build: write the files AI agents read (llms.txt, llms-full.txt, Markdown
+// versions of each page), and the CNAME file GitHub Pages needs for a custom domain.
+exports.onPostBuild = async ({ graphql, reporter }) => {
   const publicDir = path.join(__dirname, 'public');
-  const llms = fs.readFileSync(path.join(__dirname, 'content', 'llms.txt'), 'utf8');
-  fs.writeFileSync(path.join(publicDir, 'llms.txt'), llms.replace(/{{SITE_URL}}/g, siteUrl));
+  await writeAgentDocs({ graphql, reporter, publicDir });
 
   const { host } = new URL(siteUrl);
   const cnamePath = path.join(publicDir, 'CNAME');

@@ -37,7 +37,42 @@ module.exports = {
 
   // One-paragraph professional summary used on the resume and about pages.
   summary:
-    'Senior software engineer with 5+ years building Ruby on Rails, React, and AWS systems for US clients. Leads client applications end to end, from data modeling and APIs to background jobs, real-time features, CI/CD, and mentoring.',
+    'Senior software engineer with 5+ years building Ruby on Rails, React, and AWS systems for US clients. Leads client applications end to end: PostgreSQL data modeling, REST APIs, Sidekiq background jobs, real-time features with ActionCable and Hotwire, microservices on AWS, CI/CD, and mentoring.',
+
+  // Resume-only details (shown on /resume/ and in resume.pdf, not elsewhere on the site).
+  phone: '+977-9847330753',
+  skillGroups: [
+    {
+      name: 'Languages',
+      items: ['Ruby', 'JavaScript (ES6+)', 'TypeScript', 'SQL', 'HTML5', 'CSS3'],
+    },
+    {
+      name: 'Frameworks & libraries',
+      items: ['Ruby on Rails', 'React.js', 'Redux', 'Hotwire (Turbo & Stimulus)', 'Sidekiq'],
+    },
+    { name: 'Databases', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'] },
+    {
+      name: 'Cloud & infrastructure',
+      items: ['AWS (EC2, S3, Lambda, RDS, CodePipeline)', 'Docker', 'Kubernetes', 'Nginx'],
+    },
+    { name: 'APIs', items: ['RESTful API design', 'GraphQL', 'Third-party API integration'] },
+    { name: 'Testing', items: ['RSpec', 'Jest', 'TDD', 'BDD', 'Integration testing'] },
+    {
+      name: 'CI/CD & tools',
+      items: ['GitLab CI', 'GitHub Actions', 'CircleCI', 'Git', 'GitHub', 'GitLab'],
+    },
+    {
+      name: 'Practices',
+      items: ['Agile/Scrum', 'Microservices architecture', 'System design', 'Code review'],
+    },
+  ],
+  education: [
+    {
+      degree: 'B.Tech, Computer Science',
+      school: 'Maharshi Dayanand University',
+      years: '2016 – 2020',
+    },
+  ],
 
   email: 'sharma.bj11@gmail.com',
 

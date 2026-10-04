@@ -1,7 +1,7 @@
 ---
 date: '2021-04-01'
 title: 'Associate Software Engineer'
-company: 'Truemark Pvt Limited'
+company: 'Truemark Private Limited'
 location: 'Kathmandu, Nepal'
 range: 'Apr 2021 - Aug 2022'
 url: 'https://www.truemark.dev/'
