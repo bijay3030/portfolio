@@ -1,0 +1,48 @@
+---
+// Shows Bijay's local time and, when it differs, the visitor's — so overlap is obvious, not claimed.
+import { profile } from '../data/site';
+---
+
+<span class="clock" data-tz={profile.timezone}>
+  <span class="dot" aria-hidden="true"></span>
+  <span data-here>Kathmandu</span><span data-there hidden></span>
+</span>
+
+<script>
+  const root = document.querySelector<HTMLElement>('.clock');
+  if (root) {
+    const tz = root.dataset.tz!;
+    const here = root.querySelector<HTMLElement>('[data-here]')!;
+    const there = root.querySelector<HTMLElement>('[data-there]')!;
+    const fmt = (zone?: string) =>
+      new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: zone }).format(new Date());
+    const visitorTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    const tick = () => {
+      const k = fmt(tz);
+      here.textContent = `${k} in Kathmandu`;
+      const v = fmt();
+      if (visitorTz !== tz && v !== k) {
+        there.hidden = false;
+        there.textContent = ` · ${v} where you are`;
+      }
+    };
+    tick();
+    setInterval(tick, 15_000);
+  }
+</script>
+
+<style>
+  .clock {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+</style>
