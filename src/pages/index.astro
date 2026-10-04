@@ -109,7 +109,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
     }
 
     <Section id="principles" n={3} title="How I work" teaser={`${principles.length} principles`} i={7}>
-      <p class="lede muted">Rules I keep coming back to — each one learned on a project above.</p>
+      <p class="lede muted">Each one earned on a project above.</p>
       <ol class="principles">
         {
           principles.map((p) => (
@@ -188,7 +188,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       {
         drafts.length > 0 && (
           <>
-            <p class="lede muted">On the desk — notes from real projects, not yet finished:</p>
+            <p class="lede muted">In progress — notes from real projects:</p>
             <ul class="posts drafts">
               {drafts.map((p) => (
                 <li>
@@ -233,7 +233,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       <div>
         <h2 id="contact-title">Have a process held together by spreadsheets?</h2>
         <p>
-          I’d like to hear about it. Write to <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+          Tell me about it: <a href={`mailto:${profile.email}`}>{profile.email}</a>.
         </p>
         <p class="mono muted">{profile.utcOffset} · overlap {profile.overlap}</p>
       </div>

@@ -48,10 +48,10 @@ const { project: p, index } = Astro.props;
       }
     </dl>
 
-    <h4 class="label">The problem</h4>
+    <h4 class="label">Problem</h4>
     <p>{p.problem}</p>
 
-    <h4 class="label">How it fits together</h4>
+    <h4 class="label">Architecture</h4>
     <Architecture arch={p.architecture} name={p.name} />
 
     <h4 class="label">What it does</h4>
@@ -60,7 +60,7 @@ const { project: p, index } = Astro.props;
     <h4 class="label">My part</h4>
     <ul class="list">{p.contribution.map((c) => <li>{c}</li>)}</ul>
 
-    <h4 class="label">Decisions worth explaining</h4>
+    <h4 class="label">Key decisions</h4>
     <dl class="decisions">
       {
         p.decisions.map((d) => (
@@ -72,7 +72,7 @@ const { project: p, index } = Astro.props;
       }
     </dl>
 
-    <h4 class="label">What changed</h4>
+    <h4 class="label">Impact</h4>
     <ul class="list results">{p.results.map((r) => <li>{r}</li>)}</ul>
 
     <p class="stack mono">{p.stack.join(' · ')}</p>
