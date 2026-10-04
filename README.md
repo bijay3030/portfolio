@@ -36,11 +36,21 @@ npm run preview    # build + serve in one step
 | Projects / case studies | `content/featured/<Project>/index.md` — frontmatter drives the homepage card, the body is the case study |
 | Testimonials            | copy `content/testimonials/example/`, fill it in, set `draft: false`                                     |
 | Blog posts              | `content/posts/<slug>/index.md`, set `draft: false` to publish                                           |
-| FAQ                     | `src/components/sections/faq.js`                                                                         |
-| AI-crawler summary      | `static/llms.txt`                                                                                        |
+| FAQ                     | `src/data/faqs.js`                                                                                       |
+| AI-agent files          | generated on build by `gatsby/agent-docs.js` (see below)                                                 |
 | Resume                  | `static/resume.pdf`                                                                                      |
 
 Lines marked `<!-- REVIEW ... -->` in case studies and drafts are notes to check before publishing; they don't render.
+
+### Files for AI agents
+
+Every build writes, from the same content as the site (following [llmstxt.org](https://llmstxt.org)):
+
+- `/llms.txt`: index with a summary, guidance for agents, and links to every page
+- `/llms-full.txt`: all page content in one file
+- `/index.md`, `/about.md`, `/resume.md`, `/projects/<slug>.md`: Markdown versions of each page, linked from each HTML page with `rel="alternate" type="text/markdown"`
+
+Editor notes (`<!-- ... -->`) are stripped. To change the agent guidance, edit `llmsIndex` in `gatsby/agent-docs.js`.
 
 ### Diagrams and share images
 
