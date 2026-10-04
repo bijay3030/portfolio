@@ -1,92 +1,54 @@
-# Bijay Subedi — Portfolio
+# bijay-site
 
-Source for [bijay3030.github.io](https://bijay3030.github.io): the portfolio of Bijay Subedi, a senior software engineer (Ruby on Rails, React, AWS) in Kathmandu, Nepal.
+Personal site for Bijay Subedi. One page, built with Astro, and designed so every element has a reason to be there.
 
-Built with Gatsby 5, React 18, and styled-components. Originally based on [Brittany Chiang](https://brittanychiang.com)'s open-source [v4 site](https://github.com/bchiang7/v4) (MIT); see `LICENSE`.
+## The idea
 
-## What's on the site
-
-- **Home (`/`)**: hero with availability, about, experience, featured projects, testimonials (when published), quick answers (FAQ), contact.
-- **Case studies (`/projects/<slug>/`)**: one page per project with an architecture diagram, contribution, problem, decisions, and results.
-- **Writing (`/writing/`)**: blog posts, with an RSS feed at `/rss.xml`.
-- **SEO / AI answer engines**: per-page titles, descriptions, canonical URLs, Open Graph images, JSON-LD (Person, WebSite, ProfilePage, Article, BreadcrumbList, FAQPage), sitemap, a root `robots.txt` that welcomes AI search crawlers, and `/llms.txt`.
-
-## Run locally
-
-Requires Node 22 (see `.nvmrc`).
-
-```bash
-nvm use
-npm install
-npm start          # dev server at http://localhost:8000
-npm run build      # production build into public/
-npm run serve      # serve the production build at http://localhost:9000
-npm run preview    # build + serve in one step
-npm run resume:pdf # after a build: render public/ + static/resume.pdf from /resume/ (needs Chrome)
-```
-
-`npm start` is the development server: the first visit to each page type compiles it on demand, so it can take a few seconds. To judge real page speed, use `npm run preview`.
+- **Short to scan, with more for anyone who wants it.** Each section shows a one-line teaser before you open it. Each project gives a sentence plus a *before → after* line, and opens into the full case study: workflow, problem, decisions, results.
+- **Show it, don't just say it.** The live Kathmandu clock shows your time next to the visitor's, so overlap is visible. "How I work" principles each point to the project where they were learned.
+- **No tricks.** No tracking, no scroll-jacking, no framework JavaScript. The only scripts are the clock, copy-email, and opening a section when its #link is followed.
 
 ## Editing content
 
-| What                    | Where                                                                                                                        |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Hero, availability line | `src/components/sections/hero.js`, `availability` in `src/config.js`                                                         |
-| About text and skills   | `src/components/sections/about.js`                                                                                           |
-| Experience              | `content/jobs/*/index.md` (`stack` and `tabLabel` fields add pills and tab names)                                            |
-| Projects / case studies | `content/featured/<Project>/index.md` — frontmatter drives the homepage card, the body is the case study                     |
-| Testimonials            | copy `content/testimonials/example/`, fill it in, set `draft: false`                                                         |
-| Blog posts              | `content/posts/<slug>/index.md`, set `draft: false` to publish                                                               |
-| FAQ                     | `src/data/faqs.js`                                                                                                           |
-| AI-agent files          | generated on build by `gatsby/agent-docs.js` (see below)                                                                     |
-| Resume                  | `content/jobs/`, `src/config.js` (`summary`, `skillGroups`, `education`, `phone`); `resume.pdf` is generated from `/resume/` |
+| What | Where |
+| --- | --- |
+| Name, statement, links, availability | `src/data/site.ts` → `profile` |
+| About text and numbers | `src/data/site.ts` → `about`, `numbers` |
+| Case studies | `src/data/site.ts` → `projects` |
+| Experience, open source, principles, toolkit | `src/data/site.ts` |
+| Blog posts | `src/content/writing/*.md` (set `draft: false` to publish) |
+| Testimonials | `src/data/site.ts` → `testimonials` (entries with `sample: true` show only in `npm run dev`) |
+| Architecture diagrams | `architecture` on each project in `src/data/site.ts` |
+| Portrait | `src/assets/portrait.jpg` |
+| Résumé | `public/resume.pdf` |
 
-Lines marked `<!-- REVIEW ... -->` in case studies and drafts are notes to check before publishing; they don't render.
+Draft posts appear on the home page as "Draft" with no link. In `npm run dev` you can still preview them at `/writing/<file-name>/`, but production builds skip them.
 
-### Files for AI agents
-
-Every build writes, from the same content as the site (following [llmstxt.org](https://llmstxt.org)):
-
-- `/llms.txt`: index with a summary, guidance for agents, and links to every page
-- `/llms-full.txt`: all page content in one file
-- `/index.md`, `/about.md`, `/resume.md`, `/projects/<slug>.md`: Markdown versions of each page, linked from each HTML page with `rel="alternate" type="text/markdown"`
-
-Editor notes (`<!-- ... -->`) are stripped. To change the agent guidance, edit `llmsIndex` in `gatsby/agent-docs.js`.
-
-### Diagrams and share images
-
-Architecture diagrams (`content/featured/*/architecture.{svg,png}`) and Open Graph images (`static/og/*.png`) are generated:
+## Commands
 
 ```bash
-brew install librsvg        # once
-python3 scripts/generate-images.py
+npm install
 ```
-
-Edit the node and label lists in `scripts/generate-images.py` to change them.
-
-## Deploy (GitHub Pages)
-
-The site is served from the root of the `bijay3030.github.io` user site.
 
 ```bash
-npm run deploy     # builds and pushes public/ to the gh-pages branch
-npm run ping       # optional: tell Bing/IndexNow engines that pages changed
+npm run dev
 ```
-
-One-time GitHub setting: **Settings → Pages → Deploy from a branch → `gh-pages` / root**.
-
-## Measurement
-
-Nothing is tracked unless these environment variables are set when you build:
-
-| Variable                          | Used for                                                     |
-| --------------------------------- | ------------------------------------------------------------ |
-| `GATSBY_GOOGLE_SITE_VERIFICATION` | Google Search Console HTML-tag verification                  |
-| `GATSBY_BING_SITE_VERIFICATION`   | Bing Webmaster Tools verification (`msvalidate.01`)          |
-| `GATSBY_GA_MEASUREMENT_ID`        | Google Analytics 4 (e.g. `G-XXXXXXX`); respects Do Not Track |
-
-Example:
 
 ```bash
-GATSBY_GOOGLE_SITE_VERIFICATION=abc123 GATSBY_BING_SITE_VERIFICATION=def456 npm run deploy
+npm run build
 ```
+
+## Deploying to GitHub Pages
+
+This repo is the GitHub Pages user site, served at https://bijay3030.github.io. `.github/workflows/deploy.yml` builds and deploys on every push to `main`, and the repository's Pages source is set to **GitHub Actions**.
+
+- `astro.config.mjs` sets `site` and redirects the old Gatsby URLs (`/about`, `/resume`, `/projects/*`, `/writing`) to where that content lives now.
+- Internal links go through `url()` in `src/utils/url.ts`, so changing `base` later only means editing the config.
+- The previous Gatsby build is still on the `gh-pages` branch as a rollback. It isn't served.
+
+## Design notes
+
+- Type: Newsreader (variable serif with optical sizes) for reading; Geist Mono for labels and metadata.
+- Color: warm paper `#f4f0e6`, ink `#1d1b16`, and one accent, sindoor red `#b23a24`. The accent only appears where something changes or ends: the end of a workflow, a result, the live dot.
+- Layout: a 38rem reading column. On wide screens, section numbers (§ 01) sit in the left margin, like notes on a manuscript.
+- Motion: one staggered fade-in when the page loads, and smooth open/close on sections. Both turn off when the visitor has reduced motion enabled.

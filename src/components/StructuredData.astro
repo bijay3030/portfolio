@@ -1,0 +1,92 @@
+---
+// JSON-LD describing the person, the page, the work, and the FAQ — built from the same data as the page,
+// so search engines and AI answer engines read exactly what visitors see.
+import { profile, about, projects, openSource, skills, faqs, education } from '../data/site';
+import { url } from '../utils/url';
+
+const home = new URL(url(), Astro.site).href;
+const personId = `${home}#person`;
+const websiteId = `${home}#website`;
+
+const graph = [
+  {
+    '@type': 'Person',
+    '@id': personId,
+    name: profile.name,
+    url: home,
+    image: new URL(url('og.png'), Astro.site).href,
+    jobTitle: profile.jobTitle,
+    description: profile.statement,
+    email: `mailto:${profile.email}`,
+    address: { '@type': 'PostalAddress', addressLocality: 'Kathmandu', addressCountry: 'NP' },
+    worksFor: { '@type': 'Organization', name: profile.employer.name, url: profile.employer.url },
+    knowsAbout: skills.flatMap((s) => s.items),
+    alumniOf: education.map((e) => ({ '@type': 'CollegeOrUniversity', name: e.school })),
+    sameAs: profile.links.map((l) => l.href),
+  },
+  {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    url: home,
+    name: `${profile.name} — ${profile.role}`,
+    inLanguage: 'en',
+    publisher: { '@id': personId },
+  },
+  {
+    '@type': 'ProfilePage',
+    '@id': `${home}#profile`,
+    url: home,
+    name: `${profile.name} — ${profile.role}`,
+    description: about[0],
+    isPartOf: { '@id': websiteId },
+    mainEntity: { '@id': personId },
+    dateModified: new Date().toISOString().slice(0, 10),
+  },
+  {
+    '@type': 'ItemList',
+    '@id': `${home}#work`,
+    name: 'Selected work',
+    itemListElement: [
+      ...projects.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'CreativeWork',
+          name: p.name,
+          url: `${home}#${p.id}`,
+          description: p.summary,
+          about: p.domain,
+          keywords: p.stack.join(', '),
+          creator: { '@id': personId },
+        },
+      })),
+      ...openSource.map((o, i) => ({
+        '@type': 'ListItem',
+        position: projects.length + i + 1,
+        item: {
+          '@type': 'SoftwareSourceCode',
+          name: o.name,
+          url: o.href,
+          codeRepository: o.href,
+          description: o.summary,
+          programmingLanguage: o.stack.join(', '),
+          author: { '@id': personId },
+        },
+      })),
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${home}#faq`,
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+
+const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+---
+
+<script is:inline type="application/ld+json" set:html={json} />

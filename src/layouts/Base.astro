@@ -1,0 +1,60 @@
+---
+import { url } from '../utils/url';
+import '../styles/global.css';
+import { profile } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${profile.name} — ${profile.role}`,
+  description = `${profile.role} in ${profile.location}. ${profile.statement}`,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <meta name="theme-color" content="#f4f0e6" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(url('og.png'), Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" type="text/plain" href={url('llms.txt')} title="Plain-text summary" />
+    <link rel="sitemap" href={url('sitemap-index.xml')} />
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="page">
+      <slot />
+    </div>
+
+    <script>
+      // Following a link to a collapsed section (e.g. #work or #helios) opens it first.
+      function openTarget() {
+        const id = decodeURIComponent(location.hash.slice(1));
+        const el = id && document.getElementById(id);
+        if (!el) return;
+        for (let d = el.closest('details'); d; d = d.parentElement?.closest('details') ?? null) d.open = true;
+        if (el instanceof HTMLDetailsElement) el.open = true;
+        requestAnimationFrame(() => el.scrollIntoView());
+      }
+      window.addEventListener('hashchange', openTarget);
+      openTarget();
+    </script>
+  </body>
+</html>
