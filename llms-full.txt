@@ -1,0 +1,301 @@
+# Bijay Subedi
+
+> Senior software engineer (Ruby on Rails, React, AWS) in Kathmandu, Nepal. 5+ years building workflow and automation platforms for US clients at Truemark. Open to senior full-time remote roles.
+
+Bijay builds the software operations teams run on: healthcare translation workflow platforms, a versioned quoting system, and an AI tool that turns product photos into marketplace listings.
+
+- Location: Kathmandu, Nepal (UTC+5:45)
+- Availability: Open to senior full-time remote roles; 4+ hours overlap with US Eastern · full EU workday overlap
+- Email: sharma.bj11@gmail.com
+- Resume: https://bijay3030.github.io/resume/ (Markdown: https://bijay3030.github.io/resume.md)
+
+## Featured projects
+
+- [Helios](https://bijay3030.github.io/projects/helios/): Helios is a workflow platform that runs medical translation projects end to end — from file intake to vendor coordination, delivery, and invoicing. It replaced a process run on email and spreadsheets with one auditable system.
+- [Quoting](https://bijay3030.github.io/projects/quoting/): Quoting is a quote-management platform that turns a healthcare translation request into an accurate, versioned price quote. It centralizes pricing rules, tracks every revision, and hands approved quotes straight to delivery.
+- [AListEngine](https://bijay3030.github.io/projects/alistengine/): AListEngine is an AI tool that turns product photos into ready-to-publish listings for e-commerce stores and auction houses. It drafts the title, description, and price, then exports to Shopify, AuctionFlex, and LiveAuctioneers.
+
+## Open source
+
+### NEPSE Trade Journal
+
+A full-stack trading journal for Nepal Stock Exchange (NEPSE) traders: plan, execute, and review trades, keep a daily journal, track a portfolio, and see analytics like win rate, P&L, and expectancy.
+
+- Code: https://github.com/bijay3030/nepse-trade-journal
+- Stack: Ruby on Rails 8 (API), PostgreSQL, ActionCable, Devise + JWT, React 19, TypeScript, Tailwind CSS
+- Trade lifecycle modeled as Plan → Execute → Result, with automatic portfolio updates
+- Live prices over ActionCable WebSockets, with polling fallback
+- JWT authentication (Devise) on a Rails API; React Query on the client
+
+## Skills
+
+Ruby on Rails 7 · React.js / React 18 · Hotwire (Turbo + Stimulus) · PostgreSQL & Redis · Sidekiq & ActionCable · AWS (EC2, S3, Lambda, RDS) · Microservices & REST APIs · Docker & Kubernetes · RSpec, Jest & TDD · CI/CD (GitLab CI, GitHub Actions)
+
+## Frequently asked questions
+
+### Who is Bijay Subedi?
+
+Bijay Subedi is a senior software engineer based in Kathmandu, Nepal, with 5+ years of experience building Ruby on Rails, React, and AWS applications. Bijay works at Truemark, building workflow and automation platforms for US clients.
+
+### What does Bijay Subedi specialize in?
+
+Full-stack web applications with Ruby on Rails 7 and React: background processing with Sidekiq, real-time updates with ActionCable and Hotwire, PostgreSQL performance tuning, microservices on AWS, and CI/CD pipelines.
+
+### What has Bijay Subedi built?
+
+Helios, a platform that runs medical translation projects from intake to delivery; Quoting, a versioned quote system for a healthcare localization company; and AListEngine, an AI tool that turns product photos into marketplace-ready listings.
+
+### Does Bijay Subedi work remotely with US or European teams?
+
+Yes. Bijay already works remotely with US clients through Truemark and is based in Kathmandu, Nepal (UTC+5:45), with 4+ hours overlap with US Eastern and full EU workday overlap. Bijay is open to senior full-time remote roles.
+
+### How can I contact Bijay Subedi?
+
+Email sharma.bj11@gmail.com.
+
+
+---
+
+# About Bijay Subedi
+
+Bijay Subedi is a senior software engineer based in Kathmandu, Nepal, with 5+ years of experience building Ruby on Rails, React, and AWS systems. Bijay works at Truemark (https://www.truemark.dev/) on workflow and automation platforms for US clients.
+
+## Highlights
+
+- Led 6+ client Ruby on Rails applications at Truemark
+- Moved a monolith to microservices on AWS, cutting inter-service latency by 40%
+- Kept APIs serving 500K+ requests a month at 99.9% uptime
+- Cut deployment time from about 45 minutes to under 8
+- Mentored 3 junior engineers in Rails and React
+
+## Projects
+
+- [Helios](https://bijay3030.github.io/projects/helios/): Helios is a workflow platform that runs medical translation projects end to end — from file intake to vendor coordination, delivery, and invoicing. It replaced a process run on email and spreadsheets with one auditable system.
+- [Quoting](https://bijay3030.github.io/projects/quoting/): Quoting is a quote-management platform that turns a healthcare translation request into an accurate, versioned price quote. It centralizes pricing rules, tracks every revision, and hands approved quotes straight to delivery.
+- [AListEngine](https://bijay3030.github.io/projects/alistengine/): AListEngine is an AI tool that turns product photos into ready-to-publish listings for e-commerce stores and auction houses. It drafts the title, description, and price, then exports to Shopify, AuctionFlex, and LiveAuctioneers.
+- [NEPSE Trade Journal](https://github.com/bijay3030/nepse-trade-journal) (open source): A full-stack trading journal for Nepal Stock Exchange (NEPSE) traders: plan, execute, and review trades, keep a daily journal, track a portfolio, and see analytics like win rate, P&L, and expectancy.
+
+## Working with Bijay
+
+Remote from Kathmandu, Nepal (UTC+5:45), with 4+ hours overlap with US Eastern · full EU workday overlap. Open to senior full-time remote roles.
+
+## Contact and profiles
+
+- Email: sharma.bj11@gmail.com
+- LinkedIn: https://www.linkedin.com/in/bijay-p-subedi/
+- GitHub: https://github.com/bijay3030
+- LeetCode: https://leetcode.com/u/stanbj3030/
+
+
+---
+
+# Resume: Bijay Subedi
+
+Senior Software Engineer · Ruby on Rails · React · AWS
+Kathmandu, Nepal (UTC+5:45) · sharma.bj11@gmail.com · [LinkedIn](https://www.linkedin.com/in/bijay-p-subedi/) · [GitHub](https://github.com/bijay3030) · [Portfolio](https://bijay3030.github.io/) · [PDF](https://bijay3030.github.io/resume.pdf)
+
+## Summary
+
+Senior software engineer with 5+ years building Ruby on Rails, React, and AWS systems for US clients. Leads client applications end to end: PostgreSQL data modeling, REST APIs, Sidekiq background jobs, real-time features with ActionCable and Hotwire, microservices on AWS, CI/CD, and mentoring.
+
+Open to senior full-time remote roles · 4+ hours overlap with US Eastern · full EU workday overlap.
+
+## Experience
+
+### Senior Software Engineer, Truemark Private Limited
+
+Aug 2022 - Present · Kathmandu, Nepal
+
+- Led development and maintenance of 6+ Ruby on Rails client applications, delivering scalable architecture and complex business logic across projects.
+- Optimized React.js interfaces and implemented Hotwire (Turbo + Stimulus.js), reducing initial page load time by ~35% and removing full-page reloads in key flows.
+- Migrated monolithic systems to microservices on AWS (EC2, S3, Lambda), reducing inter-service latency by 40%.
+- Built and maintained RESTful APIs supporting 500K+ monthly requests while sustaining 99.9% uptime.
+- Implemented comprehensive test suites with RSpec and Jest, achieving 87% code coverage and reducing production bug reports by 35%.
+- Designed and optimized PostgreSQL schemas and indexing strategies, cutting critical query execution time by up to 60%.
+- Established CI/CD pipelines with GitLab CI and AWS CodePipeline, reducing deployment cycle time from ~45 minutes to under 8 minutes.
+- Mentored 3 junior engineers through weekly code reviews and practical coaching in Rails and React.js best practices.
+- Collaborated with product managers and designers to translate business requirements into technical specifications and sprint-ready deliverables.
+
+Stack: Ruby on Rails, React.js, Hotwire, PostgreSQL, AWS (EC2, S3, Lambda), Microservices, RSpec, Jest, GitLab CI, AWS CodePipeline
+
+### Associate Software Engineer, Truemark Private Limited
+
+Apr 2021 - Aug 2022 · Kathmandu, Nepal
+
+- Developed scalable RESTful APIs and backend services with Ruby on Rails for high-traffic applications with consistent sub-200ms response times.
+- Contributed to React.js frontend development, improving UX responsiveness and reducing client-reported UI issues by 25%.
+- Integrated 10+ third-party APIs including payment, analytics, and communication services for reliable cross-system data exchange.
+- Created and maintained unit and integration test coverage with RSpec, improving reliability and reducing regression debugging time.
+- Helped the team adopt Agile/Scrum, contributed to sprint planning, and kept technical documentation current for cross-functional partners.
+- Participated actively in code reviews to enforce best practices and raise overall code quality.
+
+Stack: Ruby on Rails, React.js, REST APIs, Third-party API integrations, RSpec, Agile/Scrum
+
+## Selected projects
+
+- [Helios](https://bijay3030.github.io/projects/helios/): Helios is a workflow platform that runs medical translation projects end to end — from file intake to vendor coordination, delivery, and invoicing. It replaced a process run on email and spreadsheets with one auditable system.
+- [Quoting](https://bijay3030.github.io/projects/quoting/): Quoting is a quote-management platform that turns a healthcare translation request into an accurate, versioned price quote. It centralizes pricing rules, tracks every revision, and hands approved quotes straight to delivery.
+- [AListEngine](https://bijay3030.github.io/projects/alistengine/): AListEngine is an AI tool that turns product photos into ready-to-publish listings for e-commerce stores and auction houses. It drafts the title, description, and price, then exports to Shopify, AuctionFlex, and LiveAuctioneers.
+
+## Open source
+
+- [NEPSE Trade Journal](https://github.com/bijay3030/nepse-trade-journal): A full-stack trading journal for Nepal Stock Exchange (NEPSE) traders: plan, execute, and review trades, keep a daily journal, track a portfolio, and see analytics like win rate, P&L, and expectancy.
+
+## Technical skills
+
+- Languages: Ruby, JavaScript (ES6+), TypeScript, SQL, HTML5, CSS3
+- Frameworks & libraries: Ruby on Rails, React.js, Redux, Hotwire (Turbo & Stimulus), Sidekiq
+- Databases: PostgreSQL, MySQL, MongoDB, Redis
+- Cloud & infrastructure: AWS (EC2, S3, Lambda, RDS, CodePipeline), Docker, Kubernetes, Nginx
+- APIs: RESTful API design, GraphQL, Third-party API integration
+- Testing: RSpec, Jest, TDD, BDD, Integration testing
+- CI/CD & tools: GitLab CI, GitHub Actions, CircleCI, Git, GitHub, GitLab
+- Practices: Agile/Scrum, Microservices architecture, System design, Code review
+
+## Education
+
+- B.Tech, Computer Science, Maharshi Dayanand University (2016 – 2020)
+
+
+---
+
+# Helios: Healthcare Translation Operations case study
+
+> Helios is a workflow platform that runs medical translation projects end to end — from file intake to vendor coordination, delivery, and invoicing. It replaced a process run on email and spreadsheets with one auditable system.
+
+- URL: https://bijay3030.github.io/projects/helios/
+- Client: US healthcare localization provider (under NDA)
+- Role: Full-stack engineer (Rails + React) at Truemark
+- Stack: Ruby on Rails 7, React.js, Sidekiq, ActionCable, AWS S3, Pundit
+- Last updated: 2026-09-30
+
+## My contribution
+
+- Built Rails services and Sidekiq jobs that route multilingual files and run validation checks on upload
+- Automated pricing and turnaround calculations and generated vendor work orders from them
+- Added live job-status updates with ActionCable and role-based access with Pundit
+
+## The problem
+
+Medical translation projects move through many hands: the client uploads source files, a project manager checks them, prices the job, picks vendors for each language pair, tracks progress, and finally delivers, invoices, and hands off.
+
+Before Helios, most of that coordination happened in **email threads and spreadsheets**. That made it slow to turn a job around, easy to lose track of a file or a deadline, and hard to prove who did what — a real problem for healthcare clients who expect a clean audit trail.
+
+## What I built
+
+Helios models each translation job as a workflow with clear states, and automates the steps between them:
+
+- **Intake and validation.** Uploaded files go to AWS S3 and are checked by background jobs (Sidekiq) before anyone touches them, so bad or missing files are caught at the door.
+- **Routing and pricing.** Jobs are split by language pair, and pricing and turnaround are calculated from the job's inputs instead of by hand.
+- **Vendor work orders.** Work orders for each vendor are generated automatically from the priced job.
+- **Delivery and invoicing.** Final files, the invoice, and the client handoff all happen from the same record.
+- **Live status.** Project managers see status changes in real time through ActionCable instead of refreshing or asking around.
+- **Access control and audit.** Pundit policies decide who can see and change each job, and changes are logged.
+
+## Key engineering decisions
+
+- **Background jobs for anything slow.** Validation, routing, and document generation run in Sidekiq so uploads return immediately and failures can be retried safely.
+- **Authorization as policies, not scattered checks.** Pundit keeps "who can do what" in one place per model, which matters when clients, vendors, and staff share one system.
+- **Push, don't poll.** ActionCable pushes status changes to open dashboards, which keeps the UI current without extra load from polling.
+
+## Results
+
+- Manual hand-offs across intake, vendor coordination, and delivery were replaced by automated steps.
+- Every step is permission-checked and logged, giving healthcare clients an audit-ready history of each job.
+- The team can take on higher volumes of medical localization work without adding coordinators.
+
+
+---
+
+# Quoting: Healthcare Localization case study
+
+> Quoting is a quote-management platform that turns a healthcare translation request into an accurate, versioned price quote. It centralizes pricing rules, tracks every revision, and hands approved quotes straight to delivery.
+
+- URL: https://bijay3030.github.io/projects/quoting/
+- Client: US healthcare localization provider (under NDA)
+- Role: Full-stack engineer (Rails + React) at Truemark
+- Stack: Ruby on Rails 7, React 18, PostgreSQL, ActionCable, AWS S3, Pundit
+- Last updated: 2026-09-30
+
+## My contribution
+
+- Modeled worksheet-based pricing rules and versioned quotes in PostgreSQL
+- Built multilingual line-item editing in React 18, synced live over ActionCable
+- Wired intake from external systems in, and approved quotes out to delivery
+
+## The problem
+
+Pricing a translation job depends on a lot of inputs: the files and their word counts, the language pairs, the schedule, and a set of pricing rules that differ by client and job type.
+
+Those rules lived in **individual spreadsheets**. Quotes took a long time to put together, two project managers could price the same job differently, and when a client asked for a change there was no reliable record of what the previous quote said.
+
+## What I built
+
+Quoting turns that process into a single, rule-driven workflow:
+
+- **Intake from other systems.** Requests arrive from external intake systems through a Rails API, with their file lists and word-count logs stored in AWS S3.
+- **Worksheet-based estimates.** Shared worksheet rules calculate the first draft of each quote, so every PM prices the same way.
+- **Multilingual line items.** A React 18 editor lets PMs adjust line items per language pair; changes sync live to other people viewing the quote through ActionCable.
+- **Versioned quotes.** Every change creates a new version in PostgreSQL, so any earlier quote can be compared or restored.
+- **Approval and handoff.** Quotes are submitted or rejected, and approved ones flow straight into the delivery workflow.
+- **Access rules and audit.** Pundit policies control who can view, edit, and approve quotes.
+
+## Key engineering decisions
+
+- **Immutable versions instead of in-place edits.** Storing each revision as a new version makes history, comparisons, and client disputes straightforward.
+- **Pricing rules as data, not code.** Worksheet rules can change per client without a deploy.
+- **Real-time collaboration where it matters.** ActionCable is used on the quote editor, where several people may work on the same quote at once.
+
+## Results
+
+- Quotes are produced faster, with less back-and-forth between project managers and sales.
+- Pricing is consistent because everyone uses the same worksheet rules.
+- Enterprise clients get a full version history, access controls, and secure file handling.
+
+
+---
+
+# AListEngine: AI E-commerce Listing Automation case study
+
+> AListEngine is an AI tool that turns product photos into ready-to-publish listings for e-commerce stores and auction houses. It drafts the title, description, and price, then exports to Shopify, AuctionFlex, and LiveAuctioneers.
+
+- URL: https://bijay3030.github.io/projects/alistengine/
+- Client: E-commerce sellers and auction houses
+- Role: Full-stack engineer (Rails + React) at Truemark
+- Stack: Ruby on Rails, React.js, AI vision + text generation, Rules engine, Shopify, AuctionFlex, LiveAuctioneers
+- Last updated: 2026-09-30
+
+## My contribution
+
+- Built the photo-to-draft pipeline that calls AI vision and text models
+- Added a rules engine for seller-specific fields and marketplace formatting
+- Integrated exports to Shopify, AuctionFlex, and LiveAuctioneers
+
+## The problem
+
+Auction houses and online sellers list hundreds of one-off items: antiques, collectibles, second-hand goods. Each one needs a good title, a detailed description with item specifics, and a sensible starting price — and each marketplace wants the data in a slightly different format.
+
+Writing listings by hand took **hours per batch**, and quality depended on who wrote them.
+
+## What I built
+
+AListEngine turns a few photos into a finished listing:
+
+- **Photo upload.** Sellers upload photos with a category and any seller-specific fields.
+- **AI drafting.** AI vision and text models identify the item and draft the title, description, item specifics, and a suggested starting price.
+- **Rules engine.** Seller-specific fields and each marketplace's format rules are applied to the draft.
+- **Review, then publish.** The seller edits and approves, then exports to Shopify, AuctionFlex, or LiveAuctioneers.
+
+_(Screenshot: An AI-drafted listing: title, description, item specifics, and suggested starting price generated from product photos)_
+
+## Key engineering decisions
+
+- **The AI drafts, a person approves.** Generated listings are always reviewed before export, which keeps quality high and mistakes cheap.
+- **Marketplace rules outside the prompt.** Formatting and required fields are enforced by a rules engine, so outputs are consistent and a new marketplace doesn't mean rewriting prompts.
+- **One export layer per marketplace.** Each integration maps the same listing to that platform's format, so adding a channel is isolated work.
+
+## Results
+
+- Listing creation dropped from hours to minutes.
+- Listing quality is more consistent across sellers and channels.
+- Sellers and auction teams can list far more items per day.
