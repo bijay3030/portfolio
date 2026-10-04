@@ -6,7 +6,7 @@
  *   npm run build && npm run resume:pdf     (npm run deploy does both)
  *
  * Needs a Chromium-based browser: set CHROME_PATH, or install Google Chrome or Brave.
- * Writes public/resume.pdf (deployed) and static/resume.pdf (committed, used by other hosts).
+ * Writes public/resume.pdf (deployed) and, unless --public-only, static/resume.pdf (committed).
  */
 const fs = require('fs');
 const http = require('http');
@@ -124,7 +124,11 @@ async function main() {
     console.error('resume.pdf was not generated correctly.');
     process.exit(1);
   }
-  fs.copyFileSync(out, path.join(root, 'static', 'resume.pdf'));
+  // Deploys pass --public-only so every deploy doesn't leave a changed (timestamp-only)
+  // static/resume.pdf behind; run without it to refresh the committed copy.
+  if (!process.argv.includes('--public-only')) {
+    fs.copyFileSync(out, path.join(root, 'static', 'resume.pdf'));
+  }
   console.log(
     `resume.pdf written (${Math.round(fs.statSync(out).size / 1024)} KB) using ${path.basename(
       browser,
