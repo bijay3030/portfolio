@@ -5,7 +5,7 @@ import { profile } from '../data/site';
 
 <span class="clock" data-tz={profile.timezone}>
   <span class="dot" aria-hidden="true"></span>
-  <span data-here>Kathmandu</span><span data-there hidden></span>
+  <span data-here>my time</span><span data-there hidden></span>
 </span>
 
 <script>
@@ -20,11 +20,11 @@ import { profile } from '../data/site';
 
     const tick = () => {
       const k = fmt(tz);
-      here.textContent = `${k} in Kathmandu`;
+      here.textContent = `${k} my time`;
       const v = fmt();
       if (visitorTz !== tz && v !== k) {
         there.hidden = false;
-        there.textContent = ` · ${v} where you are`;
+        there.textContent = ` · ${v} yours`;
       }
     };
     tick();

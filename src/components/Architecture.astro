@@ -35,7 +35,7 @@ const { arch, name } = Astro.props;
       </>
     ))
   }
-  <figcaption class="mono">{arch.caption}</figcaption>
+  {arch.caption && <figcaption class="mono">{arch.caption}</figcaption>}
 </figure>
 
 <style>

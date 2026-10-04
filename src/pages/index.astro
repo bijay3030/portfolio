@@ -11,13 +11,10 @@ import portrait from '../assets/portrait.jpg';
 import {
   profile,
   about,
-  numbers,
   projects,
   openSource,
   experience,
-  principles,
   skills,
-  faqs,
   education,
   testimonials,
 } from '../data/site';
@@ -29,8 +26,10 @@ const writingTeaser = published.length
   ? `${published.length} note${published.length > 1 ? 's' : ''}`
   : `${drafts.length} in draft`;
 
-// Placeholder testimonials appear only in dev, so the live site never shows invented quotes.
-const quotes = testimonials.filter((t) => !t.sample || import.meta.env.DEV);
+// Unapproved testimonials appear only in dev, so the live site never shows words nobody signed off on.
+const quotes = testimonials.filter((t) => t.approved || import.meta.env.DEV);
+// Show the employer once when every role was at the same company.
+const company = experience.every((j) => j.company === experience[0].company) ? experience[0] : null;
 
 const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 ---
@@ -49,7 +48,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       </div>
 
       <h1 class="reveal" style="--i: 1">{profile.name}</h1>
-      <p class="role label reveal" style="--i: 2">{profile.role} · {profile.location}</p>
+      <p class="role label reveal" style="--i: 2">{profile.tagline}</p>
       <p class="statement reveal" style="--i: 3">{profile.statement}</p>
 
       <nav class="actions mono reveal" style="--i: 4" aria-label="Quick links">
@@ -66,20 +65,10 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
   <main>
     <div class="frame toolbar">
       <div class="margin"></div>
-      <div><button type="button" class="toggle-all mono" aria-controls="about work principles experience open-source writing skills faq">Expand all</button></div>
+      <div><button type="button" class="toggle-all mono" aria-controls="about work experience open-source writing skills">Expand all</button></div>
     </div>
-    <Section id="about" n={1} title="About" teaser="5+ years · Rails, React, AWS" open i={5}>
+    <Section id="about" n={1} title="About" teaser="Approach" open i={5}>
       {about.map((p) => <p>{p}</p>)}
-      <ul class="numbers">
-        {
-          numbers.map((x) => (
-            <li>
-              <span class="value">{x.value}</span>
-              <span class="mono muted">{x.label}</span>
-            </li>
-          ))
-        }
-      </ul>
     </Section>
 
     <Section id="work" n={2} title="Selected work" teaser={`${projects.length} case studies`} open i={6}>
@@ -95,7 +84,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
           <div>
             {quotes.map((t) => (
               <figure>
-                {t.sample && <span class="sample label">Sample — replace with a real quote</span>}
+                {!t.approved && <span class="sample label">Pending approval — not live</span>}
                 <blockquote>{t.quote}</blockquote>
                 <figcaption class="mono">
                   {t.href ? <a href={t.href}>{t.name}</a> : t.name}, {t.title}
@@ -108,31 +97,39 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       )
     }
 
-    <Section id="principles" n={3} title="How I work" teaser={`${principles.length} principles`} i={7}>
-      <p class="lede muted">Each one earned on a project above.</p>
-      <ol class="principles">
-        {
-          principles.map((p) => (
-            <li>
-              <strong>{p.title}</strong> {p.body}
-              <span class="from label">{p.from}</span>
-            </li>
-          ))
-        }
-      </ol>
-    </Section>
-
-    <Section id="experience" n={4} title="Experience" teaser="Truemark · 2021 — now" open i={8}>
+    <Section id="experience" n={3} title="Experience" teaser={`${experience.length} roles`} open i={7}>
+      {
+        company && (
+          <p class="employer label">
+            <a href={company.href}>{company.company} ↗</a>
+          </p>
+        )
+      }
       {
         experience.map((job) => (
           <article class="job">
             <header>
               <h3>
-                {job.title}, <a href={job.href}>{job.company}</a>
+                {job.title}
+                {!company && (
+                  <>
+                    , <a href={job.href}>{job.company}</a>
+                  </>
+                )}
               </h3>
               <span class="label">{job.period}</span>
             </header>
             <p class="muted">{job.summary}</p>
+            {job.metrics.length > 0 && (
+              <ul class="numbers">
+                {job.metrics.map((x) => (
+                  <li>
+                    <span class="value">{x.value}</span>
+                    <span class="mono muted">{x.label}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
             <ul class="dash">
               {job.points.map((pt) => (
                 <li>{pt}</li>
@@ -153,7 +150,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       </div>
     </Section>
 
-    <Section id="open-source" n={5} title="Open source" teaser="Built in public" i={9}>
+    <Section id="open-source" n={4} title="Open source" teaser="Built in public" i={8}>
       {
         openSource.map((o) => (
           <article class="oss">
@@ -172,7 +169,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       }
     </Section>
 
-    <Section id="writing" n={6} title="Writing" teaser={writingTeaser} i={10}>
+    <Section id="writing" n={5} title="Writing" teaser={writingTeaser} i={9}>
       {
         published.length > 0 && (
           <ul class="posts">
@@ -202,7 +199,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       }
     </Section>
 
-    <Section id="skills" n={7} title="Toolkit" teaser="What I reach for" i={11}>
+    <Section id="skills" n={6} title="Toolkit" teaser="What I reach for" i={10}>
       <dl class="skills">
         {
           skills.map((s) => (
@@ -215,23 +212,10 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       </dl>
     </Section>
 
-    <Section id="faq" n={8} title="Quick answers" teaser={`${faqs.length} questions`} i={11}>
-      <dl class="faq">
-        {
-          faqs.map((f) => (
-            <div>
-              <dt>{f.q}</dt>
-              <dd>{f.a}</dd>
-            </div>
-          ))
-        }
-      </dl>
-    </Section>
-
     <section class="frame contact reveal" style="--i: 11" aria-labelledby="contact-title">
       <div class="margin label" aria-hidden="true">§ —</div>
       <div>
-        <h2 id="contact-title">Have a process held together by spreadsheets?</h2>
+        <h2 id="contact-title">Building something operations will depend on?</h2>
         <p>
           Tell me about it: <a href={`mailto:${profile.email}`}>{profile.email}</a>.
         </p>
@@ -405,9 +389,9 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem 1.5rem;
-    margin-top: 1.75rem;
-    padding-top: 1.25rem;
-    border-top: 1px dashed var(--rule);
+    margin: 1rem 0 1.25rem;
+    padding: 1rem 0;
+    border-block: 1px dashed var(--rule);
   }
   .numbers li {
     display: flex;
@@ -421,41 +405,17 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
     font-variant-numeric: lining-nums;
   }
 
-  .principles {
-    list-style: none;
-    counter-reset: p;
-  }
-  .principles li {
-    counter-increment: p;
-    position: relative;
-    padding: 0.85rem 0 0.85rem 2rem;
-    border-bottom: 1px dashed var(--rule);
-  }
-  .principles li:last-child {
-    border-bottom: 0;
-  }
-  .principles li::before {
-    content: counter(p, lower-roman) '.';
-    position: absolute;
-    left: 0;
-    top: 1.05rem;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--accent);
-  }
-  .principles strong {
-    font-weight: 500;
-    font-style: italic;
-  }
-  .from {
-    display: block;
-    margin-top: 0.25rem;
-  }
 
   h3 {
     margin: 0;
     font-size: 1.2rem;
     font-weight: 500;
+  }
+  .employer {
+    margin: 0 0 1rem;
+  }
+  .employer a {
+    text-decoration: none;
   }
   .job + .job {
     margin-top: 2rem;
@@ -532,27 +492,6 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
     margin: 0;
   }
 
-  .faq {
-    margin: 0;
-  }
-  .faq div {
-    padding: 0.85rem 0;
-    border-bottom: 1px dashed var(--rule);
-  }
-  .faq div:first-child {
-    padding-top: 0;
-  }
-  .faq div:last-child {
-    border-bottom: 0;
-  }
-  .faq dt {
-    font-style: italic;
-    font-weight: 500;
-  }
-  .faq dd {
-    margin: 0.2rem 0 0;
-    color: var(--ink-soft);
-  }
 
   .contact > div:last-child {
     border-top: 1px solid var(--ink);
