@@ -1,0 +1,243 @@
+---
+// A case study that reads in one line and opens into the full story.
+import type { Project } from '../data/site';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project: p, index } = Astro.props;
+---
+
+<details class="project" id={p.id}>
+  <summary>
+    <span class="head">
+      <span class="label">{String.fromCharCode(97 + index)}.</span>
+      <h3>{p.name}</h3>
+      <span class="label domain">{p.domain}</span>
+    </span>
+    <span class="summary">{p.summary}</span>
+    <span class="shift mono">
+      <s>{p.before}</s>
+      <span class="arrow" aria-label="became">→</span>
+      <span class="after">{p.after}</span>
+    </span>
+    <span class="more mono" aria-hidden="true"><span class="closed">Read the case study</span><span class="opened">Close</span></span>
+  </summary>
+
+  <div class="case">
+    <ol class="flow mono" aria-label="Workflow">
+      {p.flow.map((step) => <li>{step}</li>)}
+    </ol>
+
+    <dl class="meta mono">
+      <div><dt class="label">Client</dt><dd>{p.client}</dd></div>
+      <div><dt class="label">Role</dt><dd>{p.role}</dd></div>
+    </dl>
+
+    <h4 class="label">The problem</h4>
+    <p>{p.problem}</p>
+
+    <h4 class="label">What it does</h4>
+    <ul class="list">{p.built.map((b) => <li>{b}</li>)}</ul>
+
+    <h4 class="label">My part</h4>
+    <ul class="list">{p.contribution.map((c) => <li>{c}</li>)}</ul>
+
+    <h4 class="label">Decisions worth explaining</h4>
+    <dl class="decisions">
+      {
+        p.decisions.map((d) => (
+          <div>
+            <dt>{d.title}</dt>
+            <dd>{d.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <h4 class="label">What changed</h4>
+    <ul class="list results">{p.results.map((r) => <li>{r}</li>)}</ul>
+
+    <p class="stack mono">{p.stack.join(' · ')}</p>
+  </div>
+</details>
+
+<style>
+  .project {
+    border-top: 1px dashed var(--rule);
+  }
+  .project:first-of-type {
+    border-top: 0;
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.4rem 0 1.2rem;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.01em;
+  }
+  .domain {
+    margin-left: auto;
+  }
+  .summary,
+  .shift {
+    display: block;
+  }
+  .summary {
+    margin: 0.4rem 0 0.6rem;
+    color: var(--ink-soft);
+  }
+  .shift {
+    margin: 0 0 0.6rem;
+    color: var(--muted);
+  }
+  .shift s {
+    text-decoration-color: var(--muted);
+  }
+  .arrow {
+    color: var(--accent);
+    margin: 0 0.35rem;
+  }
+  .after {
+    color: var(--ink);
+  }
+  .more {
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  summary:hover .more {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .opened,
+  .project[open] .closed {
+    display: none;
+  }
+  .project[open] .opened {
+    display: inline;
+  }
+
+  .case {
+    padding: 0.5rem 0 2rem;
+  }
+
+  /* The workflow, drawn as the steps a job actually moves through. */
+  .flow {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0;
+    margin: 0 0 1.5rem;
+    counter-reset: step;
+  }
+  .flow li {
+    counter-increment: step;
+    display: inline-flex;
+    align-items: center;
+  }
+  .flow li::before {
+    content: counter(step);
+    color: var(--muted);
+    margin-right: 0.4rem;
+    font-size: 0.65rem;
+  }
+  .flow li:not(:last-child)::after {
+    content: '';
+    width: 1.25rem;
+    height: 1px;
+    background: var(--rule);
+    margin: 0 0.6rem;
+  }
+  .flow li:last-child {
+    color: var(--accent);
+  }
+
+  .meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 0 0 1.75rem;
+    padding: 0.9rem 0;
+    border-block: 1px solid var(--rule);
+  }
+  .meta dd {
+    margin: 0.2rem 0 0;
+    color: var(--ink-soft);
+  }
+
+  h4 {
+    margin: 1.75rem 0 0.6rem;
+    font-weight: 400;
+  }
+  .case > p {
+    margin: 0;
+  }
+  .list {
+    list-style: none;
+  }
+  .list li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+  .list li + li {
+    margin-top: 0.35rem;
+  }
+  .list li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+  .results li {
+    padding-left: 1.4rem;
+  }
+  .results li::before {
+    content: '↳';
+    color: var(--accent);
+  }
+
+  .decisions {
+    margin: 0;
+  }
+  .decisions div + div {
+    margin-top: 0.75rem;
+  }
+  .decisions dt {
+    font-style: italic;
+  }
+  .decisions dd {
+    margin: 0.1rem 0 0;
+    color: var(--ink-soft);
+  }
+  .stack {
+    margin-top: 1.75rem !important;
+    color: var(--muted);
+  }
+
+  @media (max-width: 30rem) {
+    .domain {
+      margin-left: 0;
+      width: 100%;
+    }
+    .meta {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
