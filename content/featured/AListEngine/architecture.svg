@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="AListEngine — photos to published listings architecture diagram">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#ff6b7f"/>
+  </marker>
+</defs>
+<rect width="1200" height="700" fill="#0e1217"/>
+<text x="48" y="60" font-family="Menlo, SF Mono, monospace" font-size="16" fill="#ff6b7f">Architecture (simplified)</text>
+<text x="48" y="96" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#e2e8ef">AListEngine — photos to published listings</text>
+<rect x="48" y="170" width="260" height="84" rx="8" fill="#161c24" stroke="#28313d" stroke-width="2"/>
+<text x="178.0" y="206" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">Seller upload</text>
+<text x="178.0" y="232" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">photos + category</text>
+<rect x="470" y="170" width="260" height="84" rx="8" fill="#161c24" stroke="#ff6b7f" stroke-width="2"/>
+<text x="600.0" y="206" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">Rails + React app</text>
+<text x="600.0" y="232" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">listing workspace</text>
+<rect x="892" y="170" width="260" height="84" rx="8" fill="#161c24" stroke="#28313d" stroke-width="2"/>
+<text x="1022.0" y="206" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">AI vision + text</text>
+<text x="1022.0" y="232" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">model API</text>
+<rect x="48" y="340" width="260" height="84" rx="8" fill="#161c24" stroke="#28313d" stroke-width="2"/>
+<text x="178.0" y="376" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">Seller review</text>
+<text x="178.0" y="402" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">edit + approve</text>
+<rect x="470" y="340" width="260" height="84" rx="8" fill="#161c24" stroke="#28313d" stroke-width="2"/>
+<text x="600.0" y="376" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">Rules engine</text>
+<text x="600.0" y="402" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">seller fields · formats</text>
+<rect x="892" y="340" width="260" height="84" rx="8" fill="#161c24" stroke="#28313d" stroke-width="2"/>
+<text x="1022.0" y="376" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">Draft listing</text>
+<text x="1022.0" y="402" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">title · copy · price</text>
+<rect x="48" y="510" width="260" height="84" rx="8" fill="#161c24" stroke="#28313d" stroke-width="2"/>
+<text x="178.0" y="546" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">Shopify</text>
+<text x="178.0" y="572" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">export</text>
+<rect x="470" y="510" width="260" height="84" rx="8" fill="#161c24" stroke="#28313d" stroke-width="2"/>
+<text x="600.0" y="546" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">AuctionFlex</text>
+<text x="600.0" y="572" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">export</text>
+<rect x="892" y="510" width="260" height="84" rx="8" fill="#161c24" stroke="#28313d" stroke-width="2"/>
+<text x="1022.0" y="546" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#e2e8ef">LiveAuctioneers</text>
+<text x="1022.0" y="572" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="14" fill="#8d99a8">export</text>
+<line x1="310" y1="212.0" x2="468" y2="212.0" stroke="#ff6b7f" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="389.0" y="202.0" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="13" fill="#b4bfcc">upload</text>
+<line x1="732" y1="212.0" x2="890" y2="212.0" stroke="#ff6b7f" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="811.0" y="202.0" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="13" fill="#b4bfcc">analyze</text>
+<line x1="1022.0" y1="256" x2="1022.0" y2="338" stroke="#ff6b7f" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1070.0" y="301.0" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="13" fill="#b4bfcc">generate</text>
+<line x1="890" y1="382.0" x2="732" y2="382.0" stroke="#ff6b7f" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="811.0" y="372.0" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="13" fill="#b4bfcc">normalize</text>
+<line x1="468" y1="382.0" x2="310" y2="382.0" stroke="#ff6b7f" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="389.0" y="372.0" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="13" fill="#b4bfcc">draft</text>
+<line x1="178.0" y1="426" x2="178.0" y2="508" stroke="#ff6b7f" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="226.0" y="471.0" text-anchor="middle" font-family="Menlo, SF Mono, monospace" font-size="13" fill="#b4bfcc">publish</text>
+<line x1="298" y1="426" x2="600.0" y2="508" stroke="#ff6b7f" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="308" y1="414" x2="982.0" y2="508" stroke="#ff6b7f" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>
