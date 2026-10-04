@@ -14,7 +14,8 @@ const path = require('path');
 const config = require('../src/config');
 const faqs = require('../src/data/faqs');
 
-const { siteUrl, email, availability, skills, summary, socialMedia } = config;
+const { siteUrl, email, availability, skills, skillGroups, education, summary, socialMedia } =
+  config;
 
 const profile = name => (socialMedia.find(s => s.name === name) || {}).url;
 
@@ -140,9 +141,13 @@ ${projects}
 
 ${repos}
 
-## Skills
+## Technical skills
 
-${bulletize(skills)}
+${skillGroups.map(({ name, items }) => `- ${name}: ${items.join(', ')}`).join('\n')}
+
+## Education
+
+${education.map(({ degree, school, years }) => `- ${degree}, ${school} (${years})`).join('\n')}
 `;
 }
 

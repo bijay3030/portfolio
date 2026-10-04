@@ -22,23 +22,24 @@ npm start          # dev server at http://localhost:8000
 npm run build      # production build into public/
 npm run serve      # serve the production build at http://localhost:9000
 npm run preview    # build + serve in one step
+npm run resume:pdf # after a build: render public/ + static/resume.pdf from /resume/ (needs Chrome)
 ```
 
 `npm start` is the development server: the first visit to each page type compiles it on demand, so it can take a few seconds. To judge real page speed, use `npm run preview`.
 
 ## Editing content
 
-| What                    | Where                                                                                                    |
-| ----------------------- | -------------------------------------------------------------------------------------------------------- |
-| Hero, availability line | `src/components/sections/hero.js`, `availability` in `src/config.js`                                     |
-| About text and skills   | `src/components/sections/about.js`                                                                       |
-| Experience              | `content/jobs/*/index.md` (`stack` and `tabLabel` fields add pills and tab names)                        |
-| Projects / case studies | `content/featured/<Project>/index.md` — frontmatter drives the homepage card, the body is the case study |
-| Testimonials            | copy `content/testimonials/example/`, fill it in, set `draft: false`                                     |
-| Blog posts              | `content/posts/<slug>/index.md`, set `draft: false` to publish                                           |
-| FAQ                     | `src/data/faqs.js`                                                                                       |
-| AI-agent files          | generated on build by `gatsby/agent-docs.js` (see below)                                                 |
-| Resume                  | `static/resume.pdf`                                                                                      |
+| What                    | Where                                                                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Hero, availability line | `src/components/sections/hero.js`, `availability` in `src/config.js`                                                         |
+| About text and skills   | `src/components/sections/about.js`                                                                                           |
+| Experience              | `content/jobs/*/index.md` (`stack` and `tabLabel` fields add pills and tab names)                                            |
+| Projects / case studies | `content/featured/<Project>/index.md` — frontmatter drives the homepage card, the body is the case study                     |
+| Testimonials            | copy `content/testimonials/example/`, fill it in, set `draft: false`                                                         |
+| Blog posts              | `content/posts/<slug>/index.md`, set `draft: false` to publish                                                               |
+| FAQ                     | `src/data/faqs.js`                                                                                                           |
+| AI-agent files          | generated on build by `gatsby/agent-docs.js` (see below)                                                                     |
+| Resume                  | `content/jobs/`, `src/config.js` (`summary`, `skillGroups`, `education`, `phone`); `resume.pdf` is generated from `/resume/` |
 
 Lines marked `<!-- REVIEW ... -->` in case studies and drafts are notes to check before publishing; they don't render.
 
