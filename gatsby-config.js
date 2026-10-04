@@ -1,0 +1,266 @@
+const config = require('./src/config');
+// Served from the domain root, so there is no path prefix. Set the address in src/config.js.
+const { siteUrl } = config;
+const gaMeasurementId = process.env.GATSBY_GA_MEASUREMENT_ID;
+
+module.exports = {
+  siteMetadata: {
+    title: 'Bijay Subedi — Senior Software Engineer (Ruby on Rails, React, AWS)',
+    shortTitle: 'Bijay Subedi',
+    description:
+      'Bijay Subedi is a Kathmandu-based senior software engineer with 5+ years building Ruby on Rails, React, and AWS systems — including healthcare translation workflow platforms and AI product-listing tools.',
+    siteUrl, // No trailing slash allowed!
+    image: '/og.png', // Path to your image you placed in the 'static' folder
+    twitterUsername: '@Bj11S',
+  },
+  plugins: [
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+            posts: allMarkdownRemark(
+              filter: {
+                fileAbsolutePath: { regex: "/content/posts/" }
+                frontmatter: { draft: { ne: true } }
+              }
+            ) {
+              totalCount
+            }
+          }
+        `,
+        // Leave out thin tag pages, and the writing index until a post is published.
+        resolvePages: ({ allSitePage, posts }) =>
+          allSitePage.nodes.filter(
+            ({ path }) =>
+              !path.startsWith('/writing/tags') && (path !== '/writing/' || posts.totalCount > 0),
+          ),
+      },
+    },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: siteUrl,
+        sitemap: `${siteUrl}/sitemap-index.xml`,
+        // Explicitly welcome search engines and AI answer-engine crawlers.
+        policy: [
+          { userAgent: '*', allow: '/' },
+          { userAgent: 'Googlebot', allow: '/' },
+          { userAgent: 'Bingbot', allow: '/' },
+          { userAgent: 'OAI-SearchBot', allow: '/' },
+          { userAgent: 'ChatGPT-User', allow: '/' },
+          { userAgent: 'GPTBot', allow: '/' },
+          { userAgent: 'PerplexityBot', allow: '/' },
+          { userAgent: 'Claude-SearchBot', allow: '/' },
+          { userAgent: 'Claude-User', allow: '/' },
+          { userAgent: 'ClaudeBot', allow: '/' },
+          { userAgent: 'Google-Extended', allow: '/' },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title: shortTitle
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) =>
+              allMarkdownRemark.nodes.map(node => ({
+                title: node.frontmatter.title,
+                description: node.frontmatter.description,
+                date: node.frontmatter.date,
+                url: `${site.siteMetadata.siteUrl}${node.frontmatter.slug}`,
+                guid: `${site.siteMetadata.siteUrl}${node.frontmatter.slug}`,
+                custom_elements: [{ 'content:encoded': node.html }],
+              })),
+            query: `
+              {
+                allMarkdownRemark(
+                  filter: {
+                    fileAbsolutePath: { regex: "/content/posts/" }
+                    frontmatter: { draft: { ne: true } }
+                  }
+                  sort: { frontmatter: { date: DESC } }
+                ) {
+                  nodes {
+                    html
+                    frontmatter {
+                      title
+                      description
+                      date
+                      slug
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/rss.xml',
+            title: 'Bijay Subedi — Writing',
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Bijay Subedi — Software Engineer',
+        short_name: 'Bijay Subedi',
+        start_url: '/',
+        background_color: config.colors.darkNavy,
+        theme_color: config.colors.navy,
+        display: 'minimal-ui',
+        icon: 'src/images/logo.png',
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'content',
+        path: `${__dirname}/content/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/content/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            // https://www.gatsbyjs.org/packages/gatsby-remark-external-links
+            resolve: 'gatsby-remark-external-links',
+            options: {
+              target: '_blank',
+              rel: 'nofollow noopener noreferrer',
+            },
+          },
+          {
+            // https://www.gatsbyjs.org/packages/gatsby-remark-images
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 700,
+              linkImagesToOriginal: true,
+              quality: 90,
+            },
+          },
+          {
+            // https://www.gatsbyjs.org/packages/gatsby-remark-code-titles/
+            resolve: 'gatsby-remark-code-titles',
+          }, // IMPORTANT: this must be ahead of other plugins that use code blocks
+          {
+            // https://www.gatsbyjs.org/packages/gatsby-remark-prismjs
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              // Class prefix for <pre> tags containing syntax highlighting;
+              // defaults to 'language-' (e.g. <pre class="language-js">).
+              // If your site loads Prism into the browser at runtime,
+              // (e.g. for use with libraries like react-live),
+              // you may use this to prevent Prism from re-processing syntax.
+              // This is an uncommon use-case though;
+              // If you're unsure, it's best to use the default value.
+              classPrefix: 'language-',
+              // This is used to allow setting a language for inline code
+              // (i.e. single backticks) by creating a separator.
+              // This separator is a string and will do no white-space
+              // stripping.
+              // A suggested value for English speakers is the non-ascii
+              // character '›'.
+              inlineCodeMarker: null,
+              // This lets you set up language aliases.  For example,
+              // setting this to '{ sh: "bash" }' will let you use
+              // the language "sh" which will highlight using the
+              // bash highlighter.
+              aliases: {},
+              // This toggles the display of line numbers globally alongside the code.
+              // To use it, add the following line in gatsby-browser.js
+              // right after importing the prism color scheme:
+              //  require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+              // Defaults to false.
+              // If you wish to only show line numbers on certain code blocks,
+              // leave false and use the {numberLines: true} syntax below
+              showLineNumbers: false,
+              // If setting this to true, the parser won't handle and highlight inline
+              // code used in markdown i.e. single backtick code like `this`.
+              noInlineHighlight: false,
+              // This adds a new language definition to Prism or extend an already
+              // existing language definition. More details on this option can be
+              // found under the header "Add new language definition or extend an
+              // existing language" below.
+              languageExtensions: [
+                {
+                  language: 'superscript',
+                  extend: 'javascript',
+                  definition: {
+                    superscript_types: /(SuperType)/,
+                  },
+                  insertBefore: {
+                    function: {
+                      superscript_keywords: /(superif|superelse)/,
+                    },
+                  },
+                },
+              ],
+              // Customize the prompt used in shell output
+              // Values below are default
+              prompt: {
+                user: 'root',
+                host: 'localhost',
+                global: false,
+              },
+            },
+          },
+        ],
+      },
+    },
+    // Google Analytics 4, only when GATSBY_GA_MEASUREMENT_ID is set at build time.
+    ...(gaMeasurementId
+      ? [
+        {
+          resolve: `gatsby-plugin-google-gtag`,
+          options: {
+            trackingIds: [gaMeasurementId],
+            gtagConfig: { anonymize_ip: true },
+            pluginConfig: { head: false, respectDNT: true },
+          },
+        },
+      ]
+      : []),
+  ],
+};
