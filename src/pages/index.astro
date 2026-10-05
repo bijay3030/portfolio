@@ -21,10 +21,6 @@ import {
 
 const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const published = posts.filter((p) => !p.data.draft);
-const drafts = posts.filter((p) => p.data.draft);
-const writingTeaser = published.length
-  ? `${published.length} note${published.length > 1 ? 's' : ''}`
-  : `${drafts.length} in draft`;
 
 // Unapproved testimonials appear only in dev, so the live site never shows words nobody signed off on.
 const quotes = testimonials.filter((t) => t.approved || import.meta.env.DEV);
@@ -65,7 +61,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
   <main>
     <div class="frame toolbar">
       <div class="margin"></div>
-      <div><button type="button" class="toggle-all mono" aria-controls="about work experience open-source writing skills">Expand all</button></div>
+      <div><button type="button" class="toggle-all mono" aria-controls="about work experience open-source skills">Expand all</button></div>
     </div>
     <Section id="about" n={1} title="About" teaser="Approach" open i={5}>
       {about.map((p) => <p>{p}</p>)}
@@ -169,9 +165,10 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       }
     </Section>
 
-    <Section id="writing" n={5} title="Writing" teaser={writingTeaser} i={9}>
-      {
-        published.length > 0 && (
+    {
+      // Writing appears only once a post is published — unfinished drafts stay off the page.
+      published.length > 0 && (
+        <Section id="writing" n={5} title="Writing" teaser={`${published.length} note${published.length > 1 ? 's' : ''}`} i={9}>
           <ul class="posts">
             {published.map((p) => (
               <li>
@@ -180,26 +177,11 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
               </li>
             ))}
           </ul>
-        )
-      }
-      {
-        drafts.length > 0 && (
-          <>
-            <p class="lede muted">In progress — notes from real projects:</p>
-            <ul class="posts drafts">
-              {drafts.map((p) => (
-                <li>
-                  <span>{p.data.title}</span>
-                  <span class="label">Draft</span>
-                </li>
-              ))}
-            </ul>
-          </>
-        )
-      }
-    </Section>
+        </Section>
+      )
+    }
 
-    <Section id="skills" n={6} title="Toolkit" teaser="What I reach for" i={10}>
+    <Section id="skills" n={published.length > 0 ? 6 : 5} title="Toolkit" teaser="What I reach for" i={10}>
       <dl class="skills">
         {
           skills.map((s) => (
@@ -215,9 +197,9 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
     <section class="frame contact reveal" style="--i: 11" aria-labelledby="contact-title">
       <div class="margin label" aria-hidden="true">§ —</div>
       <div>
-        <h2 id="contact-title">Building something operations will depend on?</h2>
+        <h2 id="contact-title">Hiring a senior Rails engineer?</h2>
         <p>
-          Tell me about it: <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+          Email me: <a href={`mailto:${profile.email}`}>{profile.email}</a>.
         </p>
         <p class="mono muted">{profile.utcOffset} · overlap {profile.overlap}</p>
       </div>
@@ -467,9 +449,6 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
     gap: 1rem;
     padding: 0.6rem 0;
     border-bottom: 1px dashed var(--rule);
-  }
-  .drafts li {
-    color: var(--muted);
   }
 
   .skills {
