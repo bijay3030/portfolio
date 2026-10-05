@@ -28,6 +28,14 @@ const quotes = testimonials.filter((t) => t.approved || import.meta.env.DEV);
 // Show the employer once when every role was at the same company.
 const company = experience.every((j) => j.company === experience[0].company) ? experience[0] : null;
 
+// Section numbers follow whatever is visible, so hiding a section never leaves a gap.
+let n = 3;
+const sectionNo = {
+  openSource: openSource.length > 0 ? ++n : 0,
+  writing: published.length > 0 ? ++n : 0,
+  skills: ++n,
+};
+
 const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 ---
 
@@ -62,7 +70,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
   <main>
     <div class="frame toolbar">
       <div class="margin"></div>
-      <div><button type="button" class="toggle-all mono" aria-controls="about work experience open-source skills">Expand all</button></div>
+      <div><button type="button" class="toggle-all mono" aria-controls="about work experience skills">Expand all</button></div>
     </div>
     <Section id="about" n={1} title="About" teaser="Approach" open i={5}>
       {about.map((p) => <p>{p}</p>)}
@@ -158,7 +166,9 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       </div>
     </Section>
 
-    <Section id="open-source" n={4} title="Open source" teaser="Built in public" i={8}>
+    {
+      openSource.length > 0 && (
+    <Section id="open-source" n={sectionNo.openSource} title="Open source" teaser="Built in public" i={8}>
       {
         openSource.map((o) => (
           <article class="oss">
@@ -176,11 +186,13 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
         ))
       }
     </Section>
+      )
+    }
 
     {
       // Writing appears only once a post is published — unfinished drafts stay off the page.
       published.length > 0 && (
-        <Section id="writing" n={5} title="Writing" teaser={`${published.length} note${published.length > 1 ? 's' : ''}`} i={9}>
+        <Section id="writing" n={sectionNo.writing} title="Writing" teaser={`${published.length} note${published.length > 1 ? 's' : ''}`} i={9}>
           <ul class="posts">
             {published.map((p) => (
               <li>
@@ -193,7 +205,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
       )
     }
 
-    <Section id="skills" n={published.length > 0 ? 6 : 5} title="Toolkit" teaser="What I reach for" i={10}>
+    <Section id="skills" n={sectionNo.skills} title="Toolkit" teaser="What I reach for" i={10}>
       <dl class="skills">
         {
           skills.map((s) => (

@@ -266,7 +266,10 @@ export const projects: Project[] = [
   },
 ];
 
-export const openSource = [
+// Hidden for now: set to true to show Open source on the page, in structured data, and in /llms.txt.
+export const showOpenSource = false;
+
+const allOpenSource = [
   {
     name: 'NEPSE Trade Journal',
     href: 'https://github.com/bijay3030/nepse-trade-journal',
@@ -281,6 +284,8 @@ export const openSource = [
     stack: ['Rails 8', 'PostgreSQL', 'ActionCable', 'React 19', 'TypeScript', 'Tailwind', 'Docker'],
   },
 ];
+
+export const openSource = showOpenSource ? allOpenSource : [];
 
 export const experience = [
   {
