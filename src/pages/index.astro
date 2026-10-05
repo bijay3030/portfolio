@@ -11,6 +11,7 @@ import portrait from '../assets/portrait.jpg';
 import {
   profile,
   about,
+  aiWorkflow,
   projects,
   openSource,
   experience,
@@ -65,6 +66,17 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
     </div>
     <Section id="about" n={1} title="About" teaser="Approach" open i={5}>
       {about.map((p) => <p>{p}</p>)}
+      <h3 class="workflow-title label">How I ship a feature with AI</h3>
+      <ol class="workflow">
+        {
+          aiWorkflow.map((w) => (
+            <li>
+              <strong>{w.step}</strong>
+              <span>{w.detail}</span>
+            </li>
+          ))
+        }
+      </ol>
     </Section>
 
     <Section id="work" n={2} title="Selected work" teaser={`${projects.length} case studies`} open i={6}>
@@ -361,6 +373,49 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
     margin-left: 0.4rem;
   }
 
+  .workflow-title {
+    margin: 1.75rem 0 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 400;
+  }
+  .workflow {
+    list-style: none;
+    counter-reset: wf;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px dashed var(--rule);
+  }
+  .workflow li {
+    counter-increment: wf;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.7rem 0.75rem 0.7rem 2rem;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .workflow li:nth-child(odd) {
+    border-right: 1px dashed var(--rule);
+  }
+  .workflow li::before {
+    content: counter(wf, decimal-leading-zero);
+    position: absolute;
+    left: 0.25rem;
+    top: 0.95rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+  }
+  .workflow strong {
+    font-weight: 500;
+  }
+  .workflow span {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+
   .lede {
     font-style: italic;
     margin-bottom: 0.5rem;
@@ -492,6 +547,12 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', yea
   @media (max-width: 30rem) {
     .numbers {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .workflow {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .workflow li:nth-child(odd) {
+      border-right: 0;
     }
     .skills div {
       grid-template-columns: 1fr;

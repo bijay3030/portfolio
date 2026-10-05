@@ -1,7 +1,7 @@
 // A plain-text version of the page for AI assistants and anyone who prefers text.
 import type { APIRoute } from 'astro';
 import { url } from '../utils/url';
-import { profile, about, projects, openSource, experience, skills, faqs, education } from '../data/site';
+import { profile, about, aiWorkflow, projects, openSource, experience, skills, faqs, education } from '../data/site';
 
 export const GET: APIRoute = ({ site }) => {
   const lines = [
@@ -17,6 +17,10 @@ export const GET: APIRoute = ({ site }) => {
     '## About',
     '',
     ...about.flatMap((p) => [p, '']),
+    '### How I ship a feature with AI',
+    '',
+    ...aiWorkflow.map((w, i) => `${i + 1}. ${w.step}: ${w.detail}`),
+    '',
     '## Selected work',
     '',
     ...projects.flatMap((p) => [
