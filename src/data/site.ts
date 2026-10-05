@@ -12,9 +12,9 @@ export const profile = {
   utcOffset: 'UTC+5:45',
   email: 'sharma.bj11@gmail.com',
   resume: 'resume.pdf', // relative to the site base
-  // One sentence: the niche, who it's for, and where it's built from.
+  // One sentence: what I build now (AI products, engineering workflows), then the niche I'm known for.
   statement:
-    'I turn operations run on email and spreadsheets into Rails systems teams rely on — and I build them with AI in the loop.',
+    'Building AI-powered products and smarter engineering workflows — and turning operations run on spreadsheets into software teams rely on.',
   availability: 'Open to senior full-time remote roles',
   overlap: '4+ hours with US Eastern · full EU workday',
   links: [
