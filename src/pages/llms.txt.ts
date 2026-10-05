@@ -38,10 +38,9 @@ export const GET: APIRoute = ({ site }) => {
       ...p.results.map((r) => `- Result: ${r}`),
       '',
     ]),
-    '## Open source',
-    '',
-    ...openSource.flatMap((o) => [`- [${o.name}](${o.href}): ${o.summary}`, ...o.notes.map((n) => `  - ${n}`)]),
-    '',
+    ...(openSource.length
+      ? ['## Open source', '', ...openSource.flatMap((o) => [`- [${o.name}](${o.href}): ${o.summary}`, ...o.notes.map((n) => `  - ${n}`)]), '']
+      : []),
     '## Experience',
     '',
     ...experience.flatMap((j) => [
