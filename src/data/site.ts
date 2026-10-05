@@ -5,7 +5,7 @@ export const profile = {
   role: 'Senior software engineer',
   jobTitle: 'Senior Software Engineer',
   // Title, stack, and years: what a recruiter scans for first.
-  tagline: 'Senior Rails & React engineer · 5+ years',
+  tagline: 'Senior Rails & React engineer · Kathmandu, Nepal',
   employer: { name: 'Truemark', url: 'https://www.truemark.dev/' },
   location: 'Kathmandu, Nepal',
   timezone: 'Asia/Kathmandu',
@@ -14,7 +14,7 @@ export const profile = {
   resume: 'resume.pdf', // relative to the site base
   // One sentence: the niche, who it's for, and where it's built from.
   statement:
-    'I turn work held together by email and spreadsheets into Rails systems teams trust — for US healthcare clients, from Kathmandu.',
+    'I turn operations run on email and spreadsheets into Rails systems teams rely on — and I build them with AI in the loop.',
   availability: 'Open to senior full-time remote roles',
   overlap: '4+ hours with US Eastern · full EU workday',
   links: [
@@ -24,8 +24,8 @@ export const profile = {
 };
 
 export const about = [
-  'I start by mapping how the work actually moves — who touches what, and where it breaks. Then I model it as explicit states, automate every step between them, and record who did what, because one lost file or wrong price breaks trust.',
-  'AI is part of how I build: I orchestrate frontier models to write features, then validate their output with tests and review before anything ships.',
+  'I joined Truemark in 2021 as an associate engineer and was leading client applications as a senior 16 months later. Most of that work serves US healthcare clients, where one lost file or wrong price breaks trust.',
+  'I start by mapping how the work actually moves — who touches what, and where it breaks — then model it as explicit states and automate every step between. I orchestrate frontier models to write features, and every change ships only after tests and review.',
 ];
 
 export type Architecture = {
@@ -358,7 +358,7 @@ export const testimonials: {
   {
     // DRAFT written for Ananta to review — not his words until he approves them.
     quote:
-      'Bijay built Helios and Quoting with our team. He took workflows our project managers ran by hand and turned them into systems they rely on — and he understood our business before he wrote a line of code.',
+      'Bijay built Helios and Quoting with our team. He took workflows our project managers ran by hand and turned them into systems they depend on — and he understood our business before he wrote a line of code.',
     name: 'Ananta Raj Lamichhane',
     title: 'Senior Software Engineer, Language Scientific',
     relationship: 'Client on Helios and Quoting',
