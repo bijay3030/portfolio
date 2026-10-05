@@ -25,7 +25,19 @@ export const profile = {
 
 export const about = [
   'I joined Truemark in 2021 as an associate engineer and was leading client applications as a senior 16 months later. Most of that work serves US healthcare clients, where one lost file or wrong price breaks trust.',
-  'I start by mapping how the work actually moves — who touches what, and where it breaks — then model it as explicit states and automate every step between. I orchestrate frontier models to write features, and every change ships only after tests and review.',
+  'I start by mapping how the work actually moves — who touches what, and where it breaks — then model it as explicit states and automate every step between.',
+];
+
+// How a feature goes from request to shipped, with AI agents doing the implementation.
+export const aiWorkflow = [
+  { step: 'Understand', detail: 'the requirement, and the problem behind it' },
+  { step: 'Research', detail: 'how others have built it' },
+  { step: 'Plan with AI', detail: 'frontier models draft the plan in plan mode' },
+  { step: 'Grill the plan', detail: 'Q&A rounds — the model asks every question before any code' },
+  { step: 'Slice', detail: 'the plan becomes small, verifiable tasks' },
+  { step: 'Agents implement', detail: 'one task at a time' },
+  { step: 'QA', detail: 'I verify the work myself' },
+  { step: 'Close the gaps', detail: 'anything missed goes back to the agent until it’s right' },
 ];
 
 export type Architecture = {
@@ -328,7 +340,7 @@ export const faqs = [
   },
   {
     q: 'What does Bijay Subedi specialize in?',
-    a: 'Full-stack Ruby on Rails 7 and React applications: Sidekiq background processing, real-time updates with ActionCable and Hotwire, PostgreSQL performance tuning, AWS microservices, and CI/CD pipelines. Bijay builds with AI daily, orchestrating frontier models to write features and validating their output with tests and review.',
+    a: 'Full-stack Ruby on Rails 7 and React applications: Sidekiq background processing, real-time updates with ActionCable and Hotwire, PostgreSQL performance tuning, AWS microservices, and CI/CD pipelines. Bijay builds with AI daily: he researches each feature, plans it with frontier models in plan mode, resolves open questions through Q&A rounds, splits the plan into small tasks for AI agents to implement, then verifies the work himself and sends any gaps back to the agent.',
   },
   {
     q: 'What has Bijay Subedi built?',
